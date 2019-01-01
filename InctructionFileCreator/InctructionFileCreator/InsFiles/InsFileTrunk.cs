@@ -1,0 +1,25 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace InctructionFileCreator
+{
+    class InsFileTrunk: IInsFile
+    {
+        public IGeneralParameters GeneralParameters { get; set; }
+        public IDriverFiles DriverFiles { get; set; }
+        public List<IPft> Pfts { get; set; }
+        public PftType PftType { get; set; }
+
+        public InsFileTrunk()
+        {
+            GeneralParameters = new GeneralParametersTrunk();
+            DriverFiles = new DriverFilesTrunk();
+            Pfts = new List<IPft>();
+            PftType = PftType.Trunk;
+        }
+
+    }
+}
