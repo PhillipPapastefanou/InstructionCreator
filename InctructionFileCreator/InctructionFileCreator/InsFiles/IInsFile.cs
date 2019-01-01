@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace InctructionFileCreator
 {
-    interface IInsFile
+    interface IInsFile : ICloneable
     {
         IGeneralParameters GeneralParameters { get; set; }
         IDriverFiles DriverFiles { get; set; }
         List<IPft> Pfts { get; set; }
         PftType PftType { get; set; }
+
+        void Compare(IInsFile other);
     }
 }

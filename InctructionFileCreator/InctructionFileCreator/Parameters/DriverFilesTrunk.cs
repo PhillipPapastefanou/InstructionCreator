@@ -23,7 +23,19 @@ namespace InctructionFileCreator
         public string File_Min_Temp { get; set; }
         public string File_Max_Temp { get; set; }
         public string File_NDep { get; set; }
+        public virtual object Clone()
+        {
+            IDriverFiles parameters = new DriverFilesTrunk();
 
+            var properties = this.GetType().GetProperties();
 
+            foreach (var p in properties.Where(prop => prop.CanRead && prop.CanWrite))
+            {
+                object copyValue = p.GetValue(this);
+                p.SetValue(parameters, copyValue);
+            }
+
+            return parameters;
+        }
     }
 }

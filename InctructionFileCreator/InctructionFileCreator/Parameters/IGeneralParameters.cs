@@ -60,6 +60,10 @@ namespace InctructionFileCreator
         bool Save_State { get; set; }
 
 
+        object Clone();
+
+        void Compare(IGeneralParameters other);
+
 
 
     }

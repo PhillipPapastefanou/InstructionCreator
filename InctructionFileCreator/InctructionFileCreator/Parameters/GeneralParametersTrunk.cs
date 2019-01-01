@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -41,5 +42,31 @@ namespace InctructionFileCreator
         public double NRelocFrac { get; set; }
         public bool Restart { get; set; }
         public bool Save_State { get; set; }
+        public virtual object Clone()
+        {
+            IGeneralParameters generalParameters = new GeneralParametersTrunk();
+
+            var properties = this.GetType().GetProperties();
+
+            foreach (var p in properties.Where(prop => prop.CanRead && prop.CanWrite))
+            {
+                object copyValue = p.GetValue(this);
+                p.SetValue(generalParameters, copyValue);
+            }
+
+            return generalParameters;
+        }
+
+        public virtual void Compare(IGeneralParameters other)
+        {
+            GeneralParametersTrunk otherT = other as GeneralParametersTrunk;
+
+            var properties = this.GetType().GetProperties();
+
+            foreach (var prop in properties)
+            {
+                Console.WriteLine( prop.Name +  " " + prop.GetValue(this) + " " +prop.GetValue(otherT));
+            }
+        }
     }
 }

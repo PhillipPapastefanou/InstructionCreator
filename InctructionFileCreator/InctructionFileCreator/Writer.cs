@@ -77,7 +77,7 @@ namespace InctructionFileCreator
                 string value = ParseParameterToStr(iParam, insFile.DriverFiles);
 
 
-                string line = string.Format("param \"{0}\"     str({1})", name, value);
+                string line = string.Format("param \"{0}\"     (str {1})", name, value);
                 writer.WriteLine(line);
             }
         }

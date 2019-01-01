@@ -12,6 +12,10 @@ namespace InctructionFileCreator
         public IDriverFiles DriverFiles { get; set; }
         public List<IPft> Pfts { get; set; }
         public PftType PftType { get; set; }
+        public void Compare(IInsFile other)
+        {
+            throw new NotImplementedException();
+        }
 
         public InsFileTrunk()
         {
@@ -21,5 +25,18 @@ namespace InctructionFileCreator
             PftType = PftType.Trunk;
         }
 
+        public object Clone()
+        {
+            IInsFile newFile = new InsFileTrunk();
+            newFile.GeneralParameters = (GeneralParametersTrunk)GeneralParameters.Clone();
+            newFile.DriverFiles = (DriverFilesTrunk)DriverFiles.Clone();
+            foreach (IPft pft in Pfts)
+            {
+                newFile.Pfts.Add((Pft)pft.Clone());
+            }
+
+            newFile.PftType = this.PftType;
+            return newFile;
+        }
     }
 }

@@ -23,5 +23,8 @@ namespace InctructionFileCreator
         string File_Min_Temp { get; set; }
         string File_Max_Temp { get; set; }
         string File_NDep { get; set; }
+
+
+        object Clone();
     }
 }

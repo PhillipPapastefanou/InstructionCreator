@@ -121,5 +121,8 @@ namespace InctructionFileCreator
         double Turnover_harv_prod { get; set; }
         double Harvest_slow_frac { get; set; }
 
+        object Clone();
+        void Compare(IPft other);
+
     } 
 }
