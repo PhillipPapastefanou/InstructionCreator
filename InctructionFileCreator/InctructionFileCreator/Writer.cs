@@ -50,9 +50,11 @@ namespace InctructionFileCreator
             writer.WriteLine();
 
             IGeneralParameters generalParameters = insFile.GeneralParameters;
-
+            
 
             PropertyInfo[] parameters = generalParameters.GetType().GetProperties();
+
+            Array.Sort(parameters, (info1, info2) => info1.Name.CompareTo(info2.Name));
 
             foreach (PropertyInfo parameter in parameters)
             {
@@ -71,6 +73,9 @@ namespace InctructionFileCreator
 
             PropertyInfo[] iParams = insFile.DriverFiles.GetType().GetProperties();
 
+
+            Array.Sort(iParams, (info1, info2) => info1.Name.CompareTo(info2.Name));
+
             foreach (PropertyInfo iParam in iParams)
             {
                 string name = iParam.Name.ToLower(CultureInfo.InvariantCulture);
@@ -86,6 +91,8 @@ namespace InctructionFileCreator
         {
 
             PropertyInfo[] pftParams = insFile.Pfts.First().GetType().GetProperties();
+
+            Array.Sort(pftParams, (info1, info2) => info1.Name.CompareTo(info2.Name));
 
             foreach (Pft pft in insFile.Pfts)
             {

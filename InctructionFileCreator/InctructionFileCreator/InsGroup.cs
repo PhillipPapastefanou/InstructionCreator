@@ -35,7 +35,7 @@ namespace InctructionFileCreator
                     string dummyKey = String.Empty;
                     if (Parameters.TryGetValue(subGroupParameter.Key, out dummyKey))
                     {
-                        Parameters[subGroupParameter.Key] = subGroupParameter.Value;
+                        //Parameters[subGroupParameter.Key] = subGroupParameter.Value;
                     }
 
                     else

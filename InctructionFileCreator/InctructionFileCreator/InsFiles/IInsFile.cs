@@ -10,7 +10,7 @@ namespace InctructionFileCreator
     {
         IGeneralParameters GeneralParameters { get; set; }
         IDriverFiles DriverFiles { get; set; }
-        List<IPft> Pfts { get; set; }
+        PftList Pfts { get; set; }
         PftType PftType { get; set; }
 
         void Compare(IInsFile other);

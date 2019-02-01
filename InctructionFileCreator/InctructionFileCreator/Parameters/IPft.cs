@@ -124,5 +124,38 @@ namespace InctructionFileCreator
         object Clone();
         void Compare(IPft other);
 
-    } 
+    }
+
+
+
+
+    class PftList : List<IPft>
+    {
+        public IPft this[string name]
+        {
+            get
+            {
+                foreach (IPft pft in this)
+                {
+                    if (pft.Name == name)
+                    {
+                        return pft;
+                    }
+                }
+                return null;
+            }
+        }
+        public List<string> AllNames
+        {
+            get
+            {
+                List<string> names = new List<string>();
+                foreach (IPft pft in this)
+                {
+                    names.Add(pft.Name);
+                }
+                return names;
+            }
+        }
+    }
 }

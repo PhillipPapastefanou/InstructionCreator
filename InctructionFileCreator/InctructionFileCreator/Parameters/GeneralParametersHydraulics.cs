@@ -8,9 +8,9 @@ namespace InctructionFileCreator
 {
     enum HydraulicSystemType
     {
-        Standard,
-        Monteith_based_gc,
-        vpd_based_gc
+        STANDARD,
+        MONTEITH_BASED_GC,
+        VPD_BASED_GC
     }
 
     class GeneralParametersHydraulics: GeneralParametersTrunk

@@ -14,7 +14,7 @@ namespace InctructionFileCreator.Parameters
         }
 
         public double Isohydricity { get; set; }
-        public double Delta_Psi_Opt { get; set; }
+        public double Delta_Psi_Max { get; set; }
         public double ks_max { get; set; }
         public double kr_max { get; set; }
         public double kL_max { get; set; }

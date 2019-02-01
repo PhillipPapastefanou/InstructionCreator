@@ -10,7 +10,7 @@ namespace InctructionFileCreator
     {
         public IGeneralParameters GeneralParameters { get; set; }
         public IDriverFiles DriverFiles { get; set; }
-        public List<IPft> Pfts { get; set; }
+        public PftList Pfts { get; set; }
         public PftType PftType { get; set; }
         public void Compare(IInsFile other)
         {
@@ -21,7 +21,7 @@ namespace InctructionFileCreator
         {
             GeneralParameters = new GeneralParametersTrunk();
             DriverFiles = new DriverFilesTrunk();
-            Pfts = new List<IPft>();
+            Pfts = new PftList();
             PftType = PftType.Trunk;
         }
 
