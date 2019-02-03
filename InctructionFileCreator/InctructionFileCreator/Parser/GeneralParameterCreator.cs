@@ -108,6 +108,20 @@ namespace InctructionFileCreator
                             info.SetValue(generalParameters, mode);
                         }
                     }
+
+                    else if (info.PropertyType == typeof(OutputTimeRangeType))
+                    {
+                        OutputTimeRangeType mode;
+
+                        string enumString = value_str.Substring(0, 1).ToUpper() + value_str.Substring(1).ToLower();
+
+                        bool parsed = Enum.TryParse(enumString, out mode);
+
+                        if (parsed)
+                        {
+                            info.SetValue(generalParameters, mode);
+                        }
+                    }
                     else
                     {
                         Console.WriteLine("Invalid Enumtype supplied: " + info.PropertyType);
