@@ -12,8 +12,6 @@ namespace InctructionFileCreator
        public string Name { get; set; }
 
 
-
-
         // Common pft parameters
         public bool Include { get; set; }
         public double Lambda_max { get; set; }

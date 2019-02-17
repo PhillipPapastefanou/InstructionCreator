@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Auxilary.cs" />
+    <Compile Include="ClusterBaseSetup.cs" />
     <Compile Include="InsFiles\InsFileHydraulics.cs" />
     <Compile Include="Parameters\DriverFilesHydraulics.cs" />
     <Compile Include="Parameters\IDriverFiles.cs" />

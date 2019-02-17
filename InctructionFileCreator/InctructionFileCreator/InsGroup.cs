@@ -35,7 +35,12 @@ namespace InctructionFileCreator
                     string dummyKey = String.Empty;
                     if (Parameters.TryGetValue(subGroupParameter.Key, out dummyKey))
                     {
-                        //Parameters[subGroupParameter.Key] = subGroupParameter.Value;
+
+                        //When iterating through parameters of this list, does new parameters have to be over
+                        //written?
+                        //Resp_coeff says yes for tropical trees
+                        // the cordex tree list however tells something very different...
+                        Parameters[subGroupParameter.Key] = subGroupParameter.Value;
                     }
 
                     else

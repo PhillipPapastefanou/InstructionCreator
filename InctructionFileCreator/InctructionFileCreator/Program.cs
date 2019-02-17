@@ -18,7 +18,8 @@ namespace InctructionFileCreator
             Stopwatch sw = Stopwatch.StartNew();
 
             //string filename = @"F:\SourceTreeRepos\InstructionCreator\InctructionFileCreator\InctructionFileCreator\bin\Debug\masterH-Def-GLDAS.ins";
-            string filename = @"F:\ClimateData\master_hyd.ins";
+            //string filename = @"F:\ClimateData\master_hyd.ins";
+            string filename = @"F:\Repos\guess4_hydraulics\build\Release\masterH-Def-GLDAS.ins";
 
             IInsFile insfile = new InsFileHydraulics();
 
@@ -26,8 +27,9 @@ namespace InctructionFileCreator
             parser.Read();
             
 
-            IInsFile hydFile = (IInsFile)insfile.Clone();
-            
+  
+            InsFileHydraulics hydFile = (IInsFile) insfile.Clone() as InsFileHydraulics;
+
 
             //Writer w = new Writer(insfile, @"F:\Repos\guess4\build_mobile\Release\masterH-Def-CORDEXorg-re.ins");
             //w.Write();
@@ -36,18 +38,25 @@ namespace InctructionFileCreator
             StreamWriter fileWriter = new StreamWriter("Insfiles.txt");
             StreamWriter values = new StreamWriter("Values.txt");
 
-            //hydFile.DriverFiles.File_gridlist = "/home/hpc/pr48va/ga92wol2/driver_data/Gridlists/Amazon/TNF_CAX_K34.txt";
-            //hydFile.DriverFiles.File_temp = "/home/hpc/pr48va/ga92wol2/driver_data/GLDAS2/GLDAS_1948_2010_temp_daily_half.nc";
-            //hydFile.DriverFiles.File_insol = "/home/hpc/pr48va/ga92wol2/driver_data/GLDAS2/GLDAS_1948_2010_swdown_daily_half.nc";
-
-
+            ClusterBaseSetup baseSetup = new ClusterBaseSetup(ref hydFile);
+            
 
             List<string> precDrivers = new List<string>();
-            //precDrivers.Add("/home/hpc/pr48va/ga92wol2/driver_data/GLDAS2/GLDAS_1948_2010_prec_daily_half_normal_TNF.nc");
-            //precDrivers.Add("/home/hpc/pr48va/ga92wol2/driver_data/GLDAS2/GLDAS_1948_2010_prec_daily_half_reduced_TNF.nc");
+            precDrivers.Add("/home/hpc/pr48va/ga92wol2/driver_data/GLDAS2/GLDAS_1948_2010_prec_daily_half.nc");
+            precDrivers.Add("/home/hpc/pr48va/ga92wol2/driver_data/GLDAS2/GLDAS_1948_2010_prec_daily_half_TNF_CAX_RED05.nc");
 
-            precDrivers.Add("F:\\ClimateData\\GLDAS_1948_2010_prec_daily_half_normal_TNF.nc");
-            precDrivers.Add("F:\\ClimateData\\GLDAS_1948_2010_prec_daily_half_reduced_TNF.nc");
+            //precDrivers.Add("F:\\ClimateData\\Amazonia\\GLDAS_1948_2010_prec_daily_half_normal_TNF.nc");
+            //precDrivers.Add("F:\\ClimateData\\Amazonia\\GLDAS_1948_2010_prec_daily_half_reduced_TNF.nc");
+
+            List<double> conductiveMultiplier = new List<double>();
+            conductiveMultiplier.Add(0.5);
+            conductiveMultiplier.Add(1.0);
+            conductiveMultiplier.Add(2.0);
+
+            List<double> deltaPsiMaxes = new List<double>();
+            deltaPsiMaxes.Add(1.5);
+            deltaPsiMaxes.Add(2.0);
+            deltaPsiMaxes.Add(2.5);
 
 
             List<double> alphaAs = new List<double>();
@@ -65,16 +74,25 @@ namespace InctructionFileCreator
             List<double> cavSlopes = new List<double>();
             cavSlopes.Add(-3.0);
             cavSlopes.Add(-5.0);
-            cavSlopes.Add(-8.0);
+            cavSlopes.Add(-15.0);
 
             List<double> isohydricities = new List<double>();
             isohydricities.Add(0.0);
-            isohydricities.Add(0.3);
-            isohydricities.Add(0.8);
+            isohydricities.Add(0.25);
+            isohydricities.Add(0.50);
+            isohydricities.Add(1.0);
+
+            List<int> rootScemes = new List<int>();
+            rootScemes.Add(0);
+            rootScemes.Add(1);
 
 
             int index = 0;
 
+
+            string rootFolder = "Insfiles";
+
+            Directory.CreateDirectory(rootFolder);
 
             for (int i = 0; i < precDrivers.Count; i++)
             {
@@ -84,65 +102,88 @@ namespace InctructionFileCreator
                 {
                     foreach (double psi50 in psi50s)
                     {
-
                         foreach (double cavS in cavSlopes)
                         {
-
                             foreach (double iso in isohydricities)
                             {
-
-
-                                string name = index + "run.ins";
-                                //string path = @"/gpfs/scratch/pr48va/ga92wol2/ga92wol2/2019/Hydraulics_Sens_2019/";
-                                fileWriter.WriteLine(name);
-
-                                Writer ws = new Writer(hydFile, name);
-
-
-                                GeneralParametersHydraulics gParams =
-                                    hydFile.GeneralParameters as GeneralParametersHydraulics;
-
-                                gParams.Hydraulic_system = HydraulicSystemType.VPD_BASED_GC;
-                                gParams.NPatch = 50;
-
-                                gParams.Alphaa_nlim = alphaA;
-                                DriverFilesHydraulics hyDriverFiles = hydFile.DriverFiles as DriverFilesHydraulics;
-                                hyDriverFiles.File_prec = filePrec;
-                                //hyDriverFiles.File_vpd= "/home/hpc/pr48va/ga92wol2/driver_data/GLDAS2/GLDAS_1948_2010_vpd_d_daily_half.nc";
-                                //hyDriverFiles.File_windspeed= "/home/hpc/pr48va/ga92wol2/driver_data/GLDAS2/GLDAS_1948_2010_windspeed_daily_half.nc";
-
-
-
-
-
-                                //PftHyd p = insfile.Pfts["TrBE"] as PftHyd;
-
-
-
-                                foreach (var pft in hydFile.Pfts)
+                                foreach (double deltaPsiMax in deltaPsiMaxes)
                                 {
-                                    PftHyd pfthyd = pft as PftHyd;
-                                    pfthyd.ks_max = 80.0;
-                                    pfthyd.kL_max = 15.0;
-                                    pfthyd.kr_max = 5.0;
-                                    pfthyd.Isohydricity = iso;
-                                    pfthyd.Delta_Psi_Max = 1.75;
-                                    pfthyd.psi50_xylem = psi50;
-                                    pfthyd.cav_slope = cavS;
+                                    foreach (double multiplier in conductiveMultiplier)
+                                    {
+
+                                        foreach (double rootSceme in rootScemes)
+                                        {
+                                            
+
+
+                                    string name = index + "run.ins";
+                                    //string path = @"/gpfs/scratch/pr48va/ga92wol2/ga92wol2/2019/Hydraulics_Sens_2019/";
+                                    fileWriter.Write(name + "\n");
+
+                                    Writer ws = new Writer(hydFile, rootFolder + "//" + name);
+
+
+                                    GeneralParametersHydraulics gParams =
+                                        hydFile.GeneralParameters as GeneralParametersHydraulics;
+
+                                    gParams.Hydraulic_system = HydraulicSystemType.VPD_BASED_GC;
+                                    gParams.NPatch = 50;
+                                    gParams.Suppress_daily_output = true;
+                                    gParams.Suppress_annually_output = false;
+                                    gParams.Suppress_monthly_output = false;
+                                    gParams.Output_time_range = OutputTimeRangeType.Scenario;
+
+                                    gParams.Alphaa_nlim = alphaA;
+                                    DriverFilesHydraulics hyDriverFiles = hydFile.DriverFiles as DriverFilesHydraulics;
+                                    hyDriverFiles.File_prec = filePrec;
+
+
+
+                                    //PftHyd p = insfile.Pfts["TrBE"] as PftHyd;
+
+
+
+                                    foreach (var pft in hydFile.Pfts)
+                                    {
+                                        PftHyd pfthyd = pft as PftHyd;
+                                        pfthyd.ks_max = 80.0 * multiplier;
+                                        pfthyd.kL_max = 5.0 * multiplier;
+                                        pfthyd.kr_max = 15.0 * multiplier;
+                                        pfthyd.Isohydricity = iso;
+                                        pfthyd.Delta_Psi_Max = deltaPsiMax;
+                                        pfthyd.psi50_xylem = psi50;
+                                        pfthyd.cav_slope = cavS;
+
+                                        if (rootSceme == 0)
+                                        {
+                                            pfthyd.Rootdist = new double[]{ 0.6, 0.4};
+                                        }
+
+                                        else
+                                        {
+                                            pfthyd.Rootdist = new double[] { 0.4, 0.6 };
+                                                }
+                                    }
+
+                                    values.Write(index + "\t");
+                                    values.Write(i.ToString(CultureInfo.InvariantCulture) + "\t");
+                                    values.Write(alphaA.ToString(CultureInfo.InvariantCulture) + "\t");
+                                    values.Write(iso.ToString(CultureInfo.InvariantCulture) + "\t");
+                                    values.Write(cavS.ToString(CultureInfo.InvariantCulture) + "\t");
+                                    values.Write(psi50.ToString(CultureInfo.InvariantCulture) + "\t");
+                                    values.Write(deltaPsiMax.ToString(CultureInfo.InvariantCulture) + "\t");
+                                    values.Write(multiplier.ToString(CultureInfo.InvariantCulture) + "\t");
+                                    values.Write(rootSceme.ToString(CultureInfo.InvariantCulture));
+                                    values.Write("\n");
+
+                                    ws.Write();
+                                    ws.Dispose();
+
+                                    index++;
+                                        }
+
+                                    }
                                 }
-
-                                values.Write(index + "\t");
-                                values.Write(i.ToString(CultureInfo.InvariantCulture) + "\t");
-                                values.Write(alphaA.ToString(CultureInfo.InvariantCulture) + "\t");
-                                values.Write(iso.ToString(CultureInfo.InvariantCulture) + "\t");
-                                values.Write(cavS.ToString(CultureInfo.InvariantCulture) + "\t");
-                                values.Write(psi50.ToString(CultureInfo.InvariantCulture));
-                                values.WriteLine();
-
-                                ws.Write();
-                                ws.Dispose();
-
-                                index++;
                             }
                         }
                     }
