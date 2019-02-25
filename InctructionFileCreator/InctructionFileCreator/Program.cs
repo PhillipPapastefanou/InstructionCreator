@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InctructionFileCreator.Parameters;
+using SensitivitySetup;
 
 namespace InctructionFileCreator
 {
@@ -15,7 +16,14 @@ namespace InctructionFileCreator
     {
         static void Main(string[] args)
         {
-            Stopwatch sw = Stopwatch.StartNew();
+            SobolSequence sobolSequence = new SobolSequence("..//..//new-joe-kuo-5.21201");
+
+            sobolSequence.GetSequence(10000, 3);
+
+
+            double[,] pts = sobolSequence.Points;
+
+           Stopwatch sw = Stopwatch.StartNew();
 
             //string filename = @"F:\SourceTreeRepos\InstructionCreator\InctructionFileCreator\InctructionFileCreator\bin\Debug\masterH-Def-GLDAS.ins";
             //string filename = @"F:\ClimateData\master_hyd.ins";
@@ -88,6 +96,8 @@ namespace InctructionFileCreator
 
 
             int index = 0;
+
+
 
 
             string rootFolder = "Insfiles";

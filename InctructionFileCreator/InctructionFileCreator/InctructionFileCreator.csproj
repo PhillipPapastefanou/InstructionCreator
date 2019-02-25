@@ -70,6 +70,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\SensitivitySetup\SensitivitySetup.csproj">
+      <Project>{1c870dbb-e985-4073-80f0-f1a99b8f3c6d}</Project>
+      <Name>SensitivitySetup</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

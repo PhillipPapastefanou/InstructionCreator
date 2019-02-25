@@ -1,6 +1,8 @@
 InctructionFileCreator/.vs/*
 InctructionFileCreator/InctructionFileCreator/bin/*
 InctructionFileCreator/InctructionFileCreator/obj/*
+InctructionFileCreator/SensitivitySetup/bin/*
+InctructionFileCreator/SensitivitySetup/obj/*
 NcInterop/bin/*
 NcInterop/obj/*
 DynamicInterop/bin/*
