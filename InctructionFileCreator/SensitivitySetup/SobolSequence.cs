@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SensitivitySetup
 {
-    public class SobolSequence
+    class SobolSequence
     {
         private string _sobolNumbers;
         private int[] dL;
@@ -51,7 +51,7 @@ namespace SensitivitySetup
 
                     for (int j = 0; j < mStrings.Length; j++)
                     {
-                        if (mStrings[j] != String.Empty)
+                        if (mStrings[j] != String.Empty && mStrings[j] != "\r")
                         {
                             mL[i - 1].Add(Convert.ToInt32(mStrings[j]));
                         }
