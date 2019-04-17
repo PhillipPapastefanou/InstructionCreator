@@ -29,6 +29,7 @@ namespace InctructionFileCreator
     {
         public HydraulicSystemType Hydraulic_system { get; set; }
         public double Alphaa_nlim { get; set; }
+        public bool Disable_mort_greff { get; set; }
 
         public bool Suppress_daily_output { get; set; }
         public bool Suppress_monthly_output { get; set; }

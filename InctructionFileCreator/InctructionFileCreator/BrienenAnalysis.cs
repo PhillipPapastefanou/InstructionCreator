@@ -35,6 +35,19 @@ namespace InctructionFileCreator
             condScaler.DivideEqually(nValuesPerParameter);
             rootDepthScaler.DivideEqually(nValuesPerParameter);
 
+            List<UniformParameter> parameters = new List<UniformParameter>();
+
+            parameters.Add(alphaA);
+            parameters.Add(psi50);
+            parameters.Add(cavSlope);
+            parameters.Add(isohyd);
+            parameters.Add(deltaPsiMax);
+            parameters.Add(condScaler);
+            parameters.Add(rootDepthScaler);
+
+
+
+
 
 
 
@@ -48,12 +61,18 @@ namespace InctructionFileCreator
 
             InsFileHydraulics hydFile = (IInsFile)insfile.Clone() as InsFileHydraulics;
 
+            
+
 
             StreamWriter fileWriter = new StreamWriter("Insfiles.txt");
             ClusterBaseSetup baseSetup = new ClusterBaseSetup(ref hydFile);
 
             hydFile.DriverFiles.File_gridlist = "/home/hpc/pr48va/ga92wol2/driver_data/Gridlists/Amazon/Brienen_coords.txt";
             hydFile.DriverFiles.File_prec = "/home/hpc/pr48va/ga92wol2/driver_data/GLDAS2/GLDAS_1948_2010_prec_daily_half.nc";
+
+            GeneralParametersHydraulics hydGernGeneralParameters =  hydFile.GeneralParameters as GeneralParametersHydraulics;
+            hydGernGeneralParameters.Disable_mort_greff = true;
+
 
             string rootFolder = "Insfiles";
             Directory.CreateDirectory(rootFolder);
@@ -211,6 +230,10 @@ namespace InctructionFileCreator
 
 
             fileWriter.Close();
+
+
+            ParameterWriter parameterWriter = new ParameterWriter(parameters);
+
             Console.WriteLine(sw.ElapsedMilliseconds);
 
         }

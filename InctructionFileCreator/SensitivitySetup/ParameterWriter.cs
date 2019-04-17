@@ -32,6 +32,25 @@ namespace SensitivitySetup
             WriteRows(parameters);
         }
 
+        public ParameterWriter(List<UniformParameter> parameters)
+        {
+
+
+            n = parameters.Count * parameters[0].Values.Length;
+
+            writer = new StreamWriter("Values.tsv");
+            List<ParameterDistribution> iparams = new List<ParameterDistribution>();
+
+            for (int i = 0; i < parameters.Count; i++)
+                iparams.Add(parameters[i] as ParameterDistribution);
+
+
+            WriteHeader(iparams);
+
+            WriteRowsOAAT(parameters);
+
+        }
+
 
 
         private void WriteHeader(List<ParameterDistribution> parameters)
@@ -65,13 +84,45 @@ namespace SensitivitySetup
             }
 
             writer.Close();
+        }
 
+
+        private void WriteRowsOAAT(List<UniformParameter> parameters)
+        {
+            for (int d = 0; d < parameters.Count; d++)
+            {
+                UniformParameter param = parameters[d];
+                for (int i = 0; i < param.Values.Length; i++)
+                {
+                    for (int x = 0; x < parameters.Count; x++)
+                    {
+                        if (x == d)
+                        {
+                            writer.Write(param.Values[i].ToString(CultureInfo.InvariantCulture));
+                        }
+
+                        else
+                        {
+                            writer.Write("NaN");
+                        }
+
+                        if (x != parameters.Count - 1)
+                            writer.Write('\t');
+                    }
+
+                    writer.WriteLine();
+                }
+
+
+
+            }
+
+            writer.Close();
         }
 
 
 
-
-        }
+    }
 
     }
 
