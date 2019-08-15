@@ -46,6 +46,7 @@
     <Compile Include="BrienenAnalysis.cs" />
     <Compile Include="BrienenBaseSetup.cs" />
     <Compile Include="ClusterBaseSetup.cs" />
+    <Compile Include="Container.cs" />
     <Compile Include="InsFiles\InsFileHydraulics.cs" />
     <Compile Include="Parameters\DriverFilesHydraulics.cs" />
     <Compile Include="Parameters\IDriverFiles.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Parameters\SmartOutParameters.cs" />
     <Compile Include="SobolSequenceInstructionFile.cs" />
+    <Compile Include="TwoPftStratified.cs" />
     <Compile Include="Writer.cs" />
   </ItemGroup>
   <ItemGroup>
