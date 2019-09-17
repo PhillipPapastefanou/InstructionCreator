@@ -56,10 +56,12 @@ namespace InctructionFileCreator
 
             List<double> deltaPsiMaxes = new List<double>();
             deltaPsiMaxes.Add(1.2);
+            deltaPsiMaxes.Add(1.45);
             deltaPsiMaxes.Add(1.7);
 
             List<double> alphaAs = new List<double>();
             alphaAs.Add(0.8);
+            alphaAs.Add(0.6);
 
             List<Pair<double>> psi50s = new List<Pair<double>>();
             psi50s.Add(new Pair<double>(-2.5, -3.2));
@@ -81,12 +83,11 @@ namespace InctructionFileCreator
 
 
             List<Pair<double>> isohydricities = new List<Pair<double>>();
-            isohydricities.Add(new Pair<double>(0.8, -0.3));
-            isohydricities.Add(new Pair<double>(0.6, -0.3));
-            isohydricities.Add(new Pair<double>(0.8, 0.0));
             isohydricities.Add(new Pair<double>(0.6, 0.0));
-            isohydricities.Add(new Pair<double>(0.8, 0.3));
-            isohydricities.Add(new Pair<double>(0.6, 0.3));
+            isohydricities.Add(new Pair<double>(0.6, -0.3));
+            isohydricities.Add(new Pair<double>(0.3, 0.0));
+            isohydricities.Add(new Pair<double>(0.0, -0.3));
+            isohydricities.Add(new Pair<double>(0.3, -0.3));
 
 
             int index = 0;
@@ -101,7 +102,9 @@ namespace InctructionFileCreator
             for (int i = 0; i < precDrivers.Count; i++)
             {
                 string filePrec = precDrivers[i];
-  
+
+                foreach (double alphaA in alphaAs)
+                {
                     foreach (Pair<double> psi50 in psi50s)
                     {
                         foreach (double cavS in cavSlopes)
@@ -112,27 +115,29 @@ namespace InctructionFileCreator
                                 {
                                     foreach (Pair<double> multiplier in conductiveMultiplier)
                                     {
-                                       
-                                            string name = index + "run.ins";
-                                            //string path = @"/gpfs/scratch/pr48va/ga92wol2/ga92wol2/2019/Hydraulics_Sens_2019/";
-                                            fileWriter.Write("Insfiles/" + name + "\n");
 
-                                            Writer ws = new Writer(hydFile, rootFolder + "//" + name);
+                                        string name = index + "run.ins";
+                                        //string path = @"/gpfs/scratch/pr48va/ga92wol2/ga92wol2/2019/Hydraulics_Sens_2019/";
+                                        fileWriter.Write("Insfiles/" + name + "\n");
+
+                                        Writer ws = new Writer(hydFile, rootFolder + "//" + name);
 
 
-                                            GeneralParametersHydraulics gParams =
-                                                hydFile.GeneralParameters as GeneralParametersHydraulics;
+                                        GeneralParametersHydraulics gParams =
+                                            hydFile.GeneralParameters as GeneralParametersHydraulics;
 
-                                            gParams.Hydraulic_system = HydraulicSystemType.VPD_BASED_GC;
-                                            gParams.NPatch = 50;
-                                            gParams.Suppress_daily_output = true;
-                                            gParams.Suppress_annually_output = false;
-                                            gParams.Suppress_monthly_output = false;
-                                            gParams.Output_time_range = OutputTimeRangeType.Scenario;
+                                        gParams.Hydraulic_system = HydraulicSystemType.VPD_BASED_GC;
+                                        gParams.NPatch = 50;
+                                        gParams.Suppress_daily_output = true;
+                                        gParams.Suppress_annually_output = false;
+                                        gParams.Suppress_monthly_output = false;
+                                        gParams.Output_time_range = OutputTimeRangeType.Scenario;
+                                        gParams.Disable_mort_greff = false;
 
-                                            gParams.Alphaa_nlim = 0.8;
-                                            DriverFilesHydraulics hyDriverFiles = hydFile.DriverFiles as DriverFilesHydraulics;
-                                            hyDriverFiles.File_prec = filePrec;
+                                        gParams.Alphaa_nlim = alphaA;
+                                        DriverFilesHydraulics hyDriverFiles =
+                                            hydFile.DriverFiles as DriverFilesHydraulics;
+                                        hyDriverFiles.File_prec = filePrec;
 
 
                                         PftHyd pft_iso = insfile.Pfts["TrBE_iso"] as PftHyd;
@@ -143,7 +148,7 @@ namespace InctructionFileCreator
                                         pft_iso.Delta_Psi_Max = deltaPsiMax;
                                         pft_iso.psi50_xylem = psi50.A;
                                         pft_iso.cav_slope = cavS;
-                                        pft_iso.Rootdist = new double[] { 0.6, 0.4 };
+                                        pft_iso.Rootdist = new double[] {0.6, 0.4};
 
 
                                         PftHyd pft_ansio = insfile.Pfts["TrBE_aniso"] as PftHyd;
@@ -154,13 +159,13 @@ namespace InctructionFileCreator
                                         pft_ansio.Delta_Psi_Max = deltaPsiMax;
                                         pft_ansio.psi50_xylem = psi50.B;
                                         pft_ansio.cav_slope = cavS;
-                                        pft_ansio.Rootdist = new double[] { 0.4, 0.6 };
+                                        pft_ansio.Rootdist = new double[] {0.4, 0.6};
 
 
 
                                         values.Write(index + "\t");
                                         values.Write(i.ToString(CultureInfo.InvariantCulture) + "\t");
-                                        values.Write("0.8" + "\t");
+                                        values.Write(alphaA.ToString(CultureInfo.InvariantCulture) + "\t");
                                         values.Write(iso.ToString() + "\t");
                                         values.Write(cavS.ToString(CultureInfo.InvariantCulture) + "\t");
                                         values.Write(psi50.ToString() + "\t");
@@ -177,11 +182,11 @@ namespace InctructionFileCreator
 
                                         index++;
 
-                                }
+                                    }
                                 }
                             }
                         }
-
+                    }
                 }
             }
 
