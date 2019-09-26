@@ -18,6 +18,7 @@ namespace InctructionFileCreator
 
             uParameters.Add(new UniformParameter("AlphaA", 0.6, 0.9));
             uParameters.Add(new UniformParameter("Isohydricity", 0.0, 1.0));
+            uParameters.Add(new UniformParameter("Isohydricity", 0.0, 1.0));
             uParameters.Add(new UniformParameter("Psi50", -3.5, -1.0));
             uParameters.Add(new UniformParameter("CavSlope", -15.0, -2.0));
             uParameters.Add(new UniformParameter("DeltaPsiMax", 1.0, 2.5));

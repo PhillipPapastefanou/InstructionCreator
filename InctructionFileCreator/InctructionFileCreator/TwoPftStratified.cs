@@ -32,6 +32,7 @@ namespace InctructionFileCreator
 
             StreamWriter fileWriter = new StreamWriter("Insfiles.txt");
             StreamWriter values = new StreamWriter("Values.tsv");
+            StreamWriter values_splt = new StreamWriter("ValuesSplt.tsv");
 
             ClusterBaseSetup baseSetup = new ClusterBaseSetup(ref hydFile);
 
@@ -172,6 +173,21 @@ namespace InctructionFileCreator
                                         values.Write(deltaPsiMax.ToString(CultureInfo.InvariantCulture) + "\t");
                                         values.Write(multiplier.ToString() + "\t");
                                         values.Write("\n");
+
+
+                                        values_splt.Write(index + "\t");
+                                        values_splt.Write(i.ToString(CultureInfo.InvariantCulture) + "\t");
+                                        values_splt.Write(alphaA.ToString(CultureInfo.InvariantCulture) + "\t");
+                                        values_splt.Write(iso.A.ToString(CultureInfo.InvariantCulture)+ "\t");
+                                        values_splt.Write(iso.B.ToString(CultureInfo.InvariantCulture)+ "\t");
+                                        values_splt.Write(cavS.ToString(CultureInfo.InvariantCulture) + "\t");
+                                        values_splt.Write(psi50.A.ToString(CultureInfo.InvariantCulture) + "\t");
+                                        values_splt.Write(psi50.B.ToString(CultureInfo.InvariantCulture) + "\t");
+                                        values_splt.Write(deltaPsiMax.ToString(CultureInfo.InvariantCulture) + "\t");
+                                        values_splt.Write(multiplier.A.ToString(CultureInfo.InvariantCulture) + "\t");
+                                        values_splt.Write(multiplier.B.ToString(CultureInfo.InvariantCulture) + "\t");
+                                        values_splt.Write("\n");
+
 
                                         hydFile.Pfts[0] = pft_iso;
                                         hydFile.Pfts[1] = pft_ansio;
