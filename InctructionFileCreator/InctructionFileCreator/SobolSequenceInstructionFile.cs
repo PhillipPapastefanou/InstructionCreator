@@ -29,7 +29,7 @@ namespace InctructionFileCreator
 
             sobolGenerator.Generate();
 
-            ParameterWriter writer = new ParameterWriter(sobolGenerator);
+            ParameterWriter writer = new ParameterWriter(sobolGenerator, '\t');
 
             Stopwatch sw = Stopwatch.StartNew();
 

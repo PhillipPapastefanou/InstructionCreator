@@ -19,10 +19,11 @@ namespace InctructionFileCreator
 
             //SobolSequenceInstructionFile sobolFiles = new SobolSequenceInstructionFile();
             //BrienenAnalysis brienenAnalysis = new BrienenAnalysis();
-            TwoPftStratified twoPftStratified = new TwoPftStratified();
+            //TwoPftStratified twoPftStratified = new TwoPftStratified();
 
+            SobolPoints2D sobolPoints = new SobolPoints2D();
+            sobolPoints.GenetrateAndWrite();
             
-
 
             Console.ReadKey();
         }

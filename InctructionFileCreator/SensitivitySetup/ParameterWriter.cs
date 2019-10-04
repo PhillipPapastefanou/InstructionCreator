@@ -14,12 +14,16 @@ namespace SensitivitySetup
 
         private StreamWriter writer;
 
+        private char delimiter;
 
-        public ParameterWriter(SobolGenerator sobolGenerator)
+
+        public ParameterWriter(SobolGenerator sobolGenerator, char delimiter)
         {
             List<UniformParameter> parameters = sobolGenerator.Parameters;
             n = sobolGenerator.NPoints;
-            
+            this.delimiter = delimiter;
+
+
             writer = new StreamWriter("Values.tsv");
             List<ParameterDistribution> iparams = new List<ParameterDistribution>();
 
@@ -61,7 +65,7 @@ namespace SensitivitySetup
                 writer.Write(param.Name);
 
                 if (i != parameters.Count - 1)
-                    writer.Write('\t');
+                    writer.Write(delimiter);
             }
             writer.WriteLine();
         }
@@ -78,7 +82,7 @@ namespace SensitivitySetup
                     writer.Write(param.Values[i].ToString(CultureInfo.InvariantCulture));
 
                     if (d != parameters.Count - 1)
-                        writer.Write('\t');
+                        writer.Write(delimiter);
                 }
                 writer.WriteLine();
             }
@@ -107,7 +111,7 @@ namespace SensitivitySetup
                         }
 
                         if (x != parameters.Count - 1)
-                            writer.Write('\t');
+                            writer.Write(delimiter);
                     }
 
                     writer.WriteLine();
