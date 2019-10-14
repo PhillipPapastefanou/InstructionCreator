@@ -21,9 +21,13 @@ namespace InctructionFileCreator
             //BrienenAnalysis brienenAnalysis = new BrienenAnalysis();
             //TwoPftStratified twoPftStratified = new TwoPftStratified();
 
-            SobolPoints2D sobolPoints = new SobolPoints2D();
-            sobolPoints.GenetrateAndWrite();
+            //SobolPoints2D sobolPoints = new SobolPoints2D();
+            //sobolPoints.GenetrateAndWrite();
             
+            //HydraulicsSpinupComp spinup = new HydraulicsSpinupComp();
+            HydraulicsPsi5088 psi5088 = new HydraulicsPsi5088();
+           
+
 
             Console.ReadKey();
         }

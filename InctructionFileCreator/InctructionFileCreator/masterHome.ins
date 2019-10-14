@@ -1,0 +1,614 @@
+!///////////////////////////////////////////////////////////////////////////////////////
+!// LPJ-GUESS INSTRUCTION SCRIPT FOR COHORT/INDIVIDUAL MODE
+!// Global PFTs
+!//
+!// LPJ-GUESS 4.0.1
+!//
+!///////////////////////////////////////////////////////////////////////////////////////
+
+!mortality "LONGEVITY_GREFF"
+
+!///////////////////////////////////////////////////////////////////////////////////////
+!
+!	Reduced number of Patches and number of pfts.
+!
+!///////////////////////////////////////////////////////////////////////////////////////
+! Output files
+!
+
+! outputdirectory is mandatory. Should be "./" for parallel runs.
+outputdirectory "./"
+
+
+disable_mort_greff 0
+
+hydraulic_system "VPD_BASED_GC"
+!hydraulic_system "STANDARD"
+param "file_vpd"   (str "F:\ClimateData\GLDAS_1948_2010_vpd_d_daily_half.nc")
+param "variable_vpd" (str "vpd")
+
+param "file_windspeed"   (str "F:\ClimateData\GLDAS_1948_2010_windspeed_daily_half.nc")
+param "variable_windspeed" (str "windspeed")
+
+suppress_daily_output 1
+suppress_monthly_output 0
+suppress_annually_output 0
+output_time_range "SCENARIO"
+year_begin 1990
+year_end 2010
+output_data_format "NC4_HDF5"
+alphaa_nlim 0.8
+
+
+
+! Prefined yearly output
+! These files may be outcommented if their output is not required.
+file_cmass "cmass.out"
+file_anpp "anpp.out"
+file_agpp "agpp.out"
+file_fpc "fpc.out"
+file_aaet "aaet.out"
+file_lai "lai.out"
+file_cflux "cflux.out"
+file_dens "dens.out"
+file_runoff "tot_runoff.out"
+file_cpool "cpool.out"
+file_clitter "clitter.out"
+file_mbclic "mblic.out"    ! bioclimatic limits
+file_mnbioc "mnbioc.out"   ! negative biomass
+file_malloc "malloc.out"   ! allometry outside allowed norms
+file_mfirec "mfirec.out"   ! fire (only flux from vegetation, not litter)
+file_mgrowc "mgrowc.out"   ! growth efficiency
+file_mminc "mminc.out"     ! background (age) mortality
+file_mharvc "mharvc.out"   ! harvest
+file_mortc "mortc.out"     ! overflow (should be zero)
+file_mortdc "mortdc.out"   ! background disturbance
+file_turnrc "turnrc.out"   ! root turnover
+file_turnlc "turnlc.out"   ! leaf turnover
+file_cmass_leaf "cmass_leaf.out"
+file_cmass_wood "cmass_wood.out"
+file_cmass_root "cmass_root.out"
+!file_firert "firert.out"
+!file_aiso "aiso.out"
+!file_amon "amon.out"
+!file_speciesheights "height.out"
+
+!PP
+!file_mort_count_allometry "mortCountAllometry.out"
+!file_mort_count_climate "mortCountClimate.out"
+!file_mort_count_disturbance "mortCountDisturbance.out"
+!file_mort_reduced_growtheff "mortReduced_Growtheff.out"
+
+!file_mort_count_growtheff "mortCountGrowthEff.out"
+!file_mort_count_negcmass "mortCountNegCmass.out"
+
+!file_mean_cavitation "meanCavitation.out"
+
+file_nmass "nmass.out"
+file_cton_leaf "cton_leaf.out"
+file_ngases "ngases.out"
+file_nsources "nsources.out"
+file_npool "npool.out"
+file_nlitter "nlitter.out"
+file_nuptake "nuptake.out"
+file_nflux "nflux.out"
+file_vmaxnlim "vmaxnlim.out"
+
+! Monthly outputs
+file_mnpp "mnpp.out"
+file_mlai "mlai.out"
+file_mrh "mrh.out"
+file_mgpp "mgpp.out"
+file_mra "mra.out"
+file_mnee "mnee.out"
+file_maet "maet.out"
+file_mpet "mpet.out"
+file_mevap "mevap.out"
+file_mintercep "mintercep.out"
+file_mrunoff "mrunoff.out"
+file_mwcont_upper "mwcont_upper.out"
+file_mwcont_lower "mwcont_lower.out"
+file_miso "miso.out"
+file_mmon "mmon.out"
+
+
+
+!Vegetation output by Jörg Steinkamp (May 2017)
+!file_vegstruct "vegstruct.outList"
+
+
+!///////////////////////////////////////////////////////////////////////////////////////
+
+
+
+!///////////////////////////////////////////////////////////////////////////////////////
+!// RUN PARAMETERS AND OPTIONS
+!
+
+! Settings recognised by Plib
+! Run GUESS with -help option for list of keywords and their meanings
+
+title 'LPJ-GUESS cohort mode - global pfts'
+
+vegmode "cohort"		! "cohort", "individual" or "population"
+nyear_spinup 500		! number of years to spin up the simulation for
+ifcalcsla 1				! whether to calculate SLA from leaf longevity
+						! (PFT-specific value can be specified in this file instead)
+ifcalccton 1			! whether to calculate leaf C:N min from leaf longevity
+						! (PFT-specific value can be specified in this file instead)
+iffire 0				! whether to implement fire (1) or not (0)
+npatch 50				! number of replicate patches to simulate
+patcharea 1000			! patch area (m2)
+estinterval 5			! years between establishment events in cohort mode
+ifdisturb 1				! whether generic patch-destroying disturbances enabled
+distinterval 200		! average return time for generic patch-destroying disturbances
+						! Hickler et al. (2011) used 200
+ifbgestab 1				! whether background establishment enabled
+ifsme 1					! whether spatial mass effect enabled
+ifstochestab 1			! whether establishment stochastic
+ifstochmort 1			! whether mortality stochastic
+ifcdebt 1				! whether to allow vegetation C storage (1) or not (0)
+wateruptake "rootdist"  ! "wcont", "rootdist", "smart" or "speciesspecific",
+                        ! see documentation for water_uptake()
+						! wateruptake is overwritten, when hydraulics are turned on!
+textured_soil 1	     	! whether to use silt/sand fractions specific to soiltype
+
+
+!///////////////////////////////////////////////////////////////////////////////
+! PROCESS SETTINGS SPECIFIC TO NITROGEN
+!///////////////////////////////////////////////////////////////////////////////
+
+ifcentury 1				! whether to use CENTURY SOM dynamics (mandatory for N cycling)
+ifnlim 1				! whether plant growth limited by available N
+freenyears 100			! number of years to spin up without N limitation (needed to build up a N pool)
+nfix_a 0.102			! first term in N fixation eqn (Conservative 0.102, Central 0.234, Upper 0.367)
+nfix_b 0.524			! second term in N fixation eqn (Conservative 0.524, Central -0.172, Upper -0.754)
+nrelocfrac 0.5			! fraction of N retranslocated prior to leaf and root shedding
+
+
+!///////////////////////////////////////////////////////////////////////////////
+! SERIALIZATION SETTINGS
+!///////////////////////////////////////////////////////////////////////////////
+!state_year 500			! year to save/start state file (no setting = after spinup)
+restart 0				! wheter to start from a state file
+save_state 0			! wheter to save a state file
+!state_path ""			! directory to put state files in
+
+
+ifsmoothgreffmort 1				! whether to vary mort_greff smoothly with growth efficiency (1)
+								! or to use the standard step-function (0)
+								! greff_min values below calibrated for the smooth (1) option
+ifdroughtlimitedestab 0			! whether establishment is limited by growing season drought
+								! guess2008 - species version has 1
+ifrainonwetdaysonly 1			! whether to rain on wet days only (1), or to rain a bit every day (0)
+ifbvoc 0                     	! whether to include BVOC calculations (1) or not (0)
+
+!!!!!!!!!!!! landcover parameters !!!!!!!!!!!!!!
+
+run_landcover 0        ! whether to use (and change) landcover fractions (1) or not (0)
+
+!///////////////////////////////////////////////////////////////////////////////////////
+
+
+!///////////////////////////////////////////////////////////////////////////////////////
+!// PARAMETERS FOR PFTS
+!// Run GUESS with -help option for list of keywords and their meanings
+
+group "common" (
+
+	! Parameters common to all PFTs
+
+	lambda_max 0.8
+	emax 5
+	reprfrac 0.1
+	wscal_min 0.35
+	drought_tolerance 0.0001
+	! default value - ensures that this has little effect even if
+	! ifdroughtlimitedestab is turned on
+	landcover "natural"
+	harv_eff 0
+	res_outtake 0
+)
+
+group "tree" (
+
+	! Parameters common to all trees
+
+	common
+	lifeform "tree"
+	crownarea_max 150
+	ltor_max 1
+	turnover_root 0.7
+	rootdist 0.4 0.6
+	k_allom2 36  !use here parameter derived from height/diameter relationship from trees at ZF2 in 2016 field course, default was 60
+	k_allom3 0.22 !same as above, default was 0.67
+	k_rp 1.6
+	wooddens 200
+	cton_root 29
+	cton_sap 330
+	nuptoroot 0.0028
+	km_volume 0.000001477
+	pathway "c3"
+	respcoeff 1.0	! utkommenterad hos Thomas !
+	kest_repr 200 	! 200
+	kest_bg 0.1 	! 1 i guess2008
+	kest_pres 1 	! 0 i guess2008
+	k_chilla 0
+	k_chillb 100
+	k_chillk 0.05
+	litterme 0.3
+
+	harv_eff 0.95
+	res_outtake 0.75
+	turnover_harv_prod 0.04 ! Turnover rate for long-lived harvested products (wood) : 0.04 corresponds to a 25-year turnover time (as in Bondeau 2007)
+	harvest_slow_frac 0.33	! Bondeau 0.33
+)
+
+group "shrub" (
+	! Unchanged from species version
+	common
+	lifeform "tree"
+	leafphysiognomy "broadleaf"
+	crownarea_max 10
+	ltor_max 1
+	k_allom1 100
+	k_allom2 5
+	k_allom3 0.67
+	k_rp 1.6
+	wooddens 250
+	!cton_leaf_min 16
+	cton_root 29
+	cton_sap 330
+	nuptoroot 0.0028
+	km_volume 0.000001477
+	fnstorage 0.3
+	pathway "c3"
+	kest_repr 200
+	kest_bg 0.1
+	kest_pres 1
+	litterme 0.3
+	rootdist 0.6 0.4
+	longevity 100
+
+	turnover_harv_prod 1 ! Turnover rate for long-lived harvested products (wood) : 1-year turnover time
+	harvest_slow_frac 0
+)
+
+
+group "grass" (
+
+	! Parameters common to all grasses
+
+	common
+	lifeform "grass"
+	leafphysiognomy "broadleaf"
+	ltor_max 0.5
+	rootdist 0.9 0.1  !Sitch et al give 0.9 0.1	Fraction of fine roots in the upper and lower soil layers.
+	gmin 0.5
+	phenology "any"
+	phengdd5ramp 100		! C3 har 50 hos Thomas
+	leaflong 0.5				! Leaf longevity (years)
+	turnover_leaf 1
+	turnover_root 0.7		! 0.5 hos guess2008
+	!cton_leaf_min 16
+	cton_root 29
+	nuptoroot 0.00551
+	km_volume 0.000001876
+	fnstorage 0.3
+	litterme 0.2
+	parff_min 1000000		! 2500000 i guess2008
+	fireresist 0.5			! 1.0 hos Thomas
+	intc 0.01
+	ga 0.030
+
+	turnover_harv_prod 1 ! Turnover rate for long-lived harvested products (wood) : 1-year turnover time for GRAss
+	harvest_slow_frac 0
+)
+
+
+group "broadleaved" (
+
+	! Parameters common to all broadleaved trees
+
+	leafphysiognomy "broadleaf"
+	!cton_leaf_min 16
+	k_allom1 250
+	k_latosa 6000
+	gmin 0.5
+	intc 0.02
+	ga 0.040
+)
+
+group "needleleaved" (
+
+	! Parameters common to all needleleaved trees
+
+	leafphysiognomy "needleleaf"
+	!cton_leaf_min 28
+	k_allom1 150
+	k_latosa 5000
+	gmin 0.3
+	intc 0.06
+	ga 0.140
+)
+
+group "evergreen" (
+
+	! Parameters common to all evergreen trees
+
+	phenology "evergreen"
+	fnstorage 0.05
+	phengdd5ramp 0
+)
+
+group "summergreen" (
+
+	! Parameters common to all summergreen trees
+
+	phenology "summergreen"
+	fnstorage 0.15
+	phengdd5ramp 200
+	leaflong 0.5
+	turnover_leaf 1
+)
+
+group "boreal" (
+
+	! Parameters common to all boreal trees
+
+	pstemp_min -4
+	pstemp_low 10
+	pstemp_high 25
+	pstemp_max 38
+	respcoeff 1.0
+)
+
+group "temperate" (
+
+	! Parameters common to all temperate trees
+
+	pstemp_min -2
+	pstemp_low 15
+	pstemp_high 25
+	pstemp_max 38
+	respcoeff 1.0
+)
+
+group "tropical" (
+
+	! Parameters common to all tropical trees
+
+	tcmin_surv 15.5
+	tcmin_est 15.5
+	tcmax_est 1000   ! no limit
+	twmin_est -1000  ! no limit
+	gdd5min_est 0    ! no limit
+	pstemp_min 2
+	pstemp_low 25
+	pstemp_high 30
+	pstemp_max 55
+	respcoeff 0.15
+)
+
+
+! greff_min values below calibrated for the smooth (ifsmoothgreffmort 1) option
+group "shade_tolerant" (
+	est_max 0.05
+	parff_min 350000
+	alphar 3.0
+	greff_min 0.04
+	turnover_sap 0.05
+      !  maxdiam 150
+)
+
+! So far only trial values; not used in this global version
+group "intermediate_shade_tolerant" (
+	est_max 0.15
+	parff_min 2000000
+	alphar 7.0
+	greff_min 0.06
+	turnover_sap 0.075
+     !   maxdiam 130
+)
+
+! From global version; values from orginal European version after "!"
+group "shade_intolerant" (
+	est_max 0.2
+	parff_min 2500000
+	alphar 10.0
+	greff_min 0.08
+	turnover_sap 0.1
+     !   maxdiam 100
+)
+
+
+pft "TrBE_iso" (
+
+	! Tropical broadleaved evergreen tree
+
+	include 1
+	tree
+	broadleaved
+	shade_tolerant
+	evergreen
+	tropical
+	leaflong 2
+	turnover_leaf 0.5
+	longevity 500   !from Thomas H 2010-03-30 new 500 instead of 600 2010-04-07
+	fireresist 0.1
+	eps_iso 24.0
+	seas_iso 0
+	eps_mon 0.8
+	storfrac_mon 0.
+	
+	!Hydraulics
+    isohydricity 0.7
+    delta_psi_max 1.5
+    cav_slope -5
+    psi50_xylem -2
+    ks_max 80.0 
+    kr_max 15.0
+    kl_max 5.0
+)
+
+pft "TrBE_aniso" (
+
+	! Tropical broadleaved evergreen tree
+
+	include 1
+	tree
+	broadleaved
+	shade_tolerant
+	evergreen
+	tropical
+	leaflong 2
+	turnover_leaf 0.5
+	longevity 500   !from Thomas H 2010-03-30 new 500 instead of 600 2010-04-07
+	fireresist 0.1
+	eps_iso 24.0
+	seas_iso 0
+	eps_mon 0.8
+	storfrac_mon 0.
+	
+	!Hydraulics
+    isohydricity -0.3
+    delta_psi_max 1.5
+    cav_slope -5
+    psi50_xylem -3
+    ks_max 40.0 
+    kr_max 7.5
+    kl_max 2.5
+)
+
+
+group "C3G" (
+
+	! Cool (C3) grass
+
+	include 1
+	grass
+	pathway "c3"
+	respcoeff 1.0
+	pstemp_min -5
+	pstemp_low 10
+	pstemp_high 30
+	pstemp_max 45
+	tcmin_surv -1000	!no limit
+	tcmin_est -1000 	!no limit
+	tcmax_est 1000  	!no limit
+	twmin_est -1000 	!no limit
+	gdd5min_est 0   	!no limit
+	eps_iso 16.0
+	seas_iso 1
+	eps_mon 1.6
+	storfrac_mon 0.5
+	harv_eff 0.5
+		!Hydraulics
+    isohydricity -0.3
+    delta_psi_max 1.5
+    cav_slope -5
+    psi50_xylem -3.2
+    ks_max 40.0 
+    kr_max 7.5
+    kl_max 2.5
+)
+
+pft "C3G" (
+	C3G
+)
+
+group "C4G" (
+
+	! Warm (C3) grass
+
+	include 1
+	grass
+	pathway "c4"
+	respcoeff 0.15
+	pstemp_min 6
+	pstemp_low 20
+	pstemp_high 45
+	pstemp_max 55
+	tcmin_surv 15.5
+	tcmin_est 15.5
+	tcmax_est 1000  !no limit
+	twmin_est -1000 !no limit
+	gdd5min_est 0   !no limit
+	eps_iso 8.0
+	seas_iso 0
+	eps_mon 2.4
+	storfrac_mon 0.5
+	harv_eff 0.5
+		!Hydraulics
+    isohydricity -0.3
+    delta_psi_max 1.5
+    cav_slope -5
+    psi50_xylem -3
+    ks_max 40.0 
+    kr_max 7.5
+    kl_max 2.5
+)
+
+pft "C4G" (
+	C4G
+)
+
+
+
+!!!!!!!!!!!!!!!!!!!!!!
+! CZ additional specs!
+!!!!!!!!!!!!!!!!!!!!!!
+
+save_state 0
+!state_path "/gpfs/scratch/pr48va/ga68tux2/amazon_jens_spinup_state/"
+
+! turn off BVOC module (which needs tmin and tmax which we do not have)
+ifbvoc 0
+param "file_min_temp" (str "")
+param "file_max_temp" (str "")
+
+param "file_gridlist" (str "F:\ClimateData\Amazon\test.txt")
+!param "file_gridlist" (str "F:\ClimateData\Amazon\Amazon_basin_coords.txt")
+
+param "file_co2"      (str "F:\ClimateData\MISC\co2_1764_2016_extended_observed.dat")
+param "file_cru"      (str "F:\ClimateData\MISC\CRU_NCEP_2015\cruncep_1901_2015.bin")
+
+!
+! insolation
+!
+
+param "file_insol"      (str "F:\ClimateData\GLDAS_1948_2010_swdown_daily_half.nc")
+param "variable_insol"  (str "insol")
+
+!
+! mean temp
+!
+
+param "file_temp"     (str "F:\ClimateData\GLDAS_1948_2010_temp_daily_half.nc")
+param "variable_temp" (str "temp")
+
+!
+! precipitation
+!
+param "file_prec"     (str "F:\ClimateData\GLDAS_1948_2010_prec_daily_half_normal_TNF.nc")
+!param "file_prec"     (str "Z:\data\ClimateData\Site_Specific\Amazonia_LikeTNF\Prec_1901_2013_ReducedLikeTNF_1999_2006.nc")
+!param "file_prec"   	(str "Z:\data\ClimateData\CRU_NCEP_V5\LPJ-ready\Amazonia\Base\cruncepv5_daily_prec_1901_2013.nc")
+param "variable_prec" (str "prec")
+
+!
+! wetdays
+!
+param "file_wetdays"   (str "")
+!param "variable_wetdays" (str "wetdays")
+
+param "file_throughfall_exclusion"   (str "")
+
+
+!
+! ???
+!
+param "file_cru_misc" (str "F:\ClimateData\MISC\CRU_NCEP_2015\Cruncep_1901_2015misc.bin")
+
+! N deposition (blank string to use constant pre-industrial level of 2 kgN/ha/year)
+!param "file_ndep"     (str "L:\Grosse_Projekte\LPJ-GUESS\global_data\GlobalNitrogenDeposition.bin")
+param "file_ndep"     (str "")

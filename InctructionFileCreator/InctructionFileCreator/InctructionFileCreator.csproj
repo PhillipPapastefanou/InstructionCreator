@@ -48,6 +48,8 @@
     <Compile Include="BrienenBaseSetup.cs" />
     <Compile Include="ClusterBaseSetup.cs" />
     <Compile Include="Container.cs" />
+    <Compile Include="HydraulicsPsi5088.cs" />
+    <Compile Include="HydraulicsSpinupComp.cs" />
     <Compile Include="InsFiles\InsFileHydraulics.cs" />
     <Compile Include="Parameters\DriverFilesHydraulics.cs" />
     <Compile Include="Parameters\IDriverFiles.cs" />

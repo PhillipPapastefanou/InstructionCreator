@@ -13,6 +13,7 @@ namespace InctructionFileCreator.Parameters
         public string Variable_vpd { get; set; }
         public string File_windspeed { get; set; }
         public string Variable_windspeed { get; set; }
+        public string File_throughfall_exclusion { get; set; }
 
         public override object Clone()
         {
