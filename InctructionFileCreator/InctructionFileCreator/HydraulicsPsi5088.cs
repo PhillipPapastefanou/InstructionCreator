@@ -19,8 +19,6 @@ namespace InctructionFileCreator
             List<double> psi50s = new List<double>();
             List<double> cavSlopes = new List<double>();
 
-
-
             using (StreamReader reader = File.OpenText("F:\\Dropbox\\UNI\\Projekte\\03_Hydraulics_Implementation\\Analysis\\CavCurves\\CavitationTriples.csv"))
             {
                 StringBuilder sb = new StringBuilder();
@@ -39,11 +37,6 @@ namespace InctructionFileCreator
                     psi50s.Add(psi50);
                     cavSlopes.Add(slope);
                 }
-
-
-
-
-
             }
 
 

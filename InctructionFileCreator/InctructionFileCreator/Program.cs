@@ -25,8 +25,8 @@ namespace InctructionFileCreator
             //sobolPoints.GenetrateAndWrite();
             
             //HydraulicsSpinupComp spinup = new HydraulicsSpinupComp();
-            HydraulicsPsi5088 psi5088 = new HydraulicsPsi5088();
-           
+            //HydraulicsPsi5088 psi5088 = new HydraulicsPsi5088();
+            HydraulicsSingleSitePsi5088Home psi5088_home = new HydraulicsSingleSitePsi5088Home();
 
 
             Console.ReadKey();

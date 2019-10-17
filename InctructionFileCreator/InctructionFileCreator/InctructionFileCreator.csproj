@@ -49,6 +49,7 @@
     <Compile Include="ClusterBaseSetup.cs" />
     <Compile Include="Container.cs" />
     <Compile Include="HydraulicsPsi5088.cs" />
+    <Compile Include="HydraulicsSingleSitePsi5088Home.cs" />
     <Compile Include="HydraulicsSpinupComp.cs" />
     <Compile Include="InsFiles\InsFileHydraulics.cs" />
     <Compile Include="Parameters\DriverFilesHydraulics.cs" />
