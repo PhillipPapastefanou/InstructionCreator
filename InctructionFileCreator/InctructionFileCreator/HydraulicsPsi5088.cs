@@ -21,7 +21,7 @@ namespace InctructionFileCreator
 
 
 
-            using (StreamReader reader = File.OpenText("F:\\Dropbox\\UNI\\Projekte\\03_Hydraulics_Implementation\\Analysis\\V5\\0. AGB vs MCWD\\TwoPft + Grasses\\5.2 - 102-Candidates less zero for TNF and CAX\\CavitationTriples.csv"))
+            using (StreamReader reader = File.OpenText("F:\\Dropbox\\UNI\\Projekte\\03_Hydraulics_Implementation\\Analysis\\CavCurves\\CavitationTriples.csv"))
             {
                 StringBuilder sb = new StringBuilder();
                 sb.Append(reader.ReadToEnd());
@@ -102,7 +102,7 @@ namespace InctructionFileCreator
                                             hydFile.GeneralParameters as GeneralParametersHydraulics;
 
                                         gParams.Hydraulic_system = HydraulicSystemType.VPD_BASED_GC;
-                                        gParams.NPatch = 50;
+                                        gParams.NPatch = 100;
                                         gParams.Suppress_daily_output = true;
                                         gParams.Suppress_annually_output = false;
                                         gParams.Suppress_monthly_output = false;
@@ -116,17 +116,16 @@ namespace InctructionFileCreator
 
                     double psi50 = psi50s[j];
                     double cavS = cavSlopes[j];
-                    double cavSMinus = -cavS;
 
                     PftHyd pft_iso = insfile.Pfts["TrBE"] as PftHyd;
                                         pft_iso.psi50_xylem = psi50;
-                                        pft_iso.cav_slope = cavSMinus;
+                                        pft_iso.cav_slope = cavS;
                                         pft_iso.Rootdist = new double[] { 0.6, 0.4 };
 
                                         values.Write(index + "\t");
                                         values.Write(i.ToString(CultureInfo.InvariantCulture) + "\t");
                     values.Write(psi50.ToString(CultureInfo.InvariantCulture) + "\t");
-                    values.Write(cavSMinus.ToString(CultureInfo.InvariantCulture));
+                    values.Write(cavS.ToString(CultureInfo.InvariantCulture));
                                         values.Write("\n");
 
                                         hydFile.Pfts[0] = pft_iso;
