@@ -63,8 +63,10 @@ namespace InctructionFileCreator
                         hydFile.GeneralParameters as GeneralParametersHydraulics;
 
                     gParams.Hydraulic_system = HydraulicSystemType.VPD_BASED_GC;
-                    gParams.NPatch = 100;
+                    gParams.NPatch = 20;
                     gParams.Nyear_spinup = 1000;
+                    gParams.DistInterval = 200;
+                    gParams.Alphaa_nlim = 0.8;
                     gParams.Suppress_daily_output = false;
                     gParams.Suppress_annually_output = false;
                     gParams.Suppress_monthly_output = false;
@@ -83,6 +85,12 @@ namespace InctructionFileCreator
                     pft_iso.psi50_xylem = psi50;
                     pft_iso.cav_slope = cavS;
                     pft_iso.Rootdist = new double[] { 0.6, 0.4 };
+
+                    pft_iso.CrownArea_Max = 150.0;
+                    //pft_iso.K_rp = 1.5;
+                    //pft_iso.K_allom1 = 374;
+                    //pft_iso.K_allom2 = 36;
+                    //pft_iso.K_allom3 = 0.58;
 
                     values.Write(index + "\t");
                     values.Write(i.ToString(CultureInfo.InvariantCulture) + "\t");
