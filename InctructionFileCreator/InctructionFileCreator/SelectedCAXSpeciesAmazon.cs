@@ -30,7 +30,7 @@ namespace InctructionFileCreator
             
 
             InsFileHydraulics hydFile = (IInsFile)insfile.Clone() as InsFileHydraulics;
-
+            ClusterBaseSetup baseSetup = new ClusterBaseSetup(ref hydFile);
 
             StreamWriter fileWriter = new StreamWriter("Insfiles.txt");
             StreamWriter values = new StreamWriter("Values.tsv");
@@ -81,6 +81,8 @@ namespace InctructionFileCreator
                     PftHyd pft_iso = insfile.Pfts["TrBE"] as PftHyd;
                     pft_iso.psi50_xylem = psi50;
                     pft_iso.cav_slope = cavS;
+                    pft_iso.CrownArea_Max = 150.0;
+                    pft_iso.RespCoeff = 0.1;
                     pft_iso.Rootdist = new double[] { 0.6, 0.4 };
 
                     values.Write(index + "\t");

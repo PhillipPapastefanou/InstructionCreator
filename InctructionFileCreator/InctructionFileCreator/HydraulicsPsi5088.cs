@@ -114,8 +114,10 @@ namespace InctructionFileCreator
                                         pft_iso.psi50_xylem = psi50;
                                         pft_iso.cav_slope = cavS;
                                         pft_iso.Rootdist = new double[] { 0.6, 0.4 };
+                                        pft_iso.RespCoeff = 0.1;
 
-                                        values.Write(index + "\t");
+
+                    values.Write(index + "\t");
                                         values.Write(i.ToString(CultureInfo.InvariantCulture) + "\t");
                     values.Write(psi50.ToString(CultureInfo.InvariantCulture) + "\t");
                     values.Write(cavS.ToString(CultureInfo.InvariantCulture));
