@@ -26,9 +26,9 @@ namespace InctructionFileCreator
             
             //HydraulicsSpinupComp spinup = new HydraulicsSpinupComp();
             //HydraulicsPsi5088 psi5088 = new HydraulicsPsi5088();
-            //HydraulicsSingleSitePsi5088Home psi5088_home = new HydraulicsSingleSitePsi5088Home();
+            HydraulicsSingleSitePsi5088Home psi5088_home = new HydraulicsSingleSitePsi5088Home();
 
-            SelectedCAXSpeciesAmazon cAXSpeciesAmazon = new SelectedCAXSpeciesAmazon();
+            //SelectedCAXSpeciesAmazon cAXSpeciesAmazon = new SelectedCAXSpeciesAmazon();
 
 
             Console.ReadKey();

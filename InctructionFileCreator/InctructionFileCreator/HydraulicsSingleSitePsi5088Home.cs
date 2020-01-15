@@ -18,8 +18,10 @@ namespace InctructionFileCreator
 
         public HydraulicsSingleSitePsi5088Home()
         {
+           // ReadParameters(
+             //   "F:\\Dropbox\\UNI\\Projekte\\03_Hydraulics_Implementation\\Analysis\\CavCurves\\CombosOfModelForPaper.tsv");
             ReadParameters(
-                "F:\\Dropbox\\UNI\\Projekte\\03_Hydraulics_Implementation\\Analysis\\CavCurves\\CombosOfModelForPaper.tsv");
+                "F:\\Dropbox\\UNI\\Projekte\\03_Hydraulics_Implementation\\Analysis\\SelectedCavCurvesDecember.tsv");
 
             string filename = @"F:\Dropbox\UNI\Projekte\03_Hydraulics_Implementation\masterHomeWork_CAX.ins";
 

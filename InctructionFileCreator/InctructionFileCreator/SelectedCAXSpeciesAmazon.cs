@@ -19,7 +19,10 @@ namespace InctructionFileCreator
         public SelectedCAXSpeciesAmazon()
         {
             ReadParameters(
-                "F:\\Dropbox\\UNI\\Projekte\\03_Hydraulics_Implementation\\Analysis\\CavCurves\\CombosOfModelForPaper.tsv");
+                "F:\\Dropbox\\UNI\\Projekte\\03_Hydraulics_Implementation\\Analysis\\SelectedCavCurvesDecember.tsv");
+
+            //ReadParameters(
+            //    "F:\\Dropbox\\UNI\\Projekte\\03_Hydraulics_Implementation\\Analysis\\CavCurves\\CombosOfModelForPaper.tsv");
 
             string filename = @"F:\Dropbox\UNI\Projekte\03_Hydraulics_Implementation\masterBase.ins";
 
@@ -37,7 +40,7 @@ namespace InctructionFileCreator
 
 
             List<string> precDrivers = new List<string>();
-            precDrivers.Add("/home/hpc/pr48va/ga92wol2/driver_data/GLDAS2/GLDAS_1948_2010_prec_daily_half.nc");
+            precDrivers.Add("/dss/dsshome1/lxc03/ga92wol2/driver_data/GLDAS2/GLDAS_1948_2010_prec_daily_half.nc");
 
 
             int index = 0;
@@ -64,7 +67,7 @@ namespace InctructionFileCreator
                     gParams.Hydraulic_system = HydraulicSystemType.VPD_BASED_GC;
                     gParams.NPatch = 100;
                     gParams.Nyear_spinup = 1000;
-                    gParams.Suppress_daily_output = false;
+                    gParams.Suppress_daily_output = true;
                     gParams.Suppress_annually_output = false;
                     gParams.Suppress_monthly_output = false;
                     gParams.Output_time_range = OutputTimeRangeType.Scenario;
