@@ -38,14 +38,20 @@ namespace InctructionFileCreator
             StreamWriter values = new StreamWriter("Values.tsv");
 
 
+            DriverFilesHydraulics driverFiles = hydFile.DriverFiles as DriverFilesHydraulics;
+
+            driverFiles.File_vpd = "F:\\ClimateData\\GLDAS_1948_2010_vpd_sunny_d_daily_half.nc";
+
             List<string> precDrivers = new List<string>();
             precDrivers.Add("F:\\ClimateData\\GLDAS_1948_2010_prec_daily_half.nc");
-            precDrivers.Add("F:\\ClimateData\\GLDAS_1948_2010_prec_daily_half_TNF_CAX_RED05.nc");
-
+            //precDrivers.Add("F:\\ClimateData\\GLDAS_1948_2010_prec_daily_half_TNF_CAX_RED05.nc");
+            precDrivers.Add("F:\\ClimateData\\GLDAS_1948_2010_prec_daily_half_TNF_CAX_RED05_EndTime.nc");
 
             int index = 0;
             string rootFolder = "Insfiles";
             Directory.CreateDirectory(rootFolder);
+
+            double[] isohydricities = new double[] {0.7,0.7, 0.0, -0.1};
 
             for (int i = 0; i < precDrivers.Count; i++)
             {
@@ -90,6 +96,8 @@ namespace InctructionFileCreator
                     pft_iso.RespCoeff = 0.1;
 
                     pft_iso.CrownArea_Max = 150.0;
+
+                    pft_iso.Isohydricity = isohydricities[j];
                     //pft_iso.K_rp = 1.5;
                     //pft_iso.K_allom1 = 374;
                     //pft_iso.K_allom2 = 36;
