@@ -40,18 +40,24 @@ namespace InctructionFileCreator
 
             DriverFilesHydraulics driverFiles = hydFile.DriverFiles as DriverFilesHydraulics;
 
-            driverFiles.File_vpd = "F:\\ClimateData\\GLDAS_1948_2010_vpd_sunny_d_daily_half.nc";
+            //driverFiles.File_vpd = "F:\\ClimateData\\GLDAS_1948_2010_vpd_d_daily_half.nc";
+            driverFiles.File_vpd = "F:\\ClimateData\\GLDAS_1948_2010_vpd_Mean4day_d_daily_half.nc";
+            //driverFiles.File_vpd = "F:\\ClimateData\\GLDAS_1948_2010_vpd_sunny_d_daily_half.nc";
+            //driverFiles.File_vpd = "F:\\ClimateData\\GLDAS_1948_2010_vpd_sunny-06-15_d_daily_half.nc";
 
             List<string> precDrivers = new List<string>();
             precDrivers.Add("F:\\ClimateData\\GLDAS_1948_2010_prec_daily_half.nc");
             //precDrivers.Add("F:\\ClimateData\\GLDAS_1948_2010_prec_daily_half_TNF_CAX_RED05.nc");
             precDrivers.Add("F:\\ClimateData\\GLDAS_1948_2010_prec_daily_half_TNF_CAX_RED05_EndTime.nc");
+            
 
             int index = 0;
             string rootFolder = "Insfiles";
             Directory.CreateDirectory(rootFolder);
 
-            double[] isohydricities = new double[] {0.7,0.7, 0.0, -0.1};
+            //double[] isohydricities = new double[] {0.7,0.7, 0.0, -0.1};
+            //double[] isohydricities = new double[] {0.5,0.3, 0.0, -0.1};
+            double[] isohydricities = new double[] {0.0,0.0, 0.0, 0.0};
 
             for (int i = 0; i < precDrivers.Count; i++)
             {
@@ -59,7 +65,6 @@ namespace InctructionFileCreator
 
                 for (int j = 0; j < psi50s.Count; j++)
                 {
-
 
                     string name = index + "run.ins";
                     //string path = @"/gpfs/scratch/pr48va/ga92wol2/ga92wol2/2019/Hydraulics_Sens_2019/";
@@ -74,7 +79,7 @@ namespace InctructionFileCreator
                     gParams.NPatch = 50;
                     gParams.Nyear_spinup = 1000;
                     gParams.DistInterval = 200;
-                    gParams.Alphaa_nlim = 0.8;
+                    gParams.Alphaa_nlim = 0.65;
                     gParams.Suppress_daily_output = false;
                     gParams.Suppress_annually_output = false;
                     gParams.Suppress_monthly_output = false;
@@ -95,9 +100,16 @@ namespace InctructionFileCreator
                     pft_iso.Rootdist = new double[] { 0.6, 0.4 };
                     pft_iso.RespCoeff = 0.1;
 
+                    pft_iso.GA = 0.005;
                     pft_iso.CrownArea_Max = 150.0;
+                    pft_iso.Lambda_max = 0.95;
 
                     pft_iso.Isohydricity = isohydricities[j];
+                    double multiplier = 1;
+                    pft_iso.ks_max = 80.0 * multiplier;
+                    pft_iso.kL_max = 5.0 * multiplier;
+                    pft_iso.kr_max = 15.0 * multiplier;
+
                     //pft_iso.K_rp = 1.5;
                     //pft_iso.K_allom1 = 374;
                     //pft_iso.K_allom2 = 36;
