@@ -17,19 +17,40 @@ namespace InctructionFileCreator
         static void Main(string[] args)
         {
 
+            //string[] subdirectoryEntries = Directory.GetDirectories(Directory.GetCurrentDirectory());
+
+            //foreach (string dir in subdirectoryEntries)
+            //{
+            //    if (dir.Contains("run"))
+            //    {
+                    
+            //    }
+            //}
+            if (Directory.Exists("Insfiles"))
+                Directory.Delete("Insfiles", true);
+       
+
+
+
             //SobolSequenceInstructionFile sobolFiles = new SobolSequenceInstructionFile();
             //BrienenAnalysis brienenAnalysis = new BrienenAnalysis();
             //TwoPftStratified twoPftStratified = new TwoPftStratified();
 
             //SobolPoints2D sobolPoints = new SobolPoints2D();
             //sobolPoints.GenetrateAndWrite();
-            
+
             //HydraulicsSpinupComp spinup = new HydraulicsSpinupComp();
             //HydraulicsPsi5088 psi5088 = new HydraulicsPsi5088();
             //HydraulicsSingleSitePsi5088Home psi5088_home = new HydraulicsSingleSitePsi5088Home();
-            HydraulicsStratifiedClusterSampling smlp = new HydraulicsStratifiedClusterSampling();
-
+            HydraulicsSingleSitesPsi5088HomeTomPugh psi5088_home = new HydraulicsSingleSitesPsi5088HomeTomPugh();
+            //HydraulicsStratifiedClusterSampling smlp = new HydraulicsStratifiedClusterSampling();
+            // HydraulicsStratifiedFullCavSampling csamCavSampling = new HydraulicsStratifiedFullCavSampling();
+            //ClusterAlphaaLambda clusterAlphaLambda = new ClusterAlphaaLambda();
+            //HydraulicsAmazonBasinSetup setup = new HydraulicsAmazonBasinSetup();
             //SelectedCAXSpeciesAmazon cAXSpeciesAmazon = new SelectedCAXSpeciesAmazon();
+
+
+            //InsfileExport insfileExport = new InsfileExport(String.Empty);
 
 
             Console.ReadKey();

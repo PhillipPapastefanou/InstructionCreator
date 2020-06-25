@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InctructionFileCreator
+namespace InctructionFileCreator.Scenario
 {
-    class SensitivityAnalysis
+    enum ClusterDriverSetup
     {
+        GLDAS20, 
+        WATCH_WFDEI
+    } 
 
-
-    }
 }

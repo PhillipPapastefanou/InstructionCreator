@@ -46,12 +46,17 @@
     <Compile Include="Auxilary.cs" />
     <Compile Include="BrienenAnalysis.cs" />
     <Compile Include="BrienenBaseSetup.cs" />
-    <Compile Include="ClusterBaseSetup.cs" />
+    <Compile Include="Scenario\ClusterAlphaaLambda.cs" />
+    <Compile Include="Scenario\ClusterGLDASBaseSetup.cs" />
     <Compile Include="Container.cs" />
+    <Compile Include="HydraulicsAmazonBasinSetup.cs" />
     <Compile Include="HydraulicsPsi5088.cs" />
     <Compile Include="HydraulicsSingleSitePsi5088Home.cs" />
+    <Compile Include="HydraulicsSingleSitesPsi5088HomeTomPugh.cs" />
     <Compile Include="HydraulicsSpinupComp.cs" />
     <Compile Include="HydraulicsStratifiedClusterSampling.cs" />
+    <Compile Include="HydraulicsStratifiedFullCavSampling.cs" />
+    <Compile Include="InsfileExport.cs" />
     <Compile Include="InsFiles\InsFileHydraulics.cs" />
     <Compile Include="Parameters\DriverFilesHydraulics.cs" />
     <Compile Include="Parameters\IDriverFiles.cs" />
@@ -73,10 +78,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Parameters\SmartOutParameters.cs" />
+    <Compile Include="Scenario\ClusterWWBaseSetup.cs" />
+    <Compile Include="Scenario\DriverSetup.cs" />
     <Compile Include="SelectedCAXSpeciesAmazon.cs" />
-    <Compile Include="SensitivityAnalysis.cs" />
     <Compile Include="SobolSequenceInstructionFile.cs" />
     <Compile Include="TwoPftStratified.cs" />
+    <Compile Include="WatchHomeSetup.cs" />
     <Compile Include="Writer.cs" />
   </ItemGroup>
   <ItemGroup>

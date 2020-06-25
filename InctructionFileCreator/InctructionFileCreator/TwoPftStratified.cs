@@ -33,7 +33,7 @@ namespace InctructionFileCreator
             StreamWriter fileWriter = new StreamWriter("Insfiles.txt");
             StreamWriter values = new StreamWriter("Values.tsv");
 
-            ClusterBaseSetup baseSetup = new ClusterBaseSetup(ref hydFile);
+            ClusterGLDASBaseSetup baseSetup = new ClusterGLDASBaseSetup(ref hydFile);
 
 
 

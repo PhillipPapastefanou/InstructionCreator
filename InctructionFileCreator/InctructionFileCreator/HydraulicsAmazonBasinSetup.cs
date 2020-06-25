@@ -7,19 +7,37 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InctructionFileCreator.Parameters;
-using SensitivitySetup;
+using InctructionFileCreator.Scenario;
 
 namespace InctructionFileCreator
 {
-    class HydraulicsStratifiedClusterSampling
+    class HydraulicsAmazonBasinSetup
     {
+
         private List<double> psi50s;
         private List<double> cavSlopes;
+        private List<double> mults;
+        private List<double> slas;
+        private List<double> kLatosScales;
+
+        private ClusterDriverSetup setup;
 
 
-        public HydraulicsStratifiedClusterSampling()
+
+        //List<double> lambdas = new List<double>(){-0.08, 0.15, 0.49};
+        private List<double> lambdas;
+        //List<double> deltaPsiWW = new List<double>(){0.62, 1.23, 2.15};
+        private List<double> deltaPsiWW;
+        //pft_iso.Delta_Psi_Max = 1.23;
+
+        //pft_iso.Isohydricity = -0.08;
+        //pft_iso.Delta_Psi_Max = 0.62;
+
+        public HydraulicsAmazonBasinSetup()
         {
             Stopwatch sw = Stopwatch.StartNew();
+
+            setup = ClusterDriverSetup.WATCH_WFDEI;
 
             //List<double> psi50s = new List<double>();
             //List<double> cavSlopes = new List<double>();
@@ -44,8 +62,8 @@ namespace InctructionFileCreator
             //    }
             //}
 
-            ReadParameters(
-                "F:\\Dropbox\\UNI\\Projekte\\03_Hydraulics_Implementation\\Analysis\\SelectedCavCurvesDecember.tsv");
+
+            ReadParameters(@"F:\Dropbox\UNI\Projekte\A03_Hydraulics_Implementation\MULTS-SLA-All-latosaScales.csv");
 
 
             //string filename = @"F:\SourceTreeRepos\InstructionCreator\InctructionFileCreator\InctructionFileCreator\bin\Debug\masterH-Def-GLDAS.ins";
@@ -64,11 +82,46 @@ namespace InctructionFileCreator
             StreamWriter fileWriter = new StreamWriter("Insfiles.txt");
             StreamWriter values = new StreamWriter("Values.tsv");
 
-            ClusterGLDASBaseSetup baseSetup = new ClusterGLDASBaseSetup(ref hydFile);
+            if (setup == ClusterDriverSetup.GLDAS20)
+            {
+                ClusterGLDASBaseSetup baseSetup = new ClusterGLDASBaseSetup(ref hydFile);
+            }
+
+            else if (setup == ClusterDriverSetup.WATCH_WFDEI)
+            {
+                ClusterWWBaseSetup baseSetup = new ClusterWWBaseSetup(ref hydFile);
+            }
+
+            else
+            {
+                Console.WriteLine("No valid cluster setup specified.");
+            }
+
+
+            
 
             List<string> precDrivers = new List<string>();
-            precDrivers.Add("/dss/dsshome1/lxc03/ga92wol2/driver_data/GLDAS2/GLDAS_1948_2010_prec_daily_half.nc");
-            precDrivers.Add("/dss/dsshome1/lxc03/ga92wol2/driver_data/GLDAS2/GLDAS_1948_2010_prec_daily_half_TNF_CAX_RED05_EndTime.nc");
+
+            if (setup == ClusterDriverSetup.GLDAS20)
+            {
+                precDrivers.Add("/dss/dsshome1/lxc03/ga92wol2/driver_data/GLDAS2/GLDAS_1948_2010_prec_daily_half.nc");
+            }
+
+            else if (setup == ClusterDriverSetup.WATCH_WFDEI)
+            {
+                precDrivers.Add("/dss/dsshome1/lxc03/ga92wol2/driver_data/WATCH_WFDEI/WATCH_WFDEI_1950_2010_prec.nc");
+            }
+
+            else
+            {
+                Console.WriteLine("No valid cluster setup specified.");
+            }
+
+
+
+
+            //precDrivers.Add(
+            //    "/dss/dsshome1/lxc03/ga92wol2/driver_data/GLDAS2/GLDAS_1948_2010_prec_daily_half_TNF_CAX_RED05_EndTime.nc");
 
             //precDrivers.Add("F:\\ClimateData\\Amazonia\\GLDAS_1948_2010_prec_daily_half_normal_TNF.nc");
             //precDrivers.Add("F:\\ClimateData\\Amazonia\\GLDAS_1948_2010_prec_daily_half_reduced_TNF.nc");
@@ -78,15 +131,9 @@ namespace InctructionFileCreator
             int index = 0;
 
 
-            List<double> multipliers = new List<double>();
-
-            for (int i = 0; i < 40; i++)
-            {
-                multipliers.Add(0.2 + i * 0.05);
-            }
-
-            List<double> isohydricities = new List<double>() {0.0, -0.2, 0.3, 0.5, 0.7};
-            List<double> lambdaMaxes = new List<double>() {0.8, 0.9, 0.95, 0.99};
+            List<double> multipliers = new List<double>() {1.5};
+            List<double> isohydricities = new List<double>() { 0.0};
+            List<double> lambdaMaxes = new List<double>() { 0.95 };
 
 
             string rootFolder = "Insfiles";
@@ -99,7 +146,7 @@ namespace InctructionFileCreator
                 string filePrec = precDrivers[i];
 
                 for (int la = 0; la < lambdaMaxes.Count; la++)
-            {
+                {
 
 
                     for (int iso = 0; iso < isohydricities.Count; iso++)
@@ -115,7 +162,6 @@ namespace InctructionFileCreator
                             for (int j = 0; j < psi50s.Count; j++)
                             {
 
-
                                 string name = index + "run.ins";
                                 //string path = @"/gpfs/scratch/pr48va/ga92wol2/ga92wol2/2019/Hydraulics_Sens_2019/";
                                 fileWriter.Write("Insfiles/" + name + "\n");
@@ -129,12 +175,14 @@ namespace InctructionFileCreator
                                 gParams.NPatch = 50;
                                 gParams.Nyear_spinup = 1000;
                                 gParams.DistInterval = 200;
-                                gParams.Alphaa_nlim = 0.65;
+                                gParams.Alphaa_nlim = 0.7;
                                 gParams.Suppress_daily_output = true;
                                 gParams.Suppress_annually_output = false;
                                 gParams.Suppress_monthly_output = false;
                                 gParams.Output_time_range = OutputTimeRangeType.Scenario;
                                 gParams.Disable_mort_greff = false;
+
+                                gParams.IfCalcSLA = false;
 
                                 DriverFilesHydraulics hyDriverFiles =
                                     hydFile.DriverFiles as DriverFilesHydraulics;
@@ -144,29 +192,81 @@ namespace InctructionFileCreator
                                 double psi50 = psi50s[j];
                                 double cavS = cavSlopes[j];
 
+
+                                PftHyd c3g = insfile.Pfts["C3G"] as PftHyd;
+                                c3g.Sla = 26.0;
+
+                                PftHyd c4g = insfile.Pfts["C4G"] as PftHyd;
+                                c4g.Sla = 26.0;
+
+
+                                hydFile.Pfts[1] = c3g;
+                                hydFile.Pfts[2] = c4g;
+
+
                                 PftHyd pft_iso = insfile.Pfts["TrBE"] as PftHyd;
+
                                 pft_iso.psi50_xylem = psi50;
                                 pft_iso.cav_slope = cavS;
-                                pft_iso.Rootdist = new double[] {0.6, 0.4};
-                                pft_iso.RespCoeff = 0.1;
+
+                                pft_iso.Sla = slas[j];
+
+                                pft_iso.K_LaToSa = kLatosScales[j] * 4000.0;
+
+                                pft_iso.Rootdist = new double[] { 0.6, 0.4 };
+                                pft_iso.RespCoeff = 0.15;
 
                                 pft_iso.GA = 0.005;
                                 pft_iso.CrownArea_Max = 150.0;
-                                pft_iso.Lambda_max = lambdaMaxes[la];
+                                pft_iso.Lambda_max = 0.90;
 
-                                pft_iso.Isohydricity = isohydricities[iso];
-                                double multiplier = multipliers[f];
+                                pft_iso.GMin = 1.0;
+
+                                //pft_iso.Isohydricity = lambdas[j];
+                                //pft_iso.Delta_Psi_Max = deltaPsiWW[j];
+
+                                pft_iso.Isohydricity = 0.15;
+                                pft_iso.Delta_Psi_Max = 1.23;
+
+
+                                double multiplier = mults[j] * 1.25;
                                 pft_iso.ks_max = 80.0 * multiplier;
                                 pft_iso.kL_max = 5.0 * multiplier;
                                 pft_iso.kr_max = 15.0 * multiplier;
 
+                                //pft_iso.K_rp = 1.5;
+                                //pft_iso.K_allom1 = 374;
+                                //pft_iso.K_allom2 = 36;
+                                //pft_iso.K_allom3 = 0.58;
+
+                                if (index == 0)
+                                {
+                                    values.Write("DriverIndex" + "\t");
+                                    values.Write("InsfileIndex" + "\t");
+                                    values.Write("PrecipitationDriver" + "\t");
+                                    values.Write("Psi50" + "\t");
+                                    values.Write("CavSlope" + "\t");
+                                    values.Write("IsohydricityLambda" + "\t");
+                                    values.Write("ConductivityScaler" + "\t");
+                                    values.Write("AlphaA" + "\t");
+                                    values.Write("RespCoeff" + "\t");
+                                    values.Write("SLA" + "\t");
+                                    values.Write("KlatosaScale");
+                                    values.Write("\n");
+                                }
+
+                                values.Write(0 + "\t");
                                 values.Write(index + "\t");
                                 values.Write(i.ToString(CultureInfo.InvariantCulture) + "\t");
                                 values.Write(psi50.ToString(CultureInfo.InvariantCulture) + "\t");
                                 values.Write(cavS.ToString(CultureInfo.InvariantCulture) + "\t");
-                                values.Write(pft_iso.Lambda_max.ToString(CultureInfo.InvariantCulture) + "\t");
-                                values.Write(pft_iso.Isohydricity.ToString(CultureInfo.InvariantCulture) + "\t");
-                                values.Write(multipliers[f].ToString(CultureInfo.InvariantCulture));
+                                values.Write("0.15" + "\t");
+                                values.Write(multiplier.ToString(CultureInfo.InvariantCulture) + "\t");
+                                values.Write("0.7" + "\t");
+                                values.Write("0.15" + "\t");
+                                values.Write(slas[j].ToString(CultureInfo.InvariantCulture) + "\t");
+                                values.Write("4000.0");
+
                                 values.Write("\n");
 
                                 hydFile.Pfts[0] = pft_iso;
@@ -180,12 +280,12 @@ namespace InctructionFileCreator
                         }
                     }
                 }
-            
-        }
-        
+
+            }
 
 
-        fileWriter.Close();
+
+            fileWriter.Close();
             values.Close();
 
             Console.WriteLine(sw.ElapsedMilliseconds);
@@ -195,6 +295,11 @@ namespace InctructionFileCreator
         {
             psi50s = new List<double>();
             cavSlopes = new List<double>();
+            mults = new List<double>();
+            slas = new List<double>();
+            deltaPsiWW = new List<double>();
+            lambdas = new List<double>();
+            kLatosScales = new List<double>();
 
 
             using (StreamReader reader = File.OpenText(filename))
@@ -206,16 +311,27 @@ namespace InctructionFileCreator
 
                 foreach (string line in lines)
                 {
-                    string[] dataLine = line.Split('\t');
+                    string[] dataLine = line.Split(',');
 
                     double psi50 = Convert.ToDouble(dataLine[0], CultureInfo.InvariantCulture);
                     double slope = Convert.ToDouble(dataLine[1], CultureInfo.InvariantCulture);
+                    double mult = Convert.ToDouble(dataLine[2], CultureInfo.InvariantCulture);
+                    double sla = Convert.ToDouble(dataLine[3], CultureInfo.InvariantCulture);
+                    double iso = Convert.ToDouble(dataLine[4], CultureInfo.InvariantCulture);
+                    double deltaPWW = Convert.ToDouble(dataLine[5], CultureInfo.InvariantCulture);
+                    double klatosaScale = Convert.ToDouble(dataLine[6], CultureInfo.InvariantCulture);
 
                     psi50s.Add(psi50);
                     cavSlopes.Add(slope);
+                    mults.Add(mult);
+                    slas.Add(sla);
+                    lambdas.Add(iso);
+                    deltaPsiWW.Add(deltaPWW);
+                    kLatosScales.Add(klatosaScale);
                 }
             }
 
         }
     }
+
 }

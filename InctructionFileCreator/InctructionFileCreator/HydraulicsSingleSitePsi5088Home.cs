@@ -20,10 +20,9 @@ namespace InctructionFileCreator
         {
            // ReadParameters(
              //   "F:\\Dropbox\\UNI\\Projekte\\03_Hydraulics_Implementation\\Analysis\\CavCurves\\CombosOfModelForPaper.tsv");
-            ReadParameters(
-                "F:\\Dropbox\\UNI\\Projekte\\03_Hydraulics_Implementation\\Analysis\\SelectedCavCurvesDecember.tsv");
+            ReadParameters(@"F:\Dropbox\UNI\Projekte\A03_Hydraulics_Implementation\Analysis\AllCavCurves05-2020.tsv");
 
-            string filename = @"F:\Dropbox\UNI\Projekte\03_Hydraulics_Implementation\masterHomeWork_CAX.ins";
+            string filename = @"F:\Dropbox\UNI\Projekte\A03_Hydraulics_Implementation\masterHomeWork_CAX.ins";
 
             IInsFile insfile = new InsFileHydraulics();
 
@@ -57,7 +56,7 @@ namespace InctructionFileCreator
 
             //double[] isohydricities = new double[] {0.7,0.7, 0.0, -0.1};
             //double[] isohydricities = new double[] {0.5,0.3, 0.0, -0.1};
-            double[] isohydricities = new double[] {0.0,0.0, 0.0, 0.0};
+            //double[] isohydricities = new double[] {0.0,0.0, 0.0, 0.0};
 
             for (int i = 0; i < precDrivers.Count; i++)
             {
@@ -98,13 +97,19 @@ namespace InctructionFileCreator
                     pft_iso.psi50_xylem = psi50;
                     pft_iso.cav_slope = cavS;
                     pft_iso.Rootdist = new double[] { 0.6, 0.4 };
-                    pft_iso.RespCoeff = 0.1;
+                    pft_iso.RespCoeff = 0.15;
 
                     pft_iso.GA = 0.005;
                     pft_iso.CrownArea_Max = 150.0;
-                    pft_iso.Lambda_max = 0.95;
+                    pft_iso.Lambda_max = 0.90;
 
-                    pft_iso.Isohydricity = isohydricities[j];
+                    //pft_iso.Isohydricity = 0.15;
+                    //pft_iso.Delta_Psi_Max = 1.23;
+
+                    pft_iso.Isohydricity = -0.08;
+                    pft_iso.Delta_Psi_Max = 0.62;
+
+
                     double multiplier = 1;
                     pft_iso.ks_max = 80.0 * multiplier;
                     pft_iso.kL_max = 5.0 * multiplier;

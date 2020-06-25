@@ -7,12 +7,12 @@ using InctructionFileCreator.Parameters;
 
 namespace InctructionFileCreator
 {
-    class ClusterBaseSetup
+    class ClusterGLDASBaseSetup
     {
-        public ClusterBaseSetup(ref InsFileHydraulics hydFile)
+        public ClusterGLDASBaseSetup(ref InsFileHydraulics hydFile)
         {
-            hydFile.DriverFiles.File_gridlist = "/dss/dsshome1/lxc03/ga92wol2/driver_data/Gridlists/Amazon/TNF_CAX_K34_extend.txt";
-            //hydFile.DriverFiles.File_gridlist = "/dss/dsshome1/lxc03/ga92wol2/driver_data/Gridlists/Amazon/Amazon_basin_05.txt";
+            //hydFile.DriverFiles.File_gridlist = "/dss/dsshome1/lxc03/ga92wol2/driver_data/Gridlists/Amazon/TNF_CAX_K34_extend.txt";
+            hydFile.DriverFiles.File_gridlist = "/dss/dsshome1/lxc03/ga92wol2/driver_data/Gridlists/Amazon/Amazon_basin_05.txt";
             hydFile.DriverFiles.File_temp = "/dss/dsshome1/lxc03/ga92wol2/driver_data/GLDAS2/GLDAS_1948_2010_temp_daily_half.nc";
             hydFile.DriverFiles.File_insol = "/dss/dsshome1/lxc03/ga92wol2/driver_data/GLDAS2/GLDAS_1948_2010_swdown_daily_half.nc";
             hydFile.DriverFiles.File_Co2 = "/dss/dsshome1/lxc03/ga92wol2/driver_data/Misc/co2_1764_2100_extended_rcp85.dat";

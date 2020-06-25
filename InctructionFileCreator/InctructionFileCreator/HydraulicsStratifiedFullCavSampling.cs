@@ -7,17 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InctructionFileCreator.Parameters;
-using SensitivitySetup;
 
 namespace InctructionFileCreator
 {
-    class HydraulicsStratifiedClusterSampling
+    class HydraulicsStratifiedFullCavSampling
     {
+
         private List<double> psi50s;
         private List<double> cavSlopes;
 
-
-        public HydraulicsStratifiedClusterSampling()
+        public HydraulicsStratifiedFullCavSampling()
         {
             Stopwatch sw = Stopwatch.StartNew();
 
@@ -45,7 +44,7 @@ namespace InctructionFileCreator
             //}
 
             ReadParameters(
-                "F:\\Dropbox\\UNI\\Projekte\\03_Hydraulics_Implementation\\Analysis\\SelectedCavCurvesDecember.tsv");
+                @"F:\Dropbox\UNI\Projekte\A03_Hydraulics_Implementation\Analysis\AllCavCurves05-2020.tsv");
 
 
             //string filename = @"F:\SourceTreeRepos\InstructionCreator\InctructionFileCreator\InctructionFileCreator\bin\Debug\masterH-Def-GLDAS.ins";
@@ -58,7 +57,7 @@ namespace InctructionFileCreator
             parser.Read();
 
 
-            InsFileHydraulics hydFile = (IInsFile)insfile.Clone() as InsFileHydraulics;
+            InsFileHydraulics hydFile = (IInsFile) insfile.Clone() as InsFileHydraulics;
 
 
             StreamWriter fileWriter = new StreamWriter("Insfiles.txt");
@@ -68,7 +67,8 @@ namespace InctructionFileCreator
 
             List<string> precDrivers = new List<string>();
             precDrivers.Add("/dss/dsshome1/lxc03/ga92wol2/driver_data/GLDAS2/GLDAS_1948_2010_prec_daily_half.nc");
-            precDrivers.Add("/dss/dsshome1/lxc03/ga92wol2/driver_data/GLDAS2/GLDAS_1948_2010_prec_daily_half_TNF_CAX_RED05_EndTime.nc");
+            //precDrivers.Add(
+            //    "/dss/dsshome1/lxc03/ga92wol2/driver_data/GLDAS2/GLDAS_1948_2010_prec_daily_half_TNF_CAX_RED05_EndTime.nc");
 
             //precDrivers.Add("F:\\ClimateData\\Amazonia\\GLDAS_1948_2010_prec_daily_half_normal_TNF.nc");
             //precDrivers.Add("F:\\ClimateData\\Amazonia\\GLDAS_1948_2010_prec_daily_half_reduced_TNF.nc");
@@ -78,15 +78,14 @@ namespace InctructionFileCreator
             int index = 0;
 
 
-            List<double> multipliers = new List<double>();
+            //List<double> multipliers = new List<double>() {0.25, 0.5, 0.75, 1.0};
+            //List<double> isohydricities = new List<double>() {-0.2, 0.0, 0.15, 0.3, 0.6};
+            //List<double> lambdaMaxes = new List<double>() {0.9, 0.95};
 
-            for (int i = 0; i < 40; i++)
-            {
-                multipliers.Add(0.2 + i * 0.05);
-            }
 
-            List<double> isohydricities = new List<double>() {0.0, -0.2, 0.3, 0.5, 0.7};
-            List<double> lambdaMaxes = new List<double>() {0.8, 0.9, 0.95, 0.99};
+            List<double> multipliers = new List<double>() {1.0};
+            List<double> isohydricities = new List<double>() {0.1};
+            List<double> lambdaMaxes = new List<double>() {0.9};
 
 
             string rootFolder = "Insfiles";
@@ -99,7 +98,7 @@ namespace InctructionFileCreator
                 string filePrec = precDrivers[i];
 
                 for (int la = 0; la < lambdaMaxes.Count; la++)
-            {
+                {
 
 
                     for (int iso = 0; iso < isohydricities.Count; iso++)
@@ -180,12 +179,12 @@ namespace InctructionFileCreator
                         }
                     }
                 }
-            
-        }
-        
+
+            }
 
 
-        fileWriter.Close();
+
+            fileWriter.Close();
             values.Close();
 
             Console.WriteLine(sw.ElapsedMilliseconds);
@@ -202,7 +201,7 @@ namespace InctructionFileCreator
                 StringBuilder sb = new StringBuilder();
                 sb.Append(reader.ReadToEnd());
 
-                string[] lines = sb.ToString().Split(new[] { "\r\n" }, StringSplitOptions.None);
+                string[] lines = sb.ToString().Split(new[] {"\r\n"}, StringSplitOptions.None);
 
                 foreach (string line in lines)
                 {
@@ -218,4 +217,5 @@ namespace InctructionFileCreator
 
         }
     }
+
 }

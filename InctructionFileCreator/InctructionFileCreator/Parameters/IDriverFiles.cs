@@ -18,7 +18,6 @@ namespace InctructionFileCreator
         string Variable_prec { get; set; }
         string File_temp { get; set; }
         string Variable_temp { get; set; }
-        string File_throughfall_exclusion { get; set; }
 
         string File_Wetdays { get; set; }
         string File_Min_Temp { get; set; }

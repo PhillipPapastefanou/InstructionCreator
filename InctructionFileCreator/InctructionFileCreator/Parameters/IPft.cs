@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -120,6 +122,9 @@ namespace InctructionFileCreator
         double Harv_eff { get; set; }
         double Turnover_harv_prod { get; set; }
         double Harvest_slow_frac { get; set; }
+
+
+        double Sla { get; set; }
 
         object Clone();
         void Compare(IPft other);

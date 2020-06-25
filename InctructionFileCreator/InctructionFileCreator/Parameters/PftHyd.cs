@@ -12,13 +12,19 @@ namespace InctructionFileCreator.Parameters
         {
             
         }
-
+        [Export]
         public double Isohydricity { get; set; }
+        [Export]
         public double Delta_Psi_Max { get; set; }
+        [Export]
         public double ks_max { get; set; }
+        [Export]
         public double kr_max { get; set; }
+        [Export]
         public double kL_max { get; set; }
+        [Export]
         public double cav_slope { get; set; }
+        [Export]
         public double psi50_xylem { get; set; }
 
         public override object Clone()

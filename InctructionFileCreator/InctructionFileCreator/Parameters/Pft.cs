@@ -6,11 +6,15 @@ using System.Threading.Tasks;
 
 namespace InctructionFileCreator
 {
-
+    public class Export : Attribute
+    {
+        
+    }
     class Pft : IPft
     {
-       public string Name { get; set; }
 
+        [Export]
+        public string Name { get; set; }
 
         // Common pft parameters
         public bool Include { get; set; }
@@ -84,6 +88,8 @@ namespace InctructionFileCreator
         public double Harv_eff { get; set; }
         public double Turnover_harv_prod { get; set; }
         public double Harvest_slow_frac { get; set; }
+        public double Sla { get; set; }
+
         public virtual object Clone()
         {
             IPft pft = new Pft(Name);

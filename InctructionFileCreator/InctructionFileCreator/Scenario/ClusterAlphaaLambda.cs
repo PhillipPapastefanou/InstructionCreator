@@ -4,21 +4,18 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using InctructionFileCreator.Parameters;
-using SensitivitySetup;
 
 namespace InctructionFileCreator
 {
-    class HydraulicsStratifiedClusterSampling
+    class ClusterAlphaaLambda
     {
-        private List<double> psi50s;
-        private List<double> cavSlopes;
-
-
-        public HydraulicsStratifiedClusterSampling()
+        public ClusterAlphaaLambda()
         {
+
             Stopwatch sw = Stopwatch.StartNew();
 
             //List<double> psi50s = new List<double>();
@@ -44,10 +41,6 @@ namespace InctructionFileCreator
             //    }
             //}
 
-            ReadParameters(
-                "F:\\Dropbox\\UNI\\Projekte\\03_Hydraulics_Implementation\\Analysis\\SelectedCavCurvesDecember.tsv");
-
-
             //string filename = @"F:\SourceTreeRepos\InstructionCreator\InctructionFileCreator\InctructionFileCreator\bin\Debug\masterH-Def-GLDAS.ins";
             //string filename = @"F:\ClimateData\master_hyd.ins";
             string filename = @"..\..\masterBase.ins";
@@ -58,7 +51,7 @@ namespace InctructionFileCreator
             parser.Read();
 
 
-            InsFileHydraulics hydFile = (IInsFile)insfile.Clone() as InsFileHydraulics;
+            InsFileHydraulics hydFile = (IInsFile) insfile.Clone() as InsFileHydraulics;
 
 
             StreamWriter fileWriter = new StreamWriter("Insfiles.txt");
@@ -68,7 +61,8 @@ namespace InctructionFileCreator
 
             List<string> precDrivers = new List<string>();
             precDrivers.Add("/dss/dsshome1/lxc03/ga92wol2/driver_data/GLDAS2/GLDAS_1948_2010_prec_daily_half.nc");
-            precDrivers.Add("/dss/dsshome1/lxc03/ga92wol2/driver_data/GLDAS2/GLDAS_1948_2010_prec_daily_half_TNF_CAX_RED05_EndTime.nc");
+            precDrivers.Add(
+                "/dss/dsshome1/lxc03/ga92wol2/driver_data/GLDAS2/GLDAS_1948_2010_prec_daily_half_TNF_CAX_RED05_EndTime.nc");
 
             //precDrivers.Add("F:\\ClimateData\\Amazonia\\GLDAS_1948_2010_prec_daily_half_normal_TNF.nc");
             //precDrivers.Add("F:\\ClimateData\\Amazonia\\GLDAS_1948_2010_prec_daily_half_reduced_TNF.nc");
@@ -78,15 +72,53 @@ namespace InctructionFileCreator
             int index = 0;
 
 
-            List<double> multipliers = new List<double>();
+            //The medium group parameters of the xylem vulnerability space
+            List<double> psi50s = new List<double>() {-3.02};
+            List<double> cavSlopes = new List<double>() {-2.78};
 
-            for (int i = 0; i < 40; i++)
+            List<double> multipliers = new List<double>() {1.0};
+            List<double> isohydricities = new List<double>() {0.0};
+
+
+
+            List<double> lambdaMaxes = new List<double>() { 
+                0.7, 0.715, 0.729, 0.743, 0.756, 0.769, 0.782, 0.794, 0.805, 0.816, 
+                0.827, 0.838, 0.848, 0.858, 0.867, 0.877, 0.886, 0.895, 0.904, 0.912, 
+                0.92, 0.928, 0.936, 0.944, 0.951, 0.959, 0.966, 0.973, 0.98, 0.987};
+
+            List<double> alphaas = new List<double>()
             {
-                multipliers.Add(0.2 + i * 0.05);
-            }
 
-            List<double> isohydricities = new List<double>() {0.0, -0.2, 0.3, 0.5, 0.7};
-            List<double> lambdaMaxes = new List<double>() {0.8, 0.9, 0.95, 0.99};
+                0.3,
+                0.325,
+                0.35,
+                0.375,
+                0.4,
+                0.425,
+                0.45,
+                0.475,
+                0.5,
+                0.525,
+                0.55,
+                0.575,
+                0.6,
+                0.625,
+                0.65,
+                0.675,
+                0.7,
+                0.725,
+                0.75,
+                0.775,
+                0.8,
+                0.825,
+                0.85,
+                0.875,
+                0.9,
+                0.925,
+                0.95,
+                0.975,
+                1.0
+            };
 
 
             string rootFolder = "Insfiles";
@@ -99,7 +131,11 @@ namespace InctructionFileCreator
                 string filePrec = precDrivers[i];
 
                 for (int la = 0; la < lambdaMaxes.Count; la++)
-            {
+                {
+
+                    for (int a = 0; a < alphaas.Count; a++)
+                    {
+                        
 
 
                     for (int iso = 0; iso < isohydricities.Count; iso++)
@@ -129,7 +165,7 @@ namespace InctructionFileCreator
                                 gParams.NPatch = 50;
                                 gParams.Nyear_spinup = 1000;
                                 gParams.DistInterval = 200;
-                                gParams.Alphaa_nlim = 0.65;
+                                gParams.Alphaa_nlim = alphaas[a];
                                 gParams.Suppress_daily_output = true;
                                 gParams.Suppress_annually_output = false;
                                 gParams.Suppress_monthly_output = false;
@@ -165,6 +201,7 @@ namespace InctructionFileCreator
                                 values.Write(psi50.ToString(CultureInfo.InvariantCulture) + "\t");
                                 values.Write(cavS.ToString(CultureInfo.InvariantCulture) + "\t");
                                 values.Write(pft_iso.Lambda_max.ToString(CultureInfo.InvariantCulture) + "\t");
+                                values.Write(alphaas[a].ToString(CultureInfo.InvariantCulture) + "\t");
                                 values.Write(pft_iso.Isohydricity.ToString(CultureInfo.InvariantCulture) + "\t");
                                 values.Write(multipliers[f].ToString(CultureInfo.InvariantCulture));
                                 values.Write("\n");
@@ -174,48 +211,23 @@ namespace InctructionFileCreator
                                 ws.Write();
                                 ws.Dispose();
 
+                                Console.Write(index +  " ");
+
                                 index++;
                             }
-
+                        }
                         }
                     }
                 }
-            
-        }
-        
-
-
-        fileWriter.Close();
+            }
+            values.Flush();
             values.Close();
 
-            Console.WriteLine(sw.ElapsedMilliseconds);
+            fileWriter.Flush();
+            fileWriter.Close();
         }
 
-        private void ReadParameters(string filename)
-        {
-            psi50s = new List<double>();
-            cavSlopes = new List<double>();
 
-
-            using (StreamReader reader = File.OpenText(filename))
-            {
-                StringBuilder sb = new StringBuilder();
-                sb.Append(reader.ReadToEnd());
-
-                string[] lines = sb.ToString().Split(new[] { "\r\n" }, StringSplitOptions.None);
-
-                foreach (string line in lines)
-                {
-                    string[] dataLine = line.Split('\t');
-
-                    double psi50 = Convert.ToDouble(dataLine[0], CultureInfo.InvariantCulture);
-                    double slope = Convert.ToDouble(dataLine[1], CultureInfo.InvariantCulture);
-
-                    psi50s.Add(psi50);
-                    cavSlopes.Add(slope);
-                }
-            }
-
-        }
+        
     }
 }
