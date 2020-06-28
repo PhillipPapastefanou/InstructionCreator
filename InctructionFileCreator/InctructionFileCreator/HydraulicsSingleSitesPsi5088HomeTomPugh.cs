@@ -21,10 +21,12 @@ namespace InctructionFileCreator
         private List<double> mults;
         private List<double> slas;
         private List<double> kLatosScales;
+        private List<double[]> rootDists;
 
 
 
-         //List<double> lambdas = new List<double>(){-0.08, 0.15, 0.49};
+
+        //List<double> lambdas = new List<double>(){-0.08, 0.15, 0.49};
         private List<double> lambdas;
          //List<double> deltaPsiWW = new List<double>(){0.62, 1.23, 2.15};
         private List<double> deltaPsiWW;
@@ -43,14 +45,20 @@ namespace InctructionFileCreator
 
         string filename = @"F:\Dropbox\UNI\Projekte\A03_Hydraulics_Implementation\masterHomeWork_CAX.ins";
             List<double> alphaA = new List<double>(){0.7};
-            List<double> multmult = new List<double>() {1.25};
+            List<double> multmult = new List<double>() {0.5, 0.7, 0.8};
            // List<double> slaScale = new List<double>() {0.75, 1.25};
             List<double> slaScale = new List<double>() {1.0};
             //List<double> respcoeffs = new List<double>() {0.1, 0.15};
             List<double> respcoeffs = new List<double>() {0.15};
 
-            List<double> kLatosaMult = new List<double>() {4000};
-        int index = 0;
+            List<double> kLatosaMult = new List<double>() {5000,6000, 7000, 8000,9000};
+
+            List<int> distintervals = new List<int>() {200, 400 };
+            rootDists = new List<double[]>();
+            rootDists.Add(new double[] {0.6, 0.4});
+            rootDists.Add(new double[] {0.4, 0.6});
+
+            int index = 0;
 
 
             StreamWriter fileWriter = new StreamWriter("Insfiles.txt");
@@ -99,8 +107,12 @@ namespace InctructionFileCreator
 
 
                 driverFiles.File_gridlist = "F:\\ClimateData\\Amazon\\TNF_CAX_K34_extend.txt";
+                driverFiles.File_gridlist = "F:\\ClimateData\\Amazon\\TNF_K34_extend.txt";
+                driverFiles.File_gridlist = "F:\\ClimateData\\Amazon\\2005zones.txt";
 
 
+
+               
 
 
                 string rootFolder = "Insfiles";
@@ -119,6 +131,14 @@ namespace InctructionFileCreator
                         for (int aa = 0; aa < alphaA.Count; aa++)
                         {
 
+                            for (int d = 0; d < distintervals.Count; d++)
+                            {
+
+                                for (int rD = 0; rD < rootDists.Count; rD++)
+                                {
+                                    
+
+
                             for (int resp = 0; resp < respcoeffs.Count; resp++)
                             {
 
@@ -128,9 +148,10 @@ namespace InctructionFileCreator
 
                                 for (int sla = 0; sla < slaScale.Count; sla++)
                                 {
-
-
-                                    for (int j = 0; j < psi50s.Count; j++)
+                                    int[] indexesSel = {16, 17};
+                                    foreach (int j in indexesSel)
+                                        //for (int j = 0; j < psi50s.Count; j++)
+                                        //for (int j = 0; j < 2; j++)
                                     {
 
                                         string name = index + "run.ins";
@@ -145,13 +166,14 @@ namespace InctructionFileCreator
                                         gParams.Hydraulic_system = HydraulicSystemType.VPD_BASED_GC;
                                         gParams.NPatch = 50;
                                         gParams.Nyear_spinup = 1000;
-                                        gParams.DistInterval = 200;
+                                        gParams.DistInterval = distintervals[d];
                                         gParams.Alphaa_nlim = alphaA[aa];
                                         gParams.Suppress_daily_output = false;
                                         gParams.Suppress_annually_output = false;
                                         gParams.Suppress_monthly_output = false;
                                         gParams.Output_time_range = OutputTimeRangeType.Scenario;
                                         gParams.Disable_mort_greff = false;
+                                        
 
                                         gParams.IfCalcSLA = false;
 
@@ -184,7 +206,7 @@ namespace InctructionFileCreator
 
                                         pft_iso.K_LaToSa = kLatosScales[j] * kLatosaMult[klatosaIndex];
 
-                                        pft_iso.Rootdist = new double[] {0.6, 0.4};
+                                        pft_iso.Rootdist = rootDists[rD];
                                         pft_iso.RespCoeff = respcoeffs[resp];
 
                                         pft_iso.GA = 0.005;
@@ -198,6 +220,7 @@ namespace InctructionFileCreator
 
                                         pft_iso.Isohydricity = 0.15;
                                         pft_iso.Delta_Psi_Max = 1.23;
+                                        pft_iso.Longevity = 600;
 
 
                                         double multiplier = mults[j] * multmult[mm];
@@ -222,7 +245,10 @@ namespace InctructionFileCreator
                                             values.Write("AlphaA" + "\t");
                                             values.Write("RespCoeff" + "\t");
                                             values.Write("SLA" + "\t");
-                                            values.Write("KlatosaScale");
+                                            values.Write("Distinterval" + "\t");
+                                            values.Write("KlatosaScale" + "\t");
+                                            values.Write("ConductivityScaler" + "\t");
+                                            values.Write("RootDist");
                                             values.Write("\n");
                                         }
 
@@ -236,7 +262,10 @@ namespace InctructionFileCreator
                                         values.Write(alphaA[aa].ToString(CultureInfo.InvariantCulture) + "\t");
                                         values.Write(respcoeffs[resp].ToString(CultureInfo.InvariantCulture) + "\t");
                                         values.Write(slas[j].ToString(CultureInfo.InvariantCulture) + "\t");
-                                        values.Write(kLatosaMult[klatosaIndex].ToString(CultureInfo.InvariantCulture));
+                                        values.Write(distintervals[d].ToString(CultureInfo.InvariantCulture) + "\t");
+                                        values.Write(kLatosaMult[klatosaIndex].ToString(CultureInfo.InvariantCulture)+ "\t");
+                                        values.Write(multmult[mm].ToString(CultureInfo.InvariantCulture)+ "\t");
+                                        values.Write(rootDists[rD][0].ToString(CultureInfo.InvariantCulture));
 
                                         values.Write("\n");
 
@@ -247,6 +276,8 @@ namespace InctructionFileCreator
 
                                         index++;
                                     }
+                                            }
+                                        }
                                 }
                                 }
                             }

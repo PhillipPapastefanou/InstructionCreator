@@ -37,7 +37,7 @@ namespace InctructionFileCreator
         {
             Stopwatch sw = Stopwatch.StartNew();
 
-            setup = ClusterDriverSetup.WATCH_WFDEI;
+            setup = ClusterDriverSetup.GLDAS20;
 
             //List<double> psi50s = new List<double>();
             //List<double> cavSlopes = new List<double>();
@@ -174,7 +174,7 @@ namespace InctructionFileCreator
                                 gParams.Hydraulic_system = HydraulicSystemType.VPD_BASED_GC;
                                 gParams.NPatch = 50;
                                 gParams.Nyear_spinup = 1000;
-                                gParams.DistInterval = 200;
+                                gParams.DistInterval = 400;
                                 gParams.Alphaa_nlim = 0.7;
                                 gParams.Suppress_daily_output = true;
                                 gParams.Suppress_annually_output = false;
@@ -211,14 +211,15 @@ namespace InctructionFileCreator
 
                                 pft_iso.Sla = slas[j];
 
-                                pft_iso.K_LaToSa = kLatosScales[j] * 4000.0;
+                                pft_iso.K_LaToSa = kLatosScales[j] * 12000.0;
 
-                                pft_iso.Rootdist = new double[] { 0.6, 0.4 };
+                                pft_iso.Rootdist = new double[] { 0.4, 0.6 };
                                 pft_iso.RespCoeff = 0.15;
 
                                 pft_iso.GA = 0.005;
                                 pft_iso.CrownArea_Max = 150.0;
                                 pft_iso.Lambda_max = 0.90;
+                                pft_iso.Longevity = 500;
 
                                 pft_iso.GMin = 1.0;
 
@@ -229,7 +230,7 @@ namespace InctructionFileCreator
                                 pft_iso.Delta_Psi_Max = 1.23;
 
 
-                                double multiplier = mults[j] * 1.25;
+                                double multiplier = mults[j] * 0.75;
                                 pft_iso.ks_max = 80.0 * multiplier;
                                 pft_iso.kL_max = 5.0 * multiplier;
                                 pft_iso.kr_max = 15.0 * multiplier;
@@ -265,7 +266,7 @@ namespace InctructionFileCreator
                                 values.Write("0.7" + "\t");
                                 values.Write("0.15" + "\t");
                                 values.Write(slas[j].ToString(CultureInfo.InvariantCulture) + "\t");
-                                values.Write("4000.0");
+                                values.Write("12000.0");
 
                                 values.Write("\n");
 

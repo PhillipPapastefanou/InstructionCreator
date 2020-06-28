@@ -46,6 +46,7 @@
     <Compile Include="Auxilary.cs" />
     <Compile Include="BrienenAnalysis.cs" />
     <Compile Include="BrienenBaseSetup.cs" />
+    <Compile Include="HydraulicsHomeAllometric.cs" />
     <Compile Include="Scenario\ClusterAlphaaLambda.cs" />
     <Compile Include="Scenario\ClusterGLDASBaseSetup.cs" />
     <Compile Include="Container.cs" />

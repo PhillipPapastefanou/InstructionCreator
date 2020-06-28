@@ -42,18 +42,19 @@ namespace InctructionFileCreator
             //HydraulicsSpinupComp spinup = new HydraulicsSpinupComp();
             //HydraulicsPsi5088 psi5088 = new HydraulicsPsi5088();
             //HydraulicsSingleSitePsi5088Home psi5088_home = new HydraulicsSingleSitePsi5088Home();
-            HydraulicsSingleSitesPsi5088HomeTomPugh psi5088_home = new HydraulicsSingleSitesPsi5088HomeTomPugh();
+            //HydraulicsSingleSitesPsi5088HomeTomPugh psi5088_home = new HydraulicsSingleSitesPsi5088HomeTomPugh();
+            //HydraulicsHomeAllometric psi5088_home = new HydraulicsHomeAllometric();
             //HydraulicsStratifiedClusterSampling smlp = new HydraulicsStratifiedClusterSampling();
             // HydraulicsStratifiedFullCavSampling csamCavSampling = new HydraulicsStratifiedFullCavSampling();
             //ClusterAlphaaLambda clusterAlphaLambda = new ClusterAlphaaLambda();
-            //HydraulicsAmazonBasinSetup setup = new HydraulicsAmazonBasinSetup();
+            HydraulicsAmazonBasinSetup setup = new HydraulicsAmazonBasinSetup();
             //SelectedCAXSpeciesAmazon cAXSpeciesAmazon = new SelectedCAXSpeciesAmazon();
 
 
             //InsfileExport insfileExport = new InsfileExport(String.Empty);
 
 
-            Console.ReadKey();
+            //Console.ReadKey();
         }
     }
 }
