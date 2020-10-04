@@ -15,6 +15,7 @@ namespace InctructionFileCreator
     {
 
         private List<double> psi50s;
+        private List<double> psi88s;
         private List<double> cavSlopes;
         private List<double> mults;
         private List<double> slas;
@@ -63,7 +64,7 @@ namespace InctructionFileCreator
             //}
 
 
-            ReadParameters(@"F:\Dropbox\UNI\Projekte\A03_Hydraulics_Implementation\MULTS-SLA-All-latosaScales.csv");
+            ReadParameters(@"F:\Dropbox\UNI\Projekte\A03_Hydraulics_Implementation\MULTS-SLA-All.csv");
 
 
             //string filename = @"F:\SourceTreeRepos\InstructionCreator\InctructionFileCreator\InctructionFileCreator\bin\Debug\masterH-Def-GLDAS.ins";
@@ -247,12 +248,10 @@ namespace InctructionFileCreator
                                     values.Write("PrecipitationDriver" + "\t");
                                     values.Write("Psi50" + "\t");
                                     values.Write("CavSlope" + "\t");
-                                    values.Write("IsohydricityLambda" + "\t");
-                                    values.Write("ConductivityScaler" + "\t");
-                                    values.Write("AlphaA" + "\t");
-                                    values.Write("RespCoeff" + "\t");
+                                    values.Write("Sapwood conductivity" + "\t");
                                     values.Write("SLA" + "\t");
                                     values.Write("KlatosaScale");
+                                    values.Write("Psi88");
                                     values.Write("\n");
                                 }
 
@@ -261,12 +260,10 @@ namespace InctructionFileCreator
                                 values.Write(i.ToString(CultureInfo.InvariantCulture) + "\t");
                                 values.Write(psi50.ToString(CultureInfo.InvariantCulture) + "\t");
                                 values.Write(cavS.ToString(CultureInfo.InvariantCulture) + "\t");
-                                values.Write("0.15" + "\t");
-                                values.Write(multiplier.ToString(CultureInfo.InvariantCulture) + "\t");
-                                values.Write("0.7" + "\t");
-                                values.Write("0.15" + "\t");
-                                values.Write(slas[j].ToString(CultureInfo.InvariantCulture) + "\t");
-                                values.Write("12000.0");
+                                values.Write(pft_iso.ks_max.ToString(CultureInfo.InvariantCulture) + "\t");
+                                values.Write(pft_iso.Sla.ToString(CultureInfo.InvariantCulture) + "\t");
+                                values.Write(pft_iso.K_LaToSa.ToString(CultureInfo.InvariantCulture) + "\t");
+                                values.Write(psi88s[j].ToString(CultureInfo.InvariantCulture));
 
                                 values.Write("\n");
 
@@ -295,6 +292,7 @@ namespace InctructionFileCreator
         private void ReadParameters(string filename)
         {
             psi50s = new List<double>();
+            psi88s = new List<double>();
             cavSlopes = new List<double>();
             mults = new List<double>();
             slas = new List<double>();
@@ -316,18 +314,16 @@ namespace InctructionFileCreator
 
                     double psi50 = Convert.ToDouble(dataLine[0], CultureInfo.InvariantCulture);
                     double slope = Convert.ToDouble(dataLine[1], CultureInfo.InvariantCulture);
+                    double psi88 = Convert.ToDouble(dataLine[5], CultureInfo.InvariantCulture);
                     double mult = Convert.ToDouble(dataLine[2], CultureInfo.InvariantCulture);
                     double sla = Convert.ToDouble(dataLine[3], CultureInfo.InvariantCulture);
-                    double iso = Convert.ToDouble(dataLine[4], CultureInfo.InvariantCulture);
-                    double deltaPWW = Convert.ToDouble(dataLine[5], CultureInfo.InvariantCulture);
-                    double klatosaScale = Convert.ToDouble(dataLine[6], CultureInfo.InvariantCulture);
+                    double klatosaScale = Convert.ToDouble(dataLine[4], CultureInfo.InvariantCulture);
 
                     psi50s.Add(psi50);
+                    psi88s.Add(psi88);
                     cavSlopes.Add(slope);
                     mults.Add(mult);
                     slas.Add(sla);
-                    lambdas.Add(iso);
-                    deltaPsiWW.Add(deltaPWW);
                     kLatosScales.Add(klatosaScale);
                 }
             }
