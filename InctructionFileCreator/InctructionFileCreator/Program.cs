@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InctructionFileCreator.Parameters;
+using InctructionFileCreator.V1._7.ClusterSetups;
 using SensitivitySetup;
 
 namespace InctructionFileCreator
@@ -47,8 +48,10 @@ namespace InctructionFileCreator
             //HydraulicsStratifiedClusterSampling smlp = new HydraulicsStratifiedClusterSampling();
             // HydraulicsStratifiedFullCavSampling csamCavSampling = new HydraulicsStratifiedFullCavSampling();
             //ClusterAlphaaLambda clusterAlphaLambda = new ClusterAlphaaLambda();
-            HydraulicsAmazonBasinSetup setup = new HydraulicsAmazonBasinSetup();
+            //HydraulicsAmazonBasinSetup setup = new HydraulicsAmazonBasinSetup();
             //SelectedCAXSpeciesAmazon cAXSpeciesAmazon = new SelectedCAXSpeciesAmazon();
+
+            StratifiedSetup setup = new StratifiedSetup();
 
 
             //InsfileExport insfileExport = new InsfileExport(String.Empty);
