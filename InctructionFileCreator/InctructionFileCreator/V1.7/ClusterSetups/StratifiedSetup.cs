@@ -36,16 +36,16 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
             InitialSetup.MathematicaCSVReader csvReader = new MathematicaCSVReader(@"F:\Dropbox\UNI\Projekte\A03_Hydraulics_Implementation\Parameters_v1.7.csv");
 
 
-            double[] psi50s = csvReader.GetData("psi50s");
-            double[] psi88s = csvReader.GetData("psi88s");
-            double[] cavSlopes = csvReader.GetData("cavslop");
-            double[] mults = csvReader.GetData("mults");
-            double[] kStemXylem = csvReader.GetData("kStemXylem");
-            double[] kRoot = csvReader.GetData("kRoot");
-            double[] SLA = csvReader.GetData("SLA");
-            double[] kLaToSa = csvReader.GetData("klatosa");
-            double[] isohydricities = csvReader.GetData("iso");
-            double[] deltaPsiWW = csvReader.GetData("deltapsiww");
+            Column psi50s = csvReader.GetData("psi50s");
+            Column psi88s = csvReader.GetData("psi88s");
+            Column cavSlopes = csvReader.GetData("cavslop");
+            Column mults = csvReader.GetData("mults");
+            Column kStemXylem = csvReader.GetData("kStemXylem");
+            Column kRoot = csvReader.GetData("kRoot");
+            Column SLA = csvReader.GetData("SLA");
+            Column kLaToSa = csvReader.GetData("klatosa");
+            Column isohydricities = csvReader.GetData("iso");
+            Column deltaPsiWW = csvReader.GetData("deltapsiww");
     
   
             Stopwatch sw = Stopwatch.StartNew();
@@ -145,7 +145,7 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
                         {
                         
 
-                            for (int j = 0; j < psi50s.Length; j++)
+                            for (int j = 0; j < psi50s.Data.Length; j++)
                             {
 
                                 string name = index + "run.ins";
@@ -175,8 +175,8 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
                                 hyDriverFiles.File_prec = filePrec;
 
 
-                                double psi50 = psi50s[j];
-                                double cavS = cavSlopes[j];
+                                double psi50 = psi50s.Data[j];
+                                double cavS = cavSlopes.Data[j];
 
 
                                 PftHyd c3g = insfile.Pfts["C3G"] as PftHyd;
@@ -195,9 +195,9 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
                                 pft_iso.psi50_xylem = psi50;
                                 pft_iso.cav_slope = cavS;
 
-                                pft_iso.Sla = SLA[j];
+                                pft_iso.Sla = SLA.Data[j];
 
-                                pft_iso.K_LaToSa = kLaToSa[j];
+                                pft_iso.K_LaToSa = kLaToSa.Data[j];
 
                                 pft_iso.Rootdist = new double[] { 0.4, 0.6 };
                                 pft_iso.RespCoeff = 0.15;
@@ -218,9 +218,9 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
 
                                 //double multiplier = mults[j] * 0.75;
 
-                                pft_iso.ks_max = kStemXylem[j];
-                                pft_iso.kL_max = mults[j]*maxKLeaf[f];
-                                pft_iso.kr_max = kRoot[j];
+                                pft_iso.ks_max = kStemXylem.Data[j];
+                                pft_iso.kL_max = mults.Data[j]*maxKLeaf[f];
+                                pft_iso.kr_max = kRoot.Data[j];
 
                                 //pft_iso.K_rp = 1.5;
                                 //pft_iso.K_allom1 = 374;
@@ -249,7 +249,7 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
                                 values.Write(pft_iso.ks_max.ToString(CultureInfo.InvariantCulture) + "\t");
                                 values.Write(pft_iso.Sla.ToString(CultureInfo.InvariantCulture) + "\t");
                                 values.Write(pft_iso.K_LaToSa.ToString(CultureInfo.InvariantCulture) + "\t");
-                                values.Write(psi88s[j].ToString(CultureInfo.InvariantCulture));
+                                values.Write(psi88s.Data[j].ToString(CultureInfo.InvariantCulture));
 
                                 values.Write("\n");
 

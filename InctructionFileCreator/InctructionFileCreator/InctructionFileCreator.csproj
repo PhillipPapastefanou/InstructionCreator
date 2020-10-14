@@ -63,6 +63,7 @@
     <Compile Include="BrienenBaseSetup.cs" />
     <Compile Include="HydraulicsHomeAllometric.cs" />
     <Compile Include="InitialSetup\MathematicaCSVReader.cs" />
+    <Compile Include="InitialSetup\ParameterCombinationWriter.cs" />
     <Compile Include="Scenario\ClusterAlphaaLambda.cs" />
     <Compile Include="Scenario\ClusterGLDASBaseSetup.cs" />
     <Compile Include="Container.cs" />

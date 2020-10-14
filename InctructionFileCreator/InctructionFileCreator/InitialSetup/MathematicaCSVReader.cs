@@ -8,16 +8,34 @@ using System.Threading.Tasks;
 
 namespace InctructionFileCreator.InitialSetup
 {
+    class Column
+    {
+        public Column(string headerName, double[] data)
+        {
+            this.Header = headerName;
+            this.Data = data;
+        }
+
+        public string Header { get; private set; }
+        public double[] Data { get; private set; }
+    }
+
+
+
     class MathematicaCSVReader
     {
         public string[] Header { get; set; }
 
         private double[,] data;
 
+        private List<Column> columns;
+
 
         
         public MathematicaCSVReader(string filename)
         {
+
+            columns = new List<Column>();
 
             using (StreamReader reader = File.OpenText(filename))
             {
@@ -39,11 +57,24 @@ namespace InctructionFileCreator.InitialSetup
                         data[i, j] = Convert.ToDouble(dataLine[j], CultureInfo.InvariantCulture);
                     }
                 }
+
+                for (int i = 0; i < Header.Length; i++)
+                {
+                    double[] slice = new double[data.GetLength(0)];
+                    for (int dI = 0; dI < data.GetLength(0); dI++)
+                    {
+                        slice[dI] = data[dI, i];
+                    }
+
+                    columns.Add(new Column(Header[i], slice));
+                }
+
+
             }
         }
 
 
-        public double[] GetData(string varName)
+        public Column GetData(string varName)
         {
             int fIndex = -1;
 
@@ -61,14 +92,8 @@ namespace InctructionFileCreator.InitialSetup
                 
             }
 
-            double[] slice = new double[data.GetLength(0)];
 
-            for (int dI = 0; dI < data.GetLength(0); dI++)
-            {
-                slice[dI] = data[dI, fIndex];
-            }
-            
-            return slice;
+            return columns[fIndex];
         }
 
     }
