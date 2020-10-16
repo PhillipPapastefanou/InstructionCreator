@@ -67,7 +67,9 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
 
 
             StreamWriter fileWriter = new StreamWriter("Insfiles.txt");
-            StreamWriter values = new StreamWriter("Values.tsv");
+            ParameterCombinationWriter writer = new ParameterCombinationWriter("Values.tsv");
+
+       
 
             if (setup == ClusterDriverSetup.GLDAS20)
             {
@@ -107,13 +109,13 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
 
 
 
-            precDrivers.Add(
-                "/dss/dsshome1/lxc03/ga92wol2/driver_data/GLDAS2/GLDAS_1948_2010_prec_daily_half_TNF_CAX_RED05_EndTime.nc");
+            //precDrivers.Add(
+            //    "/dss/dsshome1/lxc03/ga92wol2/driver_data/GLDAS2/GLDAS_1948_2010_prec_daily_half_TNF_CAX_RED05_EndTime.nc");
 
 
             DriverFilesHydraulics driverFiles = hydFile.DriverFiles as DriverFilesHydraulics;
 
-            driverFiles.File_gridlist = "/dss/dsshome1/lxc03/ga92wol2/driver_data/Gridlists/Amazon/TNF_CAX_K34_extend.txt";
+            //driverFiles.File_gridlist = "/dss/dsshome1/lxc03/ga92wol2/driver_data/Gridlists/Amazon/TNF_CAX_K34_extend.txt";
 
             //precDrivers.Add("F:\\ClimateData\\Amazonia\\GLDAS_1948_2010_prec_daily_half_normal_TNF.nc");
             //precDrivers.Add("F:\\ClimateData\\Amazonia\\GLDAS_1948_2010_prec_daily_half_reduced_TNF.nc");
@@ -123,10 +125,12 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
             int index = 0;
 
 
-            List<double> maxKLeaf = new List<double>(){ 15.0, 10.0, 5.0};
+            List<double> maxKLeaf = new List<double>(){ 10.0, 5.0};
 
             //List<double> multipliers = new List<double>() { 1.5 };
             List<double> alphaAs = new List<double>() { 0.65, 0.75 };
+
+            writer.Setup(new List<string>() { "precDriver", "psi50", "psi88", "maxKLeaf", "alphaA" });
 
 
             string rootFolder = "Insfiles";
@@ -226,32 +230,14 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
                                 //pft_iso.K_allom1 = 374;
                                 //pft_iso.K_allom2 = 36;
                                 //pft_iso.K_allom3 = 0.58;
-
-                                if (index == 0)
-                                {
-                                    values.Write("DriverIndex" + "\t");
-                                    values.Write("InsfileIndex" + "\t");
-                                    values.Write("PrecipitationDriver" + "\t");
-                                    values.Write("Psi50" + "\t");
-                                    values.Write("CavSlope" + "\t");
-                                    values.Write("Sapwood conductivity" + "\t");
-                                    values.Write("SLA" + "\t");
-                                    values.Write("KlatosaScale");
-                                    values.Write("Psi88");
-                                    values.Write("\n");
-                                }
-
-                                values.Write(0 + "\t");
-                                values.Write(index + "\t");
-                                values.Write(i.ToString(CultureInfo.InvariantCulture) + "\t");
-                                values.Write(psi50.ToString(CultureInfo.InvariantCulture) + "\t");
-                                values.Write(cavS.ToString(CultureInfo.InvariantCulture) + "\t");
-                                values.Write(pft_iso.ks_max.ToString(CultureInfo.InvariantCulture) + "\t");
-                                values.Write(pft_iso.Sla.ToString(CultureInfo.InvariantCulture) + "\t");
-                                values.Write(pft_iso.K_LaToSa.ToString(CultureInfo.InvariantCulture) + "\t");
-                                values.Write(psi88s.Data[j].ToString(CultureInfo.InvariantCulture));
-
-                                values.Write("\n");
+                                
+                                
+                                writer.AddValue("precDriver", i);
+                                writer.AddValue("alphaA", gParams.Alphaa_nlim);
+                                writer.AddValue("maxKLeaf", maxKLeaf[f]);
+                                writer.AddValue("psi50", pft_iso.psi50_xylem);
+                                writer.AddValue("psi88", psi88s.Data[j]);
+         
 
                                 hydFile.Pfts[0] = pft_iso;
 
@@ -270,7 +256,7 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
 
 
             fileWriter.Close();
-            values.Close();
+            writer.Write();
 
             Console.WriteLine(sw.ElapsedMilliseconds);
         }
