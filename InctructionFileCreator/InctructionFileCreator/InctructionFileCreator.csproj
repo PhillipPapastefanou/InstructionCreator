@@ -101,6 +101,7 @@
     <Compile Include="SelectedCAXSpeciesAmazon.cs" />
     <Compile Include="SobolSequenceInstructionFile.cs" />
     <Compile Include="TwoPftStratified.cs" />
+    <Compile Include="V1.7\ClusterSetups\ABSetup.cs" />
     <Compile Include="V1.7\ClusterSetups\StratifiedSetup.cs" />
     <Compile Include="WatchHomeSetup.cs" />
     <Compile Include="Writer.cs" />

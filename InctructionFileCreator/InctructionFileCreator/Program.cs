@@ -51,8 +51,8 @@ namespace InctructionFileCreator
             //HydraulicsAmazonBasinSetup setup = new HydraulicsAmazonBasinSetup();
             //SelectedCAXSpeciesAmazon cAXSpeciesAmazon = new SelectedCAXSpeciesAmazon();
 
-            StratifiedSetup setup = new StratifiedSetup();
-
+            //StratifiedSetup setup = new StratifiedSetup();
+            ABSetup setup = new ABSetup();
 
             //InsfileExport insfileExport = new InsfileExport(String.Empty);
 
