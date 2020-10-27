@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using InctructionFileCreator.Parameters;
 using InctructionFileCreator.V1._7.ClusterSetups;
+using InctructionFileCreator.V1._7.HomeSetups;
 using SensitivitySetup;
 
 namespace InctructionFileCreator
@@ -54,6 +55,8 @@ namespace InctructionFileCreator
             //StratifiedSetup setup = new StratifiedSetup();
             ABSetup setup = new ABSetup();
 
+            //HomeStratifiedSetup f = new HomeStratifiedSetup();
+            
             //InsfileExport insfileExport = new InsfileExport(String.Empty);
 
 
