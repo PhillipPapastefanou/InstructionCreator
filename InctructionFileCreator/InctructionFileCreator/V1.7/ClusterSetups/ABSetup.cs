@@ -49,7 +49,7 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
   
             Stopwatch sw = Stopwatch.StartNew();
 
-            setup = ClusterDriverSetup.WATCH_WFDEI;
+            setup = ClusterDriverSetup.GLDAS20;
 
 
             //string filename = @"F:\SourceTreeRepos\InstructionCreator\InctructionFileCreator\InctructionFileCreator\bin\Debug\masterH-Def-GLDAS.ins";
@@ -127,7 +127,7 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
             List<double> maxKLeaf = new List<double>(){ 7.5};
 
             //List<double> multipliers = new List<double>() { 1.5 };
-            List<double> alphaAs = new List<double>() { 0.65 };
+            List<double> alphaAs = new List<double>() { 0.7 };
 
             writer.Setup(new List<string>() { "precDriver", "psi50", "psi88", "maxKLeaf", "alphaA" });
 
@@ -209,7 +209,7 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
                                 pft_iso.CrownArea_Max = 150.0;
                                 pft_iso.Lambda_max = 0.90;
                                // pft_iso.Longevity = 500;
-                                pft_iso.Longevity = 700;
+
 
                                 pft_iso.GMin = 1.0;
 
@@ -229,10 +229,13 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
                                 //pft_iso.K_rp = 1.5;
                                 //pft_iso.K_allom1 = 374;
                                 //pft_iso.K_allom2 = 36;
+                                //pft_iso.K_allom3 = 0.22;
                                 pft_iso.K_allom3 = 0.58;
-                                
-                                
-                                writer.AddValue("precDriver", i);
+                                pft_iso.Longevity = 650;
+                                pft_iso.WoodDens = 175;
+
+
+                            writer.AddValue("precDriver", i);
                                 writer.AddValue("alphaA", gParams.Alphaa_nlim);
                                 writer.AddValue("maxKLeaf", maxKLeaf[f]);
                                 writer.AddValue("psi50", pft_iso.psi50_xylem);

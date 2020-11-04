@@ -53,8 +53,8 @@ namespace InctructionFileCreator
             //SelectedCAXSpeciesAmazon cAXSpeciesAmazon = new SelectedCAXSpeciesAmazon();
 
             //StratifiedSetup setup = new StratifiedSetup();
-            ABSetup setup = new ABSetup();
-
+            //ABSetup setup = new ABSetup();
+            StratiefiedTwo st = new StratiefiedTwo();
             //HomeStratifiedSetup f = new HomeStratifiedSetup();
             
             //InsfileExport insfileExport = new InsfileExport(String.Empty);
