@@ -123,12 +123,14 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
             int index = 0;
 
 
-            List<double> maxKLeaf = new List<double>() { 7.5 };
+            List<double> SLAS = new List<double>() { 11.0, 15.0, 20.0 };
 
             //List<double> multipliers = new List<double>() { 1.5 };
-            List<int> longevities = new List<int>() { 650, 750, 850 };
+            List<int> longevities = new List<int>() { 500, 550,  600};
 
-            writer.Setup(new List<string>() { "gridcells", "psi50", "psi88", "longevity", "alphaA" });
+            List<double> ltors = new List<double>() { 0.8, 0.9, 1.0 };
+
+            writer.Setup(new List<string>() { "gridcells", "psi50", "psi88", "longevity", "SLA", "LtoR" });
 
             List<int> indexes = new List<int>(){0,1,3,6,17};
 
@@ -147,110 +149,115 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
                 for (int alpha = 0; alpha < longevities.Count; alpha++)
                 {
 
-                    for (int f = 0; f < maxKLeaf.Count; f++)
+                    for (int f = 0; f < SLAS.Count; f++)
                     {
-
-
-                        for (int ji = 0; ji < indexes.Count; ji++)
+                        for (int l = 0; l < ltors.Count; l++)
                         {
-                            int j = indexes[ji];
-                            string name = index + "run.ins";
-                            //string path = @"/gpfs/scratch/pr48va/ga92wol2/ga92wol2/2019/Hydraulics_Sens_2019/";
-                            fileWriter.Write("Insfiles/" + name + "\n");
-
-                            Writer ws = new Writer(hydFile, rootFolder + "//" + name);
-
-                            GeneralParametersHydraulics gParams =
-                                hydFile.GeneralParameters as GeneralParametersHydraulics;
-
-                            gParams.Hydraulic_system = HydraulicSystemType.VPD_BASED_GC;
-                            gParams.NPatch = 50;
-                            gParams.Nyear_spinup = 1000;
-                            gParams.DistInterval = 400;
-                            gParams.Alphaa_nlim = 0.7;
-                            gParams.Suppress_daily_output = true;
-                            gParams.Suppress_annually_output = false;
-                            gParams.Suppress_monthly_output = false;
-                            gParams.Output_time_range = OutputTimeRangeType.Scenario;
-                            gParams.Disable_mort_greff = false;
-
-                            gParams.IfCalcSLA = false;
-
-                            DriverFilesHydraulics hyDriverFiles =
-                                hydFile.DriverFiles as DriverFilesHydraulics;
-                            hyDriverFiles.File_prec = filePrec;
 
 
-                            double psi50 = psi50s.Data[j];
-                            double cavS = cavSlopes.Data[j];
+
+                            for (int ji = 0; ji < indexes.Count; ji++)
+                            {
+                                int j = indexes[ji];
+                                string name = index + "run.ins";
+                                //string path = @"/gpfs/scratch/pr48va/ga92wol2/ga92wol2/2019/Hydraulics_Sens_2019/";
+                                fileWriter.Write("Insfiles/" + name + "\n");
+
+                                Writer ws = new Writer(hydFile, rootFolder + "//" + name);
+
+                                GeneralParametersHydraulics gParams =
+                                    hydFile.GeneralParameters as GeneralParametersHydraulics;
+
+                                gParams.Hydraulic_system = HydraulicSystemType.VPD_BASED_GC;
+                                gParams.NPatch = 50;
+                                gParams.Nyear_spinup = 1000;
+                                gParams.DistInterval = 400;
+                                gParams.Alphaa_nlim = 0.7;
+                                gParams.Suppress_daily_output = true;
+                                gParams.Suppress_annually_output = false;
+                                gParams.Suppress_monthly_output = false;
+                                gParams.Output_time_range = OutputTimeRangeType.Scenario;
+                                gParams.Disable_mort_greff = false;
+
+                                gParams.IfCalcSLA = false;
+
+                                DriverFilesHydraulics hyDriverFiles =
+                                    hydFile.DriverFiles as DriverFilesHydraulics;
+                                hyDriverFiles.File_prec = filePrec;
 
 
-                            PftHyd c3g = insfile.Pfts["C3G"] as PftHyd;
-                            c3g.Sla = 26.0;
-
-                            PftHyd c4g = insfile.Pfts["C4G"] as PftHyd;
-                            c4g.Sla = 26.0;
+                                double psi50 = psi50s.Data[j];
+                                double cavS = cavSlopes.Data[j];
 
 
-                            hydFile.Pfts[1] = c3g;
-                            hydFile.Pfts[2] = c4g;
+                                PftHyd c3g = insfile.Pfts["C3G"] as PftHyd;
+                                c3g.Sla = 26.0;
+
+                                PftHyd c4g = insfile.Pfts["C4G"] as PftHyd;
+                                c4g.Sla = 26.0;
 
 
-                            PftHyd pft_iso = insfile.Pfts["TrBE"] as PftHyd;
-
-                            pft_iso.psi50_xylem = psi50;
-                            pft_iso.cav_slope = cavS;
-
-                            pft_iso.Sla = SLA.Data[j];
-
-                            pft_iso.K_LaToSa = kLaToSa.Data[j];
-
-                            pft_iso.Rootdist = new double[] { 0.4, 0.6 };
-                            pft_iso.RespCoeff = 0.15;
-
-                            pft_iso.GA = 0.005;
-                            pft_iso.CrownArea_Max = 150.0;
-                            pft_iso.Lambda_max = 0.90;
-                            // pft_iso.Longevity = 500;
+                                hydFile.Pfts[1] = c3g;
+                                hydFile.Pfts[2] = c4g;
 
 
-                            pft_iso.GMin = 1.0;
+                                PftHyd pft_iso = insfile.Pfts["TrBE"] as PftHyd;
 
-                            //pft_iso.Isohydricity = lambdas[j];
-                            //pft_iso.Delta_Psi_Max = deltaPsiWW[j];
+                                pft_iso.psi50_xylem = psi50;
+                                pft_iso.cav_slope = cavS;
 
-                            pft_iso.Isohydricity = 0.15;
-                            pft_iso.Delta_Psi_Max = 1.23;
+                                pft_iso.Sla = SLAS[f];
 
+                                pft_iso.K_LaToSa = kLaToSa.Data[j];
 
-                            //double multiplier = mults[j] * 0.75;
+                                pft_iso.Rootdist = new double[] {0.4, 0.6};
+                                pft_iso.RespCoeff = 0.15;
 
-                            pft_iso.ks_max = kStemXylem.Data[j];
-                            pft_iso.kL_max = maxKLeaf[f];
-                            pft_iso.kr_max = kRoot.Data[j];
-
-                            //pft_iso.K_rp = 1.5;
-                            //pft_iso.K_allom1 = 374;
-                            //pft_iso.K_allom2 = 36;
-                            //pft_iso.K_allom3 = 0.22;
-                            pft_iso.K_allom3 = 0.58; 
-                            pft_iso.Longevity = longevities[alpha];
-                            pft_iso.WoodDens = 175;
+                                pft_iso.GA = 0.005;
+                                pft_iso.CrownArea_Max = 150.0;
+                                pft_iso.Lambda_max = 0.90;
+                                // pft_iso.Longevity = 500;
 
 
-                            writer.AddValue("gridcells", i);
-                            writer.AddValue("alphaA", gParams.Alphaa_nlim);
-                            writer.AddValue("longevity", pft_iso.Longevity);
-                            writer.AddValue("psi50", pft_iso.psi50_xylem);
-                            writer.AddValue("psi88", psi88s.Data[j]);
+                                pft_iso.GMin = 1.0;
+
+                                //pft_iso.Isohydricity = lambdas[j];
+                                //pft_iso.Delta_Psi_Max = deltaPsiWW[j];
+
+                                pft_iso.Isohydricity = 0.15;
+                                pft_iso.Delta_Psi_Max = 1.23;
 
 
-                            hydFile.Pfts[0] = pft_iso;
+                                //double multiplier = mults[j] * 0.75;
 
-                            ws.Write();
-                            ws.Dispose();
+                                pft_iso.ks_max = kStemXylem.Data[j];
+                                pft_iso.kL_max = 7.5;
+                                pft_iso.kr_max = kRoot.Data[j];
 
-                            index++;
+                                //pft_iso.K_rp = 1.5;
+                                //pft_iso.K_allom1 = 374;
+                                //pft_iso.K_allom2 = 36;
+                                //pft_iso.K_allom3 = 0.22;
+                                pft_iso.K_allom3 = 0.58;
+                                pft_iso.Longevity = longevities[alpha];
+                                pft_iso.WoodDens = 175;
+                                pft_iso.LToR_Max = ltors[l];
+
+                                writer.AddValue("gridcells", i);
+                                writer.AddValue("SLA", pft_iso.Sla);
+                                writer.AddValue("longevity", pft_iso.Longevity);
+                                writer.AddValue("LtoR", pft_iso.LToR_Max);
+                                writer.AddValue("psi50", pft_iso.psi50_xylem);
+                                writer.AddValue("psi88", psi88s.Data[j]);
+
+
+                                hydFile.Pfts[0] = pft_iso;
+
+                                ws.Write();
+                                ws.Dispose();
+
+                                index++;
+                            }
                         }
 
 
