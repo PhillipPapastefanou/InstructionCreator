@@ -54,9 +54,10 @@ namespace InctructionFileCreator
 
             //StratifiedSetup setup = new StratifiedSetup();
             //ABSetup setup = new ABSetup();
-            StratiefiedTwo st = new StratiefiedTwo();
+            //StratiefiedTwo st = new StratiefiedTwo();
+            StratifiedThree st = new StratifiedThree();
             //HomeStratifiedSetup f = new HomeStratifiedSetup();
-            
+
             //InsfileExport insfileExport = new InsfileExport(String.Empty);
 
 

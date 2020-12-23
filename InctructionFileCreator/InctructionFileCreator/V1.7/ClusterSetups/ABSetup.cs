@@ -33,7 +33,7 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
         public ABSetup()
         {
 
-            InitialSetup.MathematicaCSVReader csvReader = new MathematicaCSVReader(@"F:\Dropbox\UNI\Projekte\A03_Hydraulics_Implementation\Parameters_v1.72.csv");
+            InitialSetup.MathematicaCSVReader csvReader = new MathematicaCSVReader(@"F:\Dropbox\UNI\Projekte\A03_Hydraulics_Implementation\Parameters_v1.7.3.csv");
 
 
             Column psi50s = csvReader.GetData("psi50s");
@@ -49,7 +49,7 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
   
             Stopwatch sw = Stopwatch.StartNew();
 
-            setup = ClusterDriverSetup.GLDAS20;
+            setup = ClusterDriverSetup.WATCH_WFDEI;
 
 
             //string filename = @"F:\SourceTreeRepos\InstructionCreator\InctructionFileCreator\InctructionFileCreator\bin\Debug\masterH-Def-GLDAS.ins";
@@ -127,9 +127,9 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
             List<double> maxKLeaf = new List<double>(){ 7.5};
 
             //List<double> multipliers = new List<double>() { 1.5 };
-            List<double> alphaAs = new List<double>() { 0.7 };
+            List<double> alphaAs = new List<double>() { 0.75 };
 
-            writer.Setup(new List<string>() { "precDriver", "psi50", "psi88", "maxKLeaf", "alphaA" });
+            writer.Setup(new List<string>() { "precDriver", "psi50", "psi88", "maxKLeaf", "alphaA", "Isohyd", "DeltaPsi" });
 
 
             string rootFolder = "Insfiles";
@@ -163,7 +163,7 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
                                 gParams.Hydraulic_system = HydraulicSystemType.VPD_BASED_GC;
                                 gParams.NPatch = 50;
                                 gParams.Nyear_spinup = 1000;
-                                gParams.DistInterval = 400;
+                                gParams.DistInterval = 500;
                                 gParams.Alphaa_nlim = alphaAs[alpha];
                                 gParams.Suppress_daily_output = true;
                                 gParams.Suppress_annually_output = false;
@@ -198,9 +198,10 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
                                 pft_iso.psi50_xylem = psi50;
                                 pft_iso.cav_slope = cavS;
 
-                                pft_iso.Sla = SLA.Data[j];
+                                pft_iso.Sla = 11.0;
 
-                                pft_iso.K_LaToSa = kLaToSa.Data[j];
+                                //pft_iso.K_LaToSa = kLaToSa.Data[j];
+                                pft_iso.K_LaToSa = 12000;
 
                                 pft_iso.Rootdist = new double[] { 0.4, 0.6 };
                                 pft_iso.RespCoeff = 0.15;
@@ -216,8 +217,8 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
                                 //pft_iso.Isohydricity = lambdas[j];
                                 //pft_iso.Delta_Psi_Max = deltaPsiWW[j];
 
-                                pft_iso.Isohydricity = 0.15;
-                                pft_iso.Delta_Psi_Max = 1.23;
+                                pft_iso.Isohydricity = isohydricities.Data[j];
+                                pft_iso.Delta_Psi_Max = deltaPsiWW.Data[j];
 
 
                                 //double multiplier = mults[j] * 0.75;
@@ -231,15 +232,18 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
                                 //pft_iso.K_allom2 = 36;
                                 //pft_iso.K_allom3 = 0.22;
                                 pft_iso.K_allom3 = 0.58;
-                                pft_iso.Longevity = 650;
-                                pft_iso.WoodDens = 175;
+                                pft_iso.Longevity = 700;
+                                pft_iso.WoodDens = 250;
+                                pft_iso.LToR_Max = 1.0;
 
 
                             writer.AddValue("precDriver", i);
                                 writer.AddValue("alphaA", gParams.Alphaa_nlim);
                                 writer.AddValue("maxKLeaf", maxKLeaf[f]);
                                 writer.AddValue("psi50", pft_iso.psi50_xylem);
-                                writer.AddValue("psi88", psi88s.Data[j]);
+                                writer.AddValue("psi88", pft_iso.cav_slope);
+                                writer.AddValue("Isohyd", pft_iso.Isohydricity);
+                                writer.AddValue("DeltaPsi", pft_iso.Delta_Psi_Max);
          
 
                                 hydFile.Pfts[0] = pft_iso;

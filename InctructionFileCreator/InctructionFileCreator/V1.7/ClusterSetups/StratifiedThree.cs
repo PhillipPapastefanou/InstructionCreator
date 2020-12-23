@@ -11,11 +11,9 @@ using InctructionFileCreator.Scenario;
 
 namespace InctructionFileCreator.V1._7.ClusterSetups
 {
-    class StratiefiedTwo
+    class StratifiedThree
     {
-
-
-
+        
         private ClusterDriverSetup setup;
 
 
@@ -29,7 +27,7 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
         //pft_iso.Isohydricity = -0.08;
         //pft_iso.Delta_Psi_Max = 0.62;
 
-        public StratiefiedTwo()
+        public StratifiedThree()
         {
 
             InitialSetup.MathematicaCSVReader csvReader = new MathematicaCSVReader(@"F:\Dropbox\UNI\Projekte\A03_Hydraulics_Implementation\Parameters_v1.7.3.csv");
@@ -122,19 +120,23 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
 
             int index = 0;
 
+            List<double> SLAS = new List<double>() {15};
+            List<double> kLatoSa = new List<double>() { 10000, 12000};
+            List<int> disInterval = new List<int>() { 500, 600};
 
-            List<double> SLAS = new List<double>() {11.0, 12.0, 15.0 };
+            List<double> turonversaps = new List<double>() {0.03, 0.05 , 0.1 };
+            List<double> gmins = new List<double>() {0.25, 0.5 , 1.0 };
 
             //List<double> multipliers = new List<double>() { 1.5 };
             List<int> longevities = new List<int>() { 650, 700 };
+            List<int> woodDenses = new List<int>() { 175, 200, 250 };
 
-            List<double> alphaAs = new List<double>() { 0.65, 0.7 };
 
-            List<double> ltors = new List<double>() { 0.9, 1.0};
+            List<double> alphaAs = new List<double>() {0.65, 0.7 };
 
-            writer.Setup(new List<string>() { "gridcells", "psi50", "psi88", "longevity", "SLA", "LtoR", "alphaa"});
+            writer.Setup(new List<string>() { "gridcells", "psi50", "psi88", "longevity", "sla", "klatosa", "alphaa", "distInterval", "wooddens", "SAPS", "TSaps", "GMins"});
 
-            List<int> indexes = new List<int>(){0,3,6,7,33};
+            List<int> indexes = new List<int>() {31, 32, 33 };
 
 
             string rootFolder = "Insfiles";
@@ -142,18 +144,33 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
             Directory.CreateDirectory(rootFolder);
 
 
-            for (int i = 0; i < 21; i++)
+            for (int i = 0; i < 26; i++)
             {
                 string filePrec = precDrivers[0];
 
-                driverFiles.File_gridlist = "/dss/dsshome1/lxc03/ga92wol2/driver_data/Gridlists/Amazon/BrienenAviSlice" + i.ToString() + ".tsv";
+                driverFiles.File_gridlist = "/dss/dsshome1/lxc03/ga92wol2/driver_data/Gridlists/Amazon/BrienenAviMCWSlice" + i.ToString() + ".tsv";
 
-                for (int alpha = 0; alpha < longevities.Count; alpha++)
+                for (int longIndex = 0; longIndex < longevities.Count; longIndex++)
                 {
 
-                    for (int f = 0; f < SLAS.Count; f++)
+                    for (int k = 0; k < kLatoSa.Count; k++)
                     {
-                        for (int l = 0; l < ltors.Count; l++)
+
+                        for (int di = 0; di < disInterval.Count; di++)
+                        { 
+                            for (int tIndexSap = 0; tIndexSap < turonversaps.Count; tIndexSap++)
+                        {
+                            for (int tIndexGMIN = 0; tIndexGMIN < gmins.Count; tIndexGMIN++)
+                            {
+                                
+            
+
+
+
+
+                    for (int slaIndex = 0; slaIndex < SLAS.Count; slaIndex++)
+                    {
+                        for (int l = 0; l < woodDenses.Count; l++)
                         {
 
                             for (int a = 0; a < alphaAs.Count; a++)
@@ -176,8 +193,17 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
 
                                     gParams.Hydraulic_system = HydraulicSystemType.VPD_BASED_GC;
                                     gParams.NPatch = 50;
-                                    gParams.Nyear_spinup = 1500;
-                                    gParams.DistInterval = 1000;
+
+                                    //Toms settings
+                                    //gParams.Nyear_spinup = 1500;
+                                    //gParams.DistInterval = 1000;
+
+                                    //My settings
+                                    gParams.Nyear_spinup = 1000;
+                                    gParams.DistInterval = disInterval[di];
+
+
+
                                     gParams.Alphaa_nlim = alphaAs[a];
                                     gParams.Suppress_daily_output = true;
                                     gParams.Suppress_annually_output = false;
@@ -212,9 +238,9 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
                                     pft_iso.psi50_xylem = psi50;
                                     pft_iso.cav_slope = cavS;
 
-                                    pft_iso.Sla = SLAS[f];
+                                    pft_iso.Sla = SLAS[slaIndex];
 
-                                    pft_iso.K_LaToSa = kLaToSa.Data[j];
+                                    pft_iso.K_LaToSa = kLatoSa[k];
 
                                     pft_iso.Rootdist = new double[] {0.4, 0.6};
                                     pft_iso.RespCoeff = 0.15;
@@ -230,8 +256,8 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
                                     //pft_iso.Isohydricity = lambdas[j];
                                     //pft_iso.Delta_Psi_Max = deltaPsiWW[j];
 
-                                    pft_iso.Isohydricity = 0.15;
-                                    pft_iso.Delta_Psi_Max = 1.23;
+                                    pft_iso.Isohydricity = isohydricities.Data[j];
+                                    pft_iso.Delta_Psi_Max = deltaPsiWW.Data[j];
 
 
                                     //double multiplier = mults[j] * 0.75;
@@ -245,17 +271,23 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
                                     //pft_iso.K_allom2 = 36;
                                     //pft_iso.K_allom3 = 0.22;
                                     pft_iso.K_allom3 = 0.58;
-                                    pft_iso.Longevity = longevities[alpha];
-                                    pft_iso.WoodDens = 175;
-                                    pft_iso.LToR_Max = ltors[l];
+                                    pft_iso.Longevity = longevities[longIndex];
+                                    pft_iso.WoodDens = woodDenses[l];
+                                    pft_iso.Turnover_sap = turonversaps[tIndexSap];
+                                    pft_iso.GMin = gmins[tIndexGMIN];
 
                                     writer.AddValue("gridcells", i);
-                                    writer.AddValue("SLA", pft_iso.Sla);
+                                    writer.AddValue("klatosa", pft_iso.K_LaToSa);
+                                    writer.AddValue("sla", pft_iso.Sla);
                                     writer.AddValue("longevity", pft_iso.Longevity);
-                                    writer.AddValue("LtoR", pft_iso.LToR_Max);
                                     writer.AddValue("psi50", pft_iso.psi50_xylem);
                                     writer.AddValue("psi88", psi88s.Data[j]);
                                     writer.AddValue("alphaa", alphaAs[a]);
+                                    writer.AddValue("distInterval", gParams.DistInterval);
+                                    writer.AddValue("wooddens", pft_iso.WoodDens);
+                                    writer.AddValue("GMins", pft_iso.GMin);
+                                    writer.AddValue("TSaps", pft_iso.Turnover_sap);
+
 
 
                                     hydFile.Pfts[0] = pft_iso;
@@ -264,6 +296,11 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
                                     ws.Dispose();
 
                                     index++;
+                                }
+                            }
+                        }
+
+                                    }
                                 }
                             }
                         }
@@ -283,7 +320,5 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
         }
 
     }
-
-
 }
 

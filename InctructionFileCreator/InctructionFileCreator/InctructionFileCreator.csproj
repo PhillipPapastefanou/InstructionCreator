@@ -104,6 +104,7 @@
     <Compile Include="V1.7\ClusterSetups\ABSetup.cs" />
     <Compile Include="V1.7\ClusterSetups\StratiefiedTwo.cs" />
     <Compile Include="V1.7\ClusterSetups\StratifiedSetup.cs" />
+    <Compile Include="V1.7\ClusterSetups\StratifiedThree.cs" />
     <Compile Include="V1.7\HomeSetups\HomeStartified.cs" />
     <Compile Include="WatchHomeSetup.cs" />
     <Compile Include="Writer.cs" />
