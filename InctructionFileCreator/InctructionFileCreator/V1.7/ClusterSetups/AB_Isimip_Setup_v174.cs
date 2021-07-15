@@ -12,12 +12,10 @@ using InctructionFileCreator.Scenario;
 
 namespace InctructionFileCreator.V1._7.ClusterSetups
 {
-    class ABSetup
+    class AB_Isimip_Setup_v174
     {
-
-
-
-        private ClusterDriverSetup setup;
+        
+        private ISIMIP_Setup_v174 setupV174;
 
 
 
@@ -30,7 +28,7 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
         //pft_iso.Isohydricity = -0.08;
         //pft_iso.Delta_Psi_Max = 0.62;
 
-        public ABSetup()
+        public AB_Isimip_Setup_v174()
         {
 
             InitialSetup.MathematicaCSVReader csvReader = new MathematicaCSVReader(@"F:\Dropbox\UNI\Projekte\A03_Hydraulics_Implementation\Parameters_v1.7.3.csv");
@@ -49,12 +47,10 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
   
             Stopwatch sw = Stopwatch.StartNew();
 
-            setup = ClusterDriverSetup.GLDAS20;
-
 
             //string filename = @"F:\SourceTreeRepos\InstructionCreator\InctructionFileCreator\InctructionFileCreator\bin\Debug\masterH-Def-GLDAS.ins";
             //string filename = @"F:\ClimateData\master_hyd.ins";
-            string filename = @"..\..\masterBase.ins";
+            string filename = @"..\..\masterBase174.ins";
 
             IInsFile insfile = new InsFileHydraulics();
 
@@ -70,41 +66,11 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
 
        
 
-            if (setup == ClusterDriverSetup.GLDAS20)
-            {
-                ClusterGLDASBaseSetup baseSetup = new ClusterGLDASBaseSetup(ref hydFile);
-            }
 
-            else if (setup == ClusterDriverSetup.WATCH_WFDEI)
-            {
-                ClusterWWBaseSetup baseSetup = new ClusterWWBaseSetup(ref hydFile);
-            }
+            setupV174 = new ISIMIP_Setup_v174(ref hydFile, EarthSystemModelType.ESM4, ScenarioType.RCP_126 );
+            
 
-            else
-            {
-                Console.WriteLine("No valid cluster setup specified.");
-            }
-
-
-
-
-            List<string> precDrivers = new List<string>();
-
-            if (setup == ClusterDriverSetup.GLDAS20)
-            {
-                precDrivers.Add("/dss/dsshome1/lxc03/ga92wol2/driver_data/GLDAS2/GLDAS_1948_2010_prec_daily_half.nc");
-            }
-
-            else if (setup == ClusterDriverSetup.WATCH_WFDEI)
-            {
-                precDrivers.Add("/dss/dsshome1/lxc03/ga92wol2/driver_data/WATCH_WFDEI/WATCH_WFDEI_1950_2010_prec.nc");
-            }
-
-            else
-            {
-                Console.WriteLine("No valid cluster setup specified.");
-            }
-
+            
 
 
 
@@ -129,24 +95,17 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
             //List<double> multipliers = new List<double>() { 1.5 };
             List<double> alphaAs = new List<double>() { 0.65 };
 
-            writer.Setup(new List<string>() { "precDriver", "psi50", "psi88", "maxKLeaf", "alphaA", "Isohyd", "DeltaPsi" });
+            writer.Setup(new List<string>() { "psi50", "psi88", "maxKLeaf", "alphaA", "Isohyd", "DeltaPsi" });
 
 
             string rootFolder = "Insfiles";
 
             Directory.CreateDirectory(rootFolder);
 
-
-            for (int i = 0; i < precDrivers.Count; i++)
-            {
-                string filePrec = precDrivers[i];
-
-                for (int alpha = 0; alpha < alphaAs.Count; alpha++)
+            for (int alpha = 0; alpha < alphaAs.Count; alpha++)
                 {
-                    
-                        for (int f = 0; f < maxKLeaf.Count; f++)
+                    for (int f = 0; f < maxKLeaf.Count; f++)
                         {
-                        
 
                             for (int j = 0; j < psi50s.Data.Length; j++)
                             {
@@ -177,8 +136,6 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
 
                                 DriverFilesHydraulics hyDriverFiles =
                                     hydFile.DriverFiles as DriverFilesHydraulics;
-                                hyDriverFiles.File_prec = filePrec;
-
 
                                 double psi50 = psi50s.Data[j];
                                 double cavS = cavSlopes.Data[j];
@@ -240,7 +197,7 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
                                 pft_iso.LToR_Max = 1.0;
 
 
-                            writer.AddValue("precDriver", i);
+
                                 writer.AddValue("alphaA", gParams.Alphaa_nlim);
                                 writer.AddValue("maxKLeaf", maxKLeaf[f]);
                                 writer.AddValue("psi50", pft_iso.psi50_xylem);
@@ -261,7 +218,7 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
                     }
                 }
 
-            }
+            
 
 
 

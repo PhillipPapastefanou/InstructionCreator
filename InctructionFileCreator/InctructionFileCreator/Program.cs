@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InctructionFileCreator.Parameters;
+using InctructionFileCreator.V1._7;
 using InctructionFileCreator.V1._7.ClusterSetups;
 using InctructionFileCreator.V1._7.HomeSetups;
 using SensitivitySetup;
@@ -49,17 +50,37 @@ namespace InctructionFileCreator
             //HydraulicsStratifiedClusterSampling smlp = new HydraulicsStratifiedClusterSampling();
             // HydraulicsStratifiedFullCavSampling csamCavSampling = new HydraulicsStratifiedFullCavSampling();
             //ClusterAlphaaLambda clusterAlphaLambda = new ClusterAlphaaLambda();
-            //HydraulicsAmazonBasinSetup setup = new HydraulicsAmazonBasinSetup();
+            
+            //HydraulicsAmazonBasinSetup setup = new
+            //HydraulicsAmazonBasinSetup();
             //SelectedCAXSpeciesAmazon cAXSpeciesAmazon = new SelectedCAXSpeciesAmazon();
 
             //StratifiedSetup setup = new StratifiedSetup();
+            //ABSetupHome setup = new ABSetupHome();
+
             //ABSetup setup = new ABSetup();
+
+            //AfricanRainforestSetup setup = new AfricanRainforestSetup();
+
+            //ABSetup173_var_deltaPSi setup2205= new ABSetup173_var_deltaPSi();
+            
+            //ABSetup174 setup174 = new ABSetup174();
+            // StratifiedThreeFixed fiexed = new StratifiedThreeFixed();
+
+            //ThreeWayHomeSetup  setup  = new ThreeWayHomeSetup();
+
             //StratiefiedTwo st = new StratiefiedTwo();
-            StratifiedThree st = new StratifiedThree();
+            //StratifiedThree st = new StratifiedThree();
+
+            //RandomSampledThree r3 = new RandomSampledThree();
+
             //HomeStratifiedSetup f = new HomeStratifiedSetup();
 
             //InsfileExport insfileExport = new InsfileExport(String.Empty);
 
+
+            AB_Isimip_Setup_v174 isimip = new AB_Isimip_Setup_v174();
+            
 
             //Console.ReadKey();
         }

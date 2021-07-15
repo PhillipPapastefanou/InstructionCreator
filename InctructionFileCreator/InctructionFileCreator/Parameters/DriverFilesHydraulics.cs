@@ -11,6 +11,8 @@ namespace InctructionFileCreator.Parameters
 
         public string File_vpd { get; set; }
         public string Variable_vpd { get; set; }
+        public string File_hurs { get; set; }
+        public string Variable_hurs { get; set; }
         public string File_windspeed { get; set; }
         public string Variable_windspeed { get; set; }
 

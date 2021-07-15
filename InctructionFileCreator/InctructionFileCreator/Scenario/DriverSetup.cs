@@ -9,7 +9,8 @@ namespace InctructionFileCreator.Scenario
     enum ClusterDriverSetup
     {
         GLDAS20, 
-        WATCH_WFDEI
+        WATCH_WFDEI,
+        GLDAS20_Afirca
     } 
 
 }
