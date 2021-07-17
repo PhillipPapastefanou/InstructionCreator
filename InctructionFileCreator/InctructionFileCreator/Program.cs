@@ -12,6 +12,7 @@ using InctructionFileCreator.V1._7;
 using InctructionFileCreator.V1._7.ClusterSetups;
 using InctructionFileCreator.V1._7.HomeSetups;
 using SensitivitySetup;
+using InctructionFileCreator.Factories;
 
 namespace InctructionFileCreator
 {
@@ -79,8 +80,8 @@ namespace InctructionFileCreator
             //InsfileExport insfileExport = new InsfileExport(String.Empty);
 
 
-            AB_Isimip_Setup_v174 isimip = new AB_Isimip_Setup_v174();
-            
+            ISIMIP_Factory factory = new ISIMIP_Factory();
+
 
             //Console.ReadKey();
         }

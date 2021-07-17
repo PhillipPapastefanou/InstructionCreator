@@ -28,7 +28,7 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
         //pft_iso.Isohydricity = -0.08;
         //pft_iso.Delta_Psi_Max = 0.62;
 
-        public AB_Isimip_Setup_v174()
+        public AB_Isimip_Setup_v174(EarthSystemModelType esm_type, ScenarioType scen_type, string masterfile)
         {
 
             InitialSetup.MathematicaCSVReader csvReader = new MathematicaCSVReader(@"F:\Dropbox\UNI\Projekte\A03_Hydraulics_Implementation\Parameters_v1.7.3.csv");
@@ -50,7 +50,7 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
 
             //string filename = @"F:\SourceTreeRepos\InstructionCreator\InctructionFileCreator\InctructionFileCreator\bin\Debug\masterH-Def-GLDAS.ins";
             //string filename = @"F:\ClimateData\master_hyd.ins";
-            string filename = @"..\..\masterBase174.ins";
+            string filename = masterfile;
 
             IInsFile insfile = new InsFileHydraulics();
 
@@ -67,7 +67,8 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
        
 
 
-            setupV174 = new ISIMIP_Setup_v174(ref hydFile, EarthSystemModelType.ESM4, ScenarioType.RCP_126 );
+            setupV174 = new ISIMIP_Setup_v174(ref hydFile, esm_type, scen_type );
+            //setupV174 = new ISIMIP_Setup_v174(ref hydFile, EarthSystemModelType.ESM4, ScenarioType.RCP_126 );
             
 
             

@@ -61,6 +61,7 @@
     <Compile Include="Auxilary.cs" />
     <Compile Include="BrienenAnalysis.cs" />
     <Compile Include="BrienenBaseSetup.cs" />
+    <Compile Include="Factories\ISIMIP_Factory.cs" />
     <Compile Include="GLDASHomeSetup.cs" />
     <Compile Include="HydraulicsHomeAllometric.cs" />
     <Compile Include="InitialSetup\MathematicaCSVReader.cs" />
