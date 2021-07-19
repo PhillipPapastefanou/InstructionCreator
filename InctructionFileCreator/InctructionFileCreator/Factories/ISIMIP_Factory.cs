@@ -29,6 +29,15 @@ namespace InctructionFileCreator.Factories
 
                     File.Copy(@"..\..\..\..\submit3.sh", "submit3.sh");
 
+                    // Read a text file line by line.  
+                    string[] lines = File.ReadAllLines(@"..\..\..\..\agg.sh");
+
+                    lines[23] =
+                        "curl --ciphers AES256-SHA -T $file -u 'ga92wol:Aemwded1!REAL' " +
+                        "https://webdisk.ads.mwn.de/hcwebdav/TUWZ/b7a/data/Papastefanou/Simulations/Temporary/" + esm.ToString() + "/$file ";
+
+                    File.WriteAllText("agg.sh", string.Join("\n", lines), Encoding.ASCII);
+
 
                     AB_Isimip_Setup_v174 setup = new AB_Isimip_Setup_v174(esm, scenario,  @"..\..\..\..\masterBase174.ins");
 
