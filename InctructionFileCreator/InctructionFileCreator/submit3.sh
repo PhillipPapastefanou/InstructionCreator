@@ -11,7 +11,7 @@
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=papa@tum.de
 #SBATCH --export=NONE
-#SBATCH --time=18:00:00
+#SBATCH --time=21:00:00
   
 module load slurm_setup
  

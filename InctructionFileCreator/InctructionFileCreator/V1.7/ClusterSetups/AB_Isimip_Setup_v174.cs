@@ -57,7 +57,6 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
             InsParser parser = new InsParser(filename, insfile);
             parser.Read();
 
-
             InsFileHydraulics hydFile = (IInsFile)insfile.Clone() as InsFileHydraulics;
 
 

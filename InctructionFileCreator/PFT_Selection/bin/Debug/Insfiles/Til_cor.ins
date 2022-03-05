@@ -1,0 +1,50 @@
+!
+! Instruction file with European species to be used with the
+! CF I/O module.
+!
+! Make sure to start LPJ-GUESS with -input cf when using this
+! instruction file.
+!
+
+import "/home/phillip/src/guess4_hydraulics_dnn/data/ins/europe_Til_cor.ins"
+
+
+
+year_begin 1990
+year_end 2010
+suppress_annually_output 0
+suppress_daily_output 1
+suppress_monthly_output 0
+nyear_spinup 1000
+output_time_range "scenario"
+npatch 100
+hydraulic_system "standard"
+ifcalcsla 1
+alphaa_nlim 0.6
+use_disturb_dnn 1
+
+param "file_co2"     (str "/scratch/phillip/co2_rcp26.csv")
+param "file_cru"     (str "/scratch/phillip/cruncep_1901_2015.bin")
+param "file_cru_misc"     (str "/scratch/phillip/Cruncep_1901_2015misc.bin")
+param "file_gridlist"     (str "/scratch/phillip/Coords_Dead_Alive_NFG_RSF.tsv")
+param "file_insol"     (str "/scratch/phillip/GLDAS_1948_2010_swdown_daily_quarter.nc")
+param "file_max_temp"     (str "")
+param "file_min_temp"     (str "")
+param "file_ndep"     (str "")
+param "file_prec"     (str "/scratch/phillip/GLDAS_1948_2010_prec_daily_quarter.nc")
+param "file_temp"     (str "/scratch/phillip/GLDAS_1948_2010_temp_daily_quarter.nc")
+param "file_vpd"     (str "")
+param "file_hurs"     (str "")
+param "file_wetdays"     (str "")
+param "file_windspeed"     (str "")
+param "variable_insol"     (str "insol")
+param "variable_prec"     (str "prec")
+param "variable_temp"     (str "temp")
+param "variable_vpd"     (str "vpd")
+param "variable_hurs"     (str "hursAdjust")
+param "variable_windspeed"     (str "sfcWindAdjust")
+
+param "file_disturb_dnn" (str "/home/phillip/git/guess4_hydraulics/dnn/grr_biomass_spec_cens/traced_DNN_4_input.pt")
+param "file_disturb_dnn_parameters" (str "/home/phillip/git/guess4_hydraulics/dnn/grr_biomass_spec_cens/input_normalization_parameters_ex.csv")
+param "file_disturb_dnn_species_id" (str "/home/phillip/git/guess4_hydraulics/dnn/grr_biomass_spec_cens/species_dnn_ids_ex.csv")
+param "file_dnn_test_data" (str "/home/phillip/git/guess4_hydraulics/dnn/grr_biomass_spec_cens/dnn_sample.csv")

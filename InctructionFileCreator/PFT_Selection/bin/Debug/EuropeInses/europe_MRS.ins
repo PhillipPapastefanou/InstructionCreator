@@ -1,0 +1,274 @@
+outputdirectory "./"
+file_cmass "cmass.out"
+file_anpp "anpp.out"
+file_agpp "agpp.out"
+file_fpc "fpc.out"
+file_aaet "aaet.out"
+file_lai "lai.out"
+file_cflux "cflux.out"
+file_doc "doc.out"
+file_dens "dens.out"
+file_runoff "tot_runoff.out"
+file_cpool "cpool.out"
+file_clitter "clitter.out"
+file_nmass "nmass.out"
+file_cton_leaf "cton_leaf.out"
+file_ngases "ngases.out"
+file_nsources "nsources.out"
+file_npool "npool.out"
+file_nlitter "nlitter.out"
+file_nuptake "nuptake.out"
+file_nflux "nflux.out"
+file_vmaxnlim "vmaxnlim.out"
+title 'LPJ'
+vegmode "cohort"
+nyear_spinup 500
+ifcalcsla 1
+ifcalccton 1
+iffire 1
+npatch 25
+npatch_secondarystand 1
+reduce_all_stands 0
+age_limit_reduce 5
+patcharea 1000
+estinterval 5
+ifdisturb 1
+distinterval 100
+ifbgestab 1
+ifsme 1
+ifstochestab 1
+ifstochmort 1
+ifcdebt 1
+wateruptake "rootdist"
+textured_soil 1
+ifcentury 1
+ifnlim 1
+freenyears 100
+nfix_a 0.102
+nfix_b 0.524
+nrelocfrac 0.5
+restart 0
+save_state 0
+ifsmoothgreffmort 1
+ifdroughtlimitedestab 1
+ifrainonwetdaysonly 1
+ifbvoc 0
+run_landcover 0
+group "common"( 
+lambda_max 0.8
+emax 5
+reprfrac 0.1
+wscal_min 0.35
+drought_tolerance 0.0001
+landcover "natural"
+harv_eff 0
+res_outtake 0
+) 
+group "tree"( 
+common 
+lifeform "tree"
+crownarea_max 40
+turnover_root 0.7
+ltor_max 1
+k_allom2 40
+k_allom3 0.67
+k_rp 1.6
+wooddens 200
+cton_root 29
+cton_sap 330
+nuptoroot 0.0028
+km_volume 0.000001477
+pathway "c3"
+kest_repr 200
+kest_bg 0.1
+kest_pres 1
+litterme 0.3
+rootdist 0.6 0.4 
+harv_eff 0.95
+res_outtake 0.75
+turnover_harv_prod 0.04
+harvest_slow_frac 0.33
+) 
+group "shrub"( 
+common 
+lifeform "tree"
+leafphysiognomy "broadleaf"
+crownarea_max 10
+turnover_root 0.7
+ltor_max 1
+k_allom1 100
+k_allom2 5
+k_allom3 0.67
+k_rp 1.6
+wooddens 250
+cton_root 29
+cton_sap 330
+nuptoroot 0.0028
+km_volume 0.000001477
+fnstorage 0.3
+pathway "c3"
+kest_repr 200
+kest_bg 0.1
+kest_pres 1
+litterme 0.3
+rootdist 0.6 0.4 
+longevity 100
+turnover_harv_prod 1
+harvest_slow_frac 0
+) 
+group "needle_leaved"( 
+leafphysiognomy "needleleaf"
+k_allom1 150
+k_latosa 4000
+ga 0.140
+) 
+group "broad_leaved"( 
+leafphysiognomy "broadleaf"
+k_allom1 250
+k_latosa 5000
+leaflong 0.5
+turnover_leaf 1
+ga 0.040
+) 
+group "grass"( 
+common 
+lifeform "grass"
+leafphysiognomy "broadleaf"
+ltor_max 0.5
+cton_root 29
+nuptoroot 0.00551
+km_volume 0.000001876
+fnstorage 0.3
+respcoeff 1.0
+litterme 0.2
+ga 0.030
+turnover_harv_prod 1
+harvest_slow_frac 0
+) 
+group "shade_tolerant"( 
+est_max 0.05
+parff_min 350000
+alphar 3.0
+greff_min 0.04
+turnover_sap 0.05
+) 
+group "intermediate_shade_tolerant"( 
+est_max 0.15
+parff_min 2000000
+alphar 7.0
+greff_min 0.06
+turnover_sap 0.075
+) 
+group "shade_intolerant"( 
+est_max 0.2
+parff_min 2500000
+alphar 10.0
+greff_min 0.08
+turnover_sap 0.1
+) 
+group "boreal_tree"( 
+respcoeff 1.0
+pstemp_min -4
+pstemp_low 10
+pstemp_high 25
+pstemp_max 38
+) 
+group "temperate_tree"( 
+respcoeff 1.0
+pstemp_min -2
+pstemp_low 15
+pstemp_high 25
+pstemp_max 38
+) 
+group "C3G"( 
+include 1
+grass 
+pathway "c3"
+rootdist 0.9 0.1 
+gmin 0.5
+phenology "any"
+leaflong 0.5
+turnover_leaf 1
+turnover_root 0.7
+phengdd5ramp 100
+pstemp_min -5
+pstemp_low 10
+pstemp_high 30
+pstemp_max 45
+tcmin_surv -1000
+tcmin_est -1000
+tcmax_est 1000
+twmin_est -1000
+gdd5min_est 0
+parff_min 2000000
+fireresist 0.5
+intc 0.01
+drought_tolerance 0.01
+eps_iso 0.
+seas_iso 1
+eps_mon 1.0
+storfrac_mon 0.5
+harv_eff 0.5
+) 
+group "C4G"( 
+include 0
+grass 
+pathway "c4"
+rootdist 0.9 0.1 
+gmin 0.5
+phenology "any"
+leaflong 0.5
+turnover_leaf 1
+turnover_root 0.7
+phengdd5ramp 100
+pstemp_min 6
+pstemp_low 20
+pstemp_high 45
+pstemp_max 55
+tcmin_surv 15.5
+tcmin_est 15.5
+tcmax_est 1000
+twmin_est -1000
+gdd5min_est 0
+parff_min 1000000
+fireresist 0.5
+intc 0.01
+drought_tolerance 0.01
+eps_iso 0.
+seas_iso 1
+eps_mon 1.0
+storfrac_mon 0.5
+harv_eff 0.5
+) 
+
+
+pft "MRS" ( 
+include 1 
+shrub 
+shade_intolerant 
+temperate_tree 
+k_latosa 1500 
+rootdist 0.9 0.1 
+gmin 0.5 
+phenology "raingreen" 
+leaflong 0.5 
+turnover_leaf 1 
+phengdd5ramp 0 
+tcmin_surv 0 
+tcmin_est 1 
+tcmax_est 1000 
+twmin_est -1000 
+gdd5min_est 2200 
+k_chilla 0 
+k_chillb 100 
+k_chillk 0.05 
+fireresist 0.3 
+intc 0.02 
+longevity 100 
+drought_tolerance 0.01 
+eps_iso 2.0 
+seas_iso 0 
+eps_mon 4.0 
+storfrac_mon 0.5 
+ga 0.040 
+) 

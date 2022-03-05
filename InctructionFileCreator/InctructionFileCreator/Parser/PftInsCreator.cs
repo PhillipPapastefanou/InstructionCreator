@@ -11,7 +11,7 @@ using InctructionFileCreator.Parameters;
 
 namespace InctructionFileCreator
 {
-    class PftInsCreator
+    public class PftInsCreator
     {
         public IPft Pft { get; private set; }
 

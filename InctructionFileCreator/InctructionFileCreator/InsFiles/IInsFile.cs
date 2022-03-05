@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace InctructionFileCreator
 {
-    interface IInsFile : ICloneable
-    {
+    public interface IInsFile : ICloneable
+    { 
         IGeneralParameters GeneralParameters { get; set; }
         IDriverFiles DriverFiles { get; set; }
         PftList Pfts { get; set; }

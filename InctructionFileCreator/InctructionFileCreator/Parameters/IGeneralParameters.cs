@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace InctructionFileCreator
 {
-    enum VegetationMode
+    public enum VegetationMode
     {
         Population,
         Cohort
     }
 
-    enum WaterUptakeType
+    public enum WaterUptakeType
     {
         Smart,
         Rootdist,
         Wcont
     }
-    interface IGeneralParameters
+    public interface IGeneralParameters
     {
         string Title { get; set; }
         string Outputdirectory { get; set; }

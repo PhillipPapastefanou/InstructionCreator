@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace InctructionFileCreator
 {
-    class InsGroup
+    public class InsGroup
     {
 
         public Dictionary<string, string> Parameters { get; set; }
@@ -54,7 +54,7 @@ namespace InctructionFileCreator
 
     }
 
-    class InsGroupCollection 
+    public class InsGroupCollection 
     {
         public InsGroupCollection()
         {

@@ -59,7 +59,7 @@ namespace InctructionFileCreator
             //StratifiedSetup setup = new StratifiedSetup();
             //ABSetupHome setup = new ABSetupHome();
 
-            //ABSetup setup = new ABSetup();
+            ABSetup setup = new ABSetup();
 
             //AfricanRainforestSetup setup = new AfricanRainforestSetup();
 
@@ -80,7 +80,7 @@ namespace InctructionFileCreator
             //InsfileExport insfileExport = new InsfileExport(String.Empty);
 
 
-            ISIMIP_Factory factory = new ISIMIP_Factory();
+            //ISIMIP_Factory factory = new ISIMIP_Factory();
 
 
             //Console.ReadKey();

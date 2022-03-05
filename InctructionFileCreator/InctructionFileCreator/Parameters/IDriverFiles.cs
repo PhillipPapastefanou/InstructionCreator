@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InctructionFileCreator
 {
-    interface IDriverFiles
+    public interface IDriverFiles
     {
         string File_gridlist { get; set; }
         string File_Co2 { get; set; }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace InctructionFileCreator
 {
-    class GeneralParameterCreator
+    public class GeneralParameterCreator
     {
 
         private IGeneralParameters generalParameters;

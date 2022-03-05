@@ -1,0 +1,14 @@
+F:\SourceTreeRepos\InstructionCreator2021\InctructionFileCreator\PFT_Selection\bin\Debug\PFT_Selection.exe.config
+F:\SourceTreeRepos\InstructionCreator2021\InctructionFileCreator\PFT_Selection\bin\Debug\PFT_Selection.exe
+F:\SourceTreeRepos\InstructionCreator2021\InctructionFileCreator\PFT_Selection\bin\Debug\PFT_Selection.pdb
+F:\SourceTreeRepos\InstructionCreator2021\InctructionFileCreator\PFT_Selection\bin\Debug\CommonLibrary.dll
+F:\SourceTreeRepos\InstructionCreator2021\InctructionFileCreator\PFT_Selection\bin\Debug\InctructionFileCreator.exe
+F:\SourceTreeRepos\InstructionCreator2021\InctructionFileCreator\PFT_Selection\bin\Debug\SensitivitySetup.dll
+F:\SourceTreeRepos\InstructionCreator2021\InctructionFileCreator\PFT_Selection\bin\Debug\InctructionFileCreator.pdb
+F:\SourceTreeRepos\InstructionCreator2021\InctructionFileCreator\PFT_Selection\bin\Debug\InctructionFileCreator.exe.config
+F:\SourceTreeRepos\InstructionCreator2021\InctructionFileCreator\PFT_Selection\bin\Debug\SensitivitySetup.pdb
+F:\SourceTreeRepos\InstructionCreator2021\InctructionFileCreator\PFT_Selection\obj\Debug\PFT_Selection.csproj.AssemblyReference.cache
+F:\SourceTreeRepos\InstructionCreator2021\InctructionFileCreator\PFT_Selection\obj\Debug\PFT_Selection.csproj.CoreCompileInputs.cache
+F:\SourceTreeRepos\InstructionCreator2021\InctructionFileCreator\PFT_Selection\obj\Debug\PFT_Selection.csproj.CopyComplete
+F:\SourceTreeRepos\InstructionCreator2021\InctructionFileCreator\PFT_Selection\obj\Debug\PFT_Selection.exe
+F:\SourceTreeRepos\InstructionCreator2021\InctructionFileCreator\PFT_Selection\obj\Debug\PFT_Selection.pdb

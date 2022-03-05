@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace InctructionFileCreator
 {
-    class InsReader
+    public class InsReader
     {
         private string filename;
         private List<string> rows;

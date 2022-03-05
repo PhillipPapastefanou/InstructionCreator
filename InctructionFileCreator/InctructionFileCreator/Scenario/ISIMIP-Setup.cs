@@ -11,7 +11,9 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
     enum ScenarioType
     {
         RCP_126,
-        RCP_585
+        RCP_370,
+        RCP_585,
+        RCP_585_const
     }
 
     enum EarthSystemModelType
@@ -46,15 +48,32 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
                 scenario_type_str = "585";
             }
 
-            hydFile.DriverFiles.File_gridlist = "/dss/dsshome1/lxc03/ga92wol2/driver_data/Gridlists/Amazon/Amazon_basin_05.txt";
-            hydFile.DriverFiles.File_temp = basePath + esm_type_str  + "/tasAdjust_ssp"+ scenario_type_str + "_1850_2100.nc";
-            hydFile.DriverFiles.File_prec = basePath + esm_type_str + "/prAdjust_ssp" + scenario_type_str + "_1850_2100.nc";
-            hydFile.DriverFiles.File_insol = basePath + esm_type_str + "/rsdsAdjust_ssp" + scenario_type_str + "_1850_2100.nc";
+
+            if (scenarioType == ScenarioType.RCP_370)
+            {
+                hydFile.DriverFiles.File_Co2 = "/dss/dsshome1/lxc03/ga92wol2/driver_data/Misc/co2_1764_2100_extended_ssp370.dat";
+                scenario_type_str = "370";
+            }
+
+
+            if (scenarioType == ScenarioType.RCP_585_const)
+            {
+                hydFile.DriverFiles.File_Co2 = "/dss/dsshome1/lxc03/ga92wol2/driver_data/Misc/co2_1764_2100_extended_const2020.dat";
+                scenario_type_str = "585";
+            }
+
+
+
 
             hydFile.DriverFiles.Variable_temp = "tasAdjust";
             hydFile.DriverFiles.Variable_prec = "prAdjust";
             hydFile.DriverFiles.Variable_insol = "rsdsAdjust";
+            hydFile.DriverFiles.File_gridlist = "/dss/dsshome1/lxc03/ga92wol2/driver_data/Gridlists/Amazon/Amazon_basin_05.txt";
 
+
+            hydFile.DriverFiles.File_temp = basePath + esm_type_str + "/tasAdjust_ssp" + scenario_type_str + "_1850_2100.nc";
+            hydFile.DriverFiles.File_prec = basePath + esm_type_str + "/prAdjust_ssp" + scenario_type_str + "_1850_2100.nc";
+            hydFile.DriverFiles.File_insol = basePath + esm_type_str + "/rsdsAdjust_ssp" + scenario_type_str + "_1850_2100.nc";
 
 
 

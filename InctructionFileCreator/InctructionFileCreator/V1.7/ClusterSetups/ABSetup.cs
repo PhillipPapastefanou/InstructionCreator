@@ -14,28 +14,20 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
 {
     class ABSetup
     {
-
-
-
         private ClusterDriverSetup setup;
-
-
-
+        
         //List<double> lambdas = new List<double>(){-0.08, 0.15, 0.49};
         private List<double> lambdas;
         //List<double> deltaPsiWW = new List<double>(){0.62, 1.23, 2.15};
         private List<double> deltaPsiWW;
         //pft_iso.Delta_Psi_Max = 1.23;
-
         //pft_iso.Isohydricity = -0.08;
         //pft_iso.Delta_Psi_Max = 0.62;
 
         public ABSetup()
         {
-
             InitialSetup.MathematicaCSVReader csvReader = new MathematicaCSVReader(@"F:\Dropbox\UNI\Projekte\A03_Hydraulics_Implementation\Parameters_v1.7.3.csv");
-
-
+            
             Column psi50s = csvReader.GetData("psi50s");
             Column psi88s = csvReader.GetData("psi88s");
             Column cavSlopes = csvReader.GetData("cavslop");
@@ -177,7 +169,6 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
 
                                 DriverFilesHydraulics hyDriverFiles =
                                     hydFile.DriverFiles as DriverFilesHydraulics;
-                                hyDriverFiles.File_prec = filePrec;
 
 
                                 double psi50 = psi50s.Data[j];

@@ -66,6 +66,7 @@
     <Compile Include="HydraulicsHomeAllometric.cs" />
     <Compile Include="InitialSetup\MathematicaCSVReader.cs" />
     <Compile Include="InitialSetup\ParameterCombinationWriter.cs" />
+    <Compile Include="Parameters\GeneralParametersTrunk41.cs" />
     <Compile Include="Scenario\ClusterAlphaaLambda.cs" />
     <Compile Include="Scenario\ClusterGLDASBaseSetupAfrica.cs" />
     <Compile Include="Scenario\ClusterGLDASBaseSetup.cs" />

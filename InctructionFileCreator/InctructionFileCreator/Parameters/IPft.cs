@@ -8,37 +8,37 @@ using System.Threading.Tasks;
 
 namespace InctructionFileCreator
 {
-    enum PftType
+    public enum PftType
     {
         Trunk, Hydraulics
     }
 
-    enum LandcoverType
+    public enum LandcoverType
     {
         Natural,
         Forest,
     }
 
-    enum LifeFormType
+    public enum LifeFormType
     {
         Grass,
         Tree
     }
 
-    enum PathwayType
+    public enum PathwayType
     {
         C3,
         C4
     }
 
-    enum LeafPhysiognomyType
+    public enum LeafPhysiognomyType
     {
         Broadleaf,
         Needleleaf
     }
 
 
-    enum PhenologyType
+    public enum PhenologyType
     {
         Evergreen,
         Summergreen,
@@ -46,7 +46,7 @@ namespace InctructionFileCreator
         Any
     }
 
-    interface IPft
+    public interface IPft
     {
         string Name { get; set; }
 
@@ -134,7 +134,7 @@ namespace InctructionFileCreator
 
 
 
-    class PftList : List<IPft>
+    public class PftList : List<IPft>
     {
         public IPft this[string name]
         {

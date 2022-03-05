@@ -147,7 +147,7 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
 
             for (int i = 0; i < precDrivers.Count; i++)
             {
-                string filePrec = precDrivers[i];
+                //string filePrec = precDrivers[i];
 
                 for (int alpha = 0; alpha < alphaAs.Count; alpha++)
                 {
@@ -185,7 +185,7 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
 
                             DriverFilesHydraulics hyDriverFiles =
                                 hydFile.DriverFiles as DriverFilesHydraulics;
-                            hyDriverFiles.File_prec = filePrec;
+                            //hyDriverFiles.File_prec = filePrec;
 
 
                             double psi50 = psi50s.Data[j];
@@ -214,12 +214,12 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
                             //pft_iso.Delta_Psi_Max = deltaPsiWW.Data[j];
 
                             //pft_iso.K_LaToSa = kLaToSa.Data[j];
-                            pft_iso.K_LaToSa = 10000.0;
+                            pft_iso.K_LaToSa =8000.0;
 
                             pft_iso.Rootdist = new double[] { 0.4, 0.6 };
 
-                            pft_iso.RespCoeff = 0.3;
-                            pft_iso.Longevity = 600;
+                            pft_iso.RespCoeff = 0.2;
+                            pft_iso.Longevity = 650;
                             pft_iso.Est_max = 0.05;
 
                             pft_iso.GA = 0.005;
