@@ -10,8 +10,6 @@ namespace InctructionFileCreator
     {
         public string File_gridlist { get; set; }
         public string File_Co2 { get; set; }
-        public string File_Cru { get; set; }
-        public string File_Cru_Misc { get; set; }
         public string File_insol { get; set; }
         public string Variable_insol { get; set; }
         public string File_prec { get; set; }
@@ -22,7 +20,20 @@ namespace InctructionFileCreator
         public string File_Wetdays { get; set; }
         public string File_Min_Temp { get; set; }
         public string File_Max_Temp { get; set; }
-        public string File_NDep { get; set; }
+
+        public string Variable_min_temp { get; set; }
+        public string Variable_Max_temp { get; set; }
+        public string File_Mip_Noy { get; set; }
+        public string File_Soildata { get; set; }
+        public string File_Specifichum  { get; set; }
+        //public string Variable_Specifichum { get; set; }
+        public string File_Pres { get; set; }
+        //public string Variable_Pres { get; set; }
+        public string File_Relhum { get; set; }
+        //public string Variable_Relhum { get; set; }
+        public string File_Wind { get; set; }
+        //public string Variable_Wind { get; set; }
+        public string File_Mip_nhx { get; set; }
         public virtual object Clone()
         {
             IDriverFiles parameters = new DriverFilesTrunk();

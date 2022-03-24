@@ -6,13 +6,29 @@ using System.Threading.Tasks;
 
 namespace InctructionFileCreator
 {
+    public enum RootDistribution
+    {
+        Fixed
+    }
+
+    public enum WeatherGeneratorType
+    {
+        GWGEN
+    }
+
+
+    public enum FireModelType
+    {
+        Globfirm,
+        None
+    }
     public enum VegetationMode
     {
         Population,
         Cohort
     }
 
-    public enum WaterUptakeType
+    public enum WaterUptake
     {
         Smart,
         Rootdist,
@@ -26,7 +42,6 @@ namespace InctructionFileCreator
         int Nyear_spinup { get; set; }
         bool IfCalcSLA { get; set; }
         bool IfCalcCtoN { get; set; }
-        bool IfFire { get; set; }
         int NPatch { get; set; }
         int PatchArea { get; set; }
         int EstInterval { get; set; }
@@ -37,7 +52,7 @@ namespace InctructionFileCreator
         bool IfStochEstab { get; set; }
         bool IfStochMort { get; set; }
         bool IfCDebt { get; set; }
-        WaterUptakeType WaterUptake { get; set; }
+        WaterUptake WaterUptake { get; set; }
         bool Textured_Soil { get; set; }
         bool IfSmoothGreffMort { get; set; }
         bool IfDroughtLimitedEstab { get; set; }
@@ -45,7 +60,9 @@ namespace InctructionFileCreator
         bool IfBvoc { get; set; }
         bool Run_Landcover { get; set; }
 
-
+        RootDistribution RootDistribution { get; set; }
+        WeatherGeneratorType WeatherGenerator { get; set; }
+        FireModelType FireModel { get; set; }
 
 
         bool IfNLim { get; set; }

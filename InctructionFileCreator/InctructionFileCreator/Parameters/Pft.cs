@@ -29,7 +29,7 @@ namespace InctructionFileCreator
         public double FireResist { get; set; }
         public PhenologyType Phenology { get; set; }
         public double CrownArea_Max { get; set; }
-        public double LToR_Max  { get; set; }
+        public double LToR_Max { get; set; }
         public double Turnover_Root { get; set; }
         public double Turnover_Leaf { get; set; }
         public double[] Rootdist { get; set; }
@@ -81,14 +81,22 @@ namespace InctructionFileCreator
 
         public double Eps_iso { get; set; }
         public double Seas_iso { get; set; }
-        public double Eps_mon { get; set; }
-        public double Storfrac_mon { get; set; }
+        public double[] Eps_mon { get; set; }
+        public double[] Storfrac_mon { get; set; }
 
 
         public double Harv_eff { get; set; }
         public double Turnover_harv_prod { get; set; }
         public double Harvest_slow_frac { get; set; }
         public double Sla { get; set; }
+        public double Root_beta { get; set; }
+        public double wtp_max { get; set; }
+        public double Inund_duration { get; set; }
+        public double Min_snow { get; set; }
+        public double Max_snow { get; set; }
+        public double Gdd0_max { get; set; }
+        public double Gdd0_min { get; set; }
+        public bool Has_aerenchyma { get; set; }
 
         public virtual object Clone()
         {
@@ -137,6 +145,7 @@ namespace InctructionFileCreator
             Alphar = 3;
             Parff_min = 35000;
             Turnover_sap = 0.05;
+            Sla = 1.0;
 
 
 

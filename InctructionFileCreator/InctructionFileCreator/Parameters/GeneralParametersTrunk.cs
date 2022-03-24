@@ -13,10 +13,11 @@ namespace InctructionFileCreator
         public string Title { get; set; }
         public string Outputdirectory { get; set; }
         public VegetationMode Vegmode { get; set; }
+        
+
         public int Nyear_spinup { get; set; }
         public bool IfCalcSLA { get; set; }
         public bool IfCalcCtoN { get; set; }
-        public bool IfFire { get; set; }
         public int NPatch { get; set; }
         public int PatchArea { get; set; }
         public int EstInterval { get; set; }
@@ -27,7 +28,7 @@ namespace InctructionFileCreator
         public bool IfStochEstab { get; set; }
         public bool IfStochMort { get; set; }
         public bool IfCDebt { get; set; }
-        public WaterUptakeType WaterUptake { get; set; }
+        public WaterUptake WaterUptake { get; set; }
         public bool Textured_Soil { get; set; }
         public bool IfSmoothGreffMort { get; set; }
         public bool IfDroughtLimitedEstab { get; set; }
@@ -42,6 +43,10 @@ namespace InctructionFileCreator
         public double NRelocFrac { get; set; }
         public bool Restart { get; set; }
         public bool Save_State { get; set; }
+        public RootDistribution RootDistribution { get; set; }
+        public WeatherGeneratorType WeatherGenerator { get; set; }
+        public FireModelType FireModel { get; set; }
+
         public virtual object Clone()
         {
             IGeneralParameters generalParameters = new GeneralParametersTrunk();

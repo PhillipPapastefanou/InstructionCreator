@@ -25,7 +25,7 @@ namespace InctructionFileCreator.Parameters
         public bool IfStochEstab { get; set; }
         public bool IfStochMort { get; set; }
         public bool IfCDebt { get; set; }
-        public WaterUptakeType WaterUptake { get; set; }
+        public WaterUptake WaterUptake { get; set; }
         public bool Textured_Soil { get; set; }
         public bool IfSmoothGreffMort { get; set; }
         public bool IfDroughtLimitedEstab { get; set; }
@@ -40,6 +40,10 @@ namespace InctructionFileCreator.Parameters
         public double NRelocFrac { get; set; }
         public bool Restart { get; set; }
         public bool Save_State { get; set; }
+        public RootDistribution RootDistribution { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public WeatherGeneratorType WeatherGenerator { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public FireModelType FireModel { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
         public virtual object Clone()
         {
             IGeneralParameters generalParameters = new GeneralParametersTrunk();

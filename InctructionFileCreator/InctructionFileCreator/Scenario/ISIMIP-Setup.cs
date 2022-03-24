@@ -77,11 +77,6 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
 
 
 
-
-            hydFile.DriverFiles.File_Cru = "/dss/dsshome1/lxc03/ga92wol2/driver_data/Misc/Cruncep_1901_2015.bin";
-            hydFile.DriverFiles.File_Cru_Misc = "/dss/dsshome1/lxc03/ga92wol2/driver_data/Misc/Cruncep_1901_2015misc.bin";
-
-
             DriverFilesHydraulics hyDriverFiles = hydFile.DriverFiles as DriverFilesHydraulics;
 
             if (hyDriverFiles != null)

@@ -42,13 +42,36 @@ namespace InctructionFileCreator.InitialSetup
                 StringBuilder sb = new StringBuilder();
                 sb.Append(reader.ReadToEnd());
 
-                string[] lines = sb.ToString().Split(new[] {"\r\n"}, StringSplitOptions.None);
+                //string[] lines = sb.ToString().Split(new[] {"\r\n"}, StringSplitOptions.None);
+                string[] lines = sb.ToString().Split(new[] { "\n" }, StringSplitOptions.None);
 
                 Header = lines[0].Split(',');
 
-                this.data = new double[lines.Length - 1, Header.Length];
 
-                for (int i = 0; i < lines.Length-1; i++)
+
+
+                bool ifMacOs = true;
+
+                int realLines = lines.Length - 1;
+
+                // On Mac we end up having an extra line fo reasons I am not sure yet
+                if (ifMacOs)
+                {
+                    realLines--;
+
+                    for (int i = 0; i < Header.Length; i++)
+                    {
+                        string s = Header[i];
+                        string result = s.Substring(1, s.Length - 2);
+                        Header[i] = result;
+                       
+                    }
+
+                }
+
+                this.data = new double[realLines, Header.Length];
+
+                for (int i = 0; i < realLines; i++)
                 {
                     string[] dataLine = lines[i + 1].Split(',');
                     

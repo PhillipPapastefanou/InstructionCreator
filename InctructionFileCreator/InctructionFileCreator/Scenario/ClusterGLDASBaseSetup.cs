@@ -19,8 +19,6 @@ namespace InctructionFileCreator
             hydFile.DriverFiles.File_insol = root_path + "GLDAS_1948_2010_swdown_daily_half.nc";
             hydFile.DriverFiles.File_prec = root_path + "GLDAS_1948_2010_prec_daily_half.nc";
             hydFile.DriverFiles.File_Co2 = "/dss/dsshome1/lxc03/ga92wol2/driver_data/Misc/co2_1764_2100_extended_rcp85.dat";
-            hydFile.DriverFiles.File_Cru = "/dss/dsshome1/lxc03/ga92wol2/driver_data/Misc/Cruncep_1901_2015.bin";
-            hydFile.DriverFiles.File_Cru_Misc = "/dss/dsshome1/lxc03/ga92wol2/driver_data/Misc/Cruncep_1901_2015misc.bin";
 
             DriverFilesHydraulics hyDriverFiles = hydFile.DriverFiles as DriverFilesHydraulics;
 

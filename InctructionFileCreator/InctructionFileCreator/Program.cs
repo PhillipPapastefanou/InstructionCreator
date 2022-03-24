@@ -13,6 +13,7 @@ using InctructionFileCreator.V1._7.ClusterSetups;
 using InctructionFileCreator.V1._7.HomeSetups;
 using SensitivitySetup;
 using InctructionFileCreator.Factories;
+using InctructionFileCreator.V1.HomeSetups;
 
 namespace InctructionFileCreator
 {
@@ -32,7 +33,9 @@ namespace InctructionFileCreator
             //}
             if (Directory.Exists("Insfiles"))
                 Directory.Delete("Insfiles", true);
-       
+
+
+
 
 
 
@@ -51,7 +54,7 @@ namespace InctructionFileCreator
             //HydraulicsStratifiedClusterSampling smlp = new HydraulicsStratifiedClusterSampling();
             // HydraulicsStratifiedFullCavSampling csamCavSampling = new HydraulicsStratifiedFullCavSampling();
             //ClusterAlphaaLambda clusterAlphaLambda = new ClusterAlphaaLambda();
-            
+
             //HydraulicsAmazonBasinSetup setup = new
             //HydraulicsAmazonBasinSetup();
             //SelectedCAXSpeciesAmazon cAXSpeciesAmazon = new SelectedCAXSpeciesAmazon();
@@ -59,7 +62,9 @@ namespace InctructionFileCreator
             //StratifiedSetup setup = new StratifiedSetup();
             //ABSetupHome setup = new ABSetupHome();
 
-            ABSetup setup = new ABSetup();
+
+            MacSetup setup = new MacSetup();
+            //ABSetup setup = new ABSetup();
 
             //AfricanRainforestSetup setup = new AfricanRainforestSetup();
 

@@ -115,8 +115,8 @@ namespace InctructionFileCreator
 
         double Eps_iso { get; set; }
         double Seas_iso { get; set; }
-        double Eps_mon { get; set; }
-        double Storfrac_mon { get; set; }
+        double[] Eps_mon { get; set; }
+        double[] Storfrac_mon { get; set; }
 
 
         double Harv_eff { get; set; }
@@ -125,6 +125,17 @@ namespace InctructionFileCreator
 
 
         double Sla { get; set; }
+
+        double Root_beta { get; set; }
+        double wtp_max { get; set; }
+        double Inund_duration { get; set; }
+        double Min_snow { get; set; }
+        double Max_snow { get; set; }
+        double Gdd0_max { get; set; }
+        double Gdd0_min { get; set; }
+        bool Has_aerenchyma { get; set; }
+
+
 
         object Clone();
         void Compare(IPft other);
