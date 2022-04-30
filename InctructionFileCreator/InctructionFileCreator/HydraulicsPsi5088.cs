@@ -56,7 +56,7 @@ namespace InctructionFileCreator
             StreamWriter fileWriter = new StreamWriter("Insfiles.txt");
             StreamWriter values = new StreamWriter("Values.tsv");
 
-            ClusterGLDASBaseSetup baseSetup = new ClusterGLDASBaseSetup(ref hydFile);
+            ClusterGLDASBaseLRZSetup baseSetup = new ClusterGLDASBaseLRZSetup(ref hydFile);
 
             List<string> precDrivers = new List<string>();
             precDrivers.Add("/dss/dsshome1/lxc03/ga92wol2/driver_data/GLDAS2/GLDAS_1948_2010_prec_daily_half.nc");

@@ -7,14 +7,13 @@ using InctructionFileCreator.Parameters;
 
 namespace InctructionFileCreator
 {
-    class ClusterGLDASBaseLRZSetup
+    class ClusterGLDASBaseAuroraSetup
     {
-        public ClusterGLDASBaseLRZSetup(ref InsFileHydraulics hydFile)
+        public ClusterGLDASBaseAuroraSetup(ref InsFileHydraulics hydFile)
         {
-            string root_path = "/gpfs/scratch/pr48va/ga92wol2/ga92wol2/data/";
+            string root_path = "/home/papa/snic2022-6-59/phillip/input/GLDAS20/";
 
-            //hydFile.DriverFiles.File_gridlist = "/dss/dsshome1/lxc03/ga92wol2/driver_data/Gridlists/Amazon/TNF_CAX_K34_extend.txt";
-            hydFile.DriverFiles.File_gridlist = "/dss/dsshome1/lxc03/ga92wol2/driver_data/Gridlists/Amazon/Amazon_basin_05.txt";
+            hydFile.DriverFiles.File_gridlist = root_path + "Amazon_basin_05.txt";
             hydFile.DriverFiles.File_temp = root_path + "GLDAS_1948_2010_temp_daily_half.nc";
             hydFile.DriverFiles.File_insol = root_path + "GLDAS_1948_2010_swdown_daily_half.nc";
             hydFile.DriverFiles.File_prec = root_path + "GLDAS_1948_2010_prec_daily_half.nc";

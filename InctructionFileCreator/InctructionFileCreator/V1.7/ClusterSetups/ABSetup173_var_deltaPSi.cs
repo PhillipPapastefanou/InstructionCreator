@@ -72,7 +72,7 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
 
             if (setup == ClusterDriverSetup.GLDAS20)
             {
-                ClusterGLDASBaseSetup baseSetup = new ClusterGLDASBaseSetup(ref hydFile);
+                ClusterGLDASBaseLRZSetup baseSetup = new ClusterGLDASBaseLRZSetup(ref hydFile);
             }
 
             else if (setup == ClusterDriverSetup.WATCH_WFDEI)

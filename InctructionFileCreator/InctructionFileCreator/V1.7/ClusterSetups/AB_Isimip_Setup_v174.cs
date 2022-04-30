@@ -15,7 +15,7 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
     class AB_Isimip_Setup_v174
     {
         
-        private ISIMIP_Setup_v174 setupV174;
+        private ISIMIP_Setup_AURORA_v174 setupV174;
 
 
 
@@ -31,8 +31,8 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
         public AB_Isimip_Setup_v174(EarthSystemModelType esm_type, ScenarioType scen_type, string masterfile)
         {
 
-            InitialSetup.MathematicaCSVReader csvReader = new MathematicaCSVReader(@"F:\Dropbox\UNI\Projekte\A03_Hydraulics_Implementation\Parameters_v1.7.3.csv");
-
+            //InitialSetup.MathematicaCSVReader csvReader = new MathematicaCSVReader(@"F:\Dropbox\UNI\Projekte\A03_Hydraulics_Implementation\Parameters_v1.7.3.csv");
+            InitialSetup.MathematicaCSVReader csvReader = new MathematicaCSVReader(@"/Users/pp/Dropbox/UNI/Projekte/A03_Hydraulics_Implementation/Parameters_v1.7.3.csv");
 
             Column psi50s = csvReader.GetData("psi50s");
             Column psi88s = csvReader.GetData("psi88s");
@@ -66,11 +66,12 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
        
 
 
-            setupV174 = new ISIMIP_Setup_v174(ref hydFile, esm_type, scen_type );
+            setupV174 = new ISIMIP_Setup_AURORA_v174(ref hydFile, esm_type, scen_type );
+            //setupV174 = new ISIMIP_Setup_LRZ_v174(ref hydFile, esm_type, scen_type);
             //setupV174 = new ISIMIP_Setup_v174(ref hydFile, EarthSystemModelType.ESM4, ScenarioType.RCP_126 );
-            
 
-            
+
+
 
 
 
@@ -114,7 +115,7 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
                                 //string path = @"/gpfs/scratch/pr48va/ga92wol2/ga92wol2/2019/Hydraulics_Sens_2019/";
                                 fileWriter.Write("Insfiles/" + name + "\n");
 
-                                Writer ws = new Writer(hydFile, rootFolder + "//" + name);
+                                Writer ws = new Writer(hydFile, rootFolder + "/" + name);
 
                                 GeneralParametersHydraulics gParams =
                                     hydFile.GeneralParameters as GeneralParametersHydraulics;

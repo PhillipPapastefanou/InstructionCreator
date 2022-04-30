@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -9,29 +10,24 @@ using InctructionFileCreator.InitialSetup;
 using InctructionFileCreator.Parameters;
 using InctructionFileCreator.Scenario;
 
-namespace InctructionFileCreator.V1._7.ClusterSetups
+
+namespace InctructionFileCreator.V1.ClusterSetups
 {
-    class AfricanRainforestSetup
+    public class ABSetup_IncreasedSpinuptime
     {
-
         private ClusterDriverSetup setup;
-
-
 
         //List<double> lambdas = new List<double>(){-0.08, 0.15, 0.49};
         private List<double> lambdas;
         //List<double> deltaPsiWW = new List<double>(){0.62, 1.23, 2.15};
         private List<double> deltaPsiWW;
         //pft_iso.Delta_Psi_Max = 1.23;
+        //pft_iso.Isohydricity = -0.08;pri
 
-        //pft_iso.Isohydricity = -0.08;
-        //pft_iso.Delta_Psi_Max = 0.62;
-
-        public AfricanRainforestSetup()
+        public ABSetup_IncreasedSpinuptime()
         {
-
-            InitialSetup.MathematicaCSVReader csvReader = new MathematicaCSVReader(@"F:\Dropbox\UNI\Projekte\A03_Hydraulics_Implementation\Parameters_v1.7.3.csv");
-
+            //InitialSetup.MathematicaCSVReader csvReader = new MathematicaCSVReader(@"F:\Dropbox\UNI\Projekte\A03_Hydraulics_Implementation\Parameters_v1.7.3.csv");
+            InitialSetup.MathematicaCSVReader csvReader = new MathematicaCSVReader(@"/Users/pp/Dropbox/UNI/Projekte/A03_Hydraulics_Implementation/Parameters_v1.7.3.csv");
 
             Column psi50s = csvReader.GetData("psi50s");
             Column psi88s = csvReader.GetData("psi88s");
@@ -46,12 +42,12 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
 
             Stopwatch sw = Stopwatch.StartNew();
 
-            setup = ClusterDriverSetup.GLDAS20_Afirca;
+            setup = ClusterDriverSetup.GLDAS20;
 
 
             //string filename = @"F:\SourceTreeRepos\InstructionCreator\InctructionFileCreator\InctructionFileCreator\bin\Debug\masterH-Def-GLDAS.ins";
             //string filename = @"F:\ClimateData\master_hyd.ins";
-            string filename = @"..\..\masterBase.ins";
+            string filename = @"../../../../masterBase.ins";
 
             IInsFile insfile = new InsFileHydraulics();
 
@@ -77,35 +73,25 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
                 ClusterWWBaseSetup baseSetup = new ClusterWWBaseSetup(ref hydFile);
             }
 
-            else if (setup == ClusterDriverSetup.GLDAS20_Afirca)
-            {
-                ClusterGLDASBaseSetupAfrica baseSetup = new ClusterGLDASBaseSetupAfrica(ref hydFile);
-            }
-
-
             else
             {
                 Console.WriteLine("No valid cluster setup specified.");
             }
 
 
+            int offset = 62;
 
 
             List<string> precDrivers = new List<string>();
 
             if (setup == ClusterDriverSetup.GLDAS20)
             {
-                precDrivers.Add("/dss/dsshome1/lxc03/ga92wol2/driver_data/GLDAS2/GLDAS_1948_2010_prec_daily_half.nc");
+                precDrivers.Add("/gpfs/scratch/pr48va/ga92wol2/ga92wol2/data/GLDAS_1948_2010_prec_daily_half.nc");
             }
 
             else if (setup == ClusterDriverSetup.WATCH_WFDEI)
             {
-                precDrivers.Add("/dss/dsshome1/lxc03/ga92wol2/driver_data/WATCH_WFDEI/WATCH_WFDEI_1950_2010_prec.nc");
-            }
-
-            else if (setup == ClusterDriverSetup.GLDAS20_Afirca)
-            {
-                precDrivers.Add("/dss/dsshome1/lxc03/ga92wol2/driver_data/GLDAS2/Africa/GLDAS_1948_2010_prec_daily_quarter.nc");
+                precDrivers.Add("/gpfs/scratch/pr48va/ga92wol2/ga92wol2/data/WATCH_WFDEI_1950_2010_prec.nc");
             }
 
             else
@@ -147,14 +133,12 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
 
             for (int i = 0; i < precDrivers.Count; i++)
             {
-                //string filePrec = precDrivers[i];
+                string filePrec = precDrivers[i];
 
                 for (int alpha = 0; alpha < alphaAs.Count; alpha++)
                 {
-
                     for (int f = 0; f < maxKLeaf.Count; f++)
                     {
-
 
                         for (int j = 0; j < psi50s.Data.Length; j++)
                         {
@@ -170,7 +154,7 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
 
                             gParams.Hydraulic_system = HydraulicSystemType.VPD_BASED_GC;
                             gParams.NPatch = 50;
-                            gParams.Nyear_spinup = 1500;
+                            gParams.Nyear_spinup = 1500 + offset;
 
                             gParams.IfDisturb = true;
                             gParams.DistInterval = 1000;
@@ -178,14 +162,17 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
                             gParams.Suppress_daily_output = true;
                             gParams.Suppress_annually_output = false;
                             gParams.Suppress_monthly_output = false;
-                            gParams.Output_time_range = OutputTimeRangeType.Scenario;
+                            gParams.Output_time_range = OutputTimeRangeType.Custom;
+                            gParams.Year_begin = 1948 - offset;
+                            gParams.Year_end = 2010 - offset;
                             gParams.Disable_mort_greff = false;
 
                             gParams.IfCalcSLA = false;
 
                             DriverFilesHydraulics hyDriverFiles =
                                 hydFile.DriverFiles as DriverFilesHydraulics;
-                            //hyDriverFiles.File_prec = filePrec;
+
+                            hyDriverFiles.File_Co2 = "/gpfs/scratch/pr48va/ga92wol2/ga92wol2/data/co2_1764_2100_extended_rcp85_63offset.dat";
 
 
                             double psi50 = psi50s.Data[j];
@@ -214,12 +201,12 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
                             //pft_iso.Delta_Psi_Max = deltaPsiWW.Data[j];
 
                             //pft_iso.K_LaToSa = kLaToSa.Data[j];
-                            pft_iso.K_LaToSa =8000.0;
+                            pft_iso.K_LaToSa = 10000.0;
 
                             pft_iso.Rootdist = new double[] { 0.4, 0.6 };
 
-                            pft_iso.RespCoeff = 0.2;
-                            pft_iso.Longevity = 650;
+                            pft_iso.RespCoeff = 0.3;
+                            pft_iso.Longevity = 600;
                             pft_iso.Est_max = 0.05;
 
                             pft_iso.GA = 0.005;
@@ -227,7 +214,8 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
                             pft_iso.Lambda_max = 0.90;
 
                             pft_iso.GMin = 0.75;
-                            
+
+
                             //double multiplier = mults[j] * 0.75;
 
                             pft_iso.ks_max = kStemXylem.Data[j];
@@ -273,5 +261,7 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
 
             Console.WriteLine(sw.ElapsedMilliseconds);
         }
+
     }
 }
+

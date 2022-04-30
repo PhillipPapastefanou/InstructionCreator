@@ -13,6 +13,7 @@ using InctructionFileCreator.V1._7.ClusterSetups;
 using InctructionFileCreator.V1._7.HomeSetups;
 using SensitivitySetup;
 using InctructionFileCreator.Factories;
+using InctructionFileCreator.V1.ClusterSetups;
 
 namespace InctructionFileCreator
 {
@@ -32,7 +33,7 @@ namespace InctructionFileCreator
             //}
             if (Directory.Exists("Insfiles"))
                 Directory.Delete("Insfiles", true);
-       
+
 
 
 
@@ -51,7 +52,7 @@ namespace InctructionFileCreator
             //HydraulicsStratifiedClusterSampling smlp = new HydraulicsStratifiedClusterSampling();
             // HydraulicsStratifiedFullCavSampling csamCavSampling = new HydraulicsStratifiedFullCavSampling();
             //ClusterAlphaaLambda clusterAlphaLambda = new ClusterAlphaaLambda();
-            
+
             //HydraulicsAmazonBasinSetup setup = new
             //HydraulicsAmazonBasinSetup();
             //SelectedCAXSpeciesAmazon cAXSpeciesAmazon = new SelectedCAXSpeciesAmazon();
@@ -59,7 +60,13 @@ namespace InctructionFileCreator
             //StratifiedSetup setup = new StratifiedSetup();
             //ABSetupHome setup = new ABSetupHome();
 
-            ABSetup setup = new ABSetup();
+            //ABSetup setup = new ABSetup();
+
+            //TNFCAXSetup setup = new TNFCAXSetup();
+
+            //ABSetup_IncreasedSpinuptime setup = new ABSetup_IncreasedSpinuptime();
+
+            //AB_Comp_Iso_Ansio setup = new AB_Comp_Iso_Ansio();
 
             //AfricanRainforestSetup setup = new AfricanRainforestSetup();
 
@@ -80,7 +87,7 @@ namespace InctructionFileCreator
             //InsfileExport insfileExport = new InsfileExport(String.Empty);
 
 
-            //ISIMIP_Factory factory = new ISIMIP_Factory();
+            ISIMIP_Factory factory = new ISIMIP_Factory();
 
 
             //Console.ReadKey();

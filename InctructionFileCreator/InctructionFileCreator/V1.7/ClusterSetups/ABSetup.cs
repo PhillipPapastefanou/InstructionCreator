@@ -12,6 +12,14 @@ using InctructionFileCreator.Scenario;
 
 namespace InctructionFileCreator.V1._7.ClusterSetups
 {
+
+    enum Cluster {
+        LRZ,
+        Aurora,
+        Simba
+    }
+
+
     class ABSetup
     {
         private ClusterDriverSetup setup;
@@ -21,13 +29,14 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
         //List<double> deltaPsiWW = new List<double>(){0.62, 1.23, 2.15};
         private List<double> deltaPsiWW;
         //pft_iso.Delta_Psi_Max = 1.23;
-        //pft_iso.Isohydricity = -0.08;
+        //pft_iso.Isohydricity = -0.08;pri
         //pft_iso.Delta_Psi_Max = 0.62;
 
         public ABSetup()
         {
-            InitialSetup.MathematicaCSVReader csvReader = new MathematicaCSVReader(@"F:\Dropbox\UNI\Projekte\A03_Hydraulics_Implementation\Parameters_v1.7.3.csv");
-            
+            //InitialSetup.MathematicaCSVReader csvReader = new MathematicaCSVReader(@"F:\Dropbox\UNI\Projekte\A03_Hydraulics_Implementation\Parameters_v1.7.3.csv");
+            InitialSetup.MathematicaCSVReader csvReader = new MathematicaCSVReader(@"/Users/pp/Dropbox/UNI/Projekte/A03_Hydraulics_Implementation/Parameters_v1.7.3.csv");
+
             Column psi50s = csvReader.GetData("psi50s");
             Column psi88s = csvReader.GetData("psi88s");
             Column cavSlopes = csvReader.GetData("cavslop");
@@ -46,7 +55,7 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
 
             //string filename = @"F:\SourceTreeRepos\InstructionCreator\InctructionFileCreator\InctructionFileCreator\bin\Debug\masterH-Def-GLDAS.ins";
             //string filename = @"F:\ClimateData\master_hyd.ins";
-            string filename = @"..\..\masterBase.ins";
+            string filename = @"../../masterBase.ins";
 
             IInsFile insfile = new InsFileHydraulics();
 
@@ -60,43 +69,50 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
             StreamWriter fileWriter = new StreamWriter("Insfiles.txt");
             ParameterCombinationWriter writer = new ParameterCombinationWriter("Values.tsv");
 
-       
 
-            if (setup == ClusterDriverSetup.GLDAS20)
+            Cluster cluster = Cluster.Aurora;
+
+
+            switch (cluster)
             {
-                ClusterGLDASBaseSetup baseSetup = new ClusterGLDASBaseSetup(ref hydFile);
+                case Cluster.LRZ:
+                    {
+                        if (setup == ClusterDriverSetup.GLDAS20)
+                        { ClusterGLDASBaseLRZSetup baseSetup = new ClusterGLDASBaseLRZSetup(ref hydFile); }
+
+                        else if (setup == ClusterDriverSetup.WATCH_WFDEI)
+                        { ClusterWWBaseSetup baseSetup = new ClusterWWBaseSetup(ref hydFile); }
+
+                        else
+                        { Console.WriteLine("No valid cluster setup specified."); }
+
+                    }
+                    break;
+
+                case Cluster.Aurora:
+                    {
+                        if (setup == ClusterDriverSetup.GLDAS20)
+                        { ClusterGLDASBaseAuroraSetup baseSetup = new ClusterGLDASBaseAuroraSetup(ref hydFile); }
+
+                        else
+                        { Console.WriteLine("No valid cluster setup specified."); }
+
+                    }
+                    break;
+
+                case Cluster.Simba:
+                    {
+                        if (setup == ClusterDriverSetup.GLDAS20)
+                        { SimbaGLDASBaseSetup baseSetup = new SimbaGLDASBaseSetup(ref hydFile); }
+
+                        else
+                        { Console.WriteLine("No valid cluster setup specified."); }
+
+                    }
+                    break;
+                default:
+                    break;
             }
-
-            else if (setup == ClusterDriverSetup.WATCH_WFDEI)
-            {
-                ClusterWWBaseSetup baseSetup = new ClusterWWBaseSetup(ref hydFile);
-            }
-
-            else
-            {
-                Console.WriteLine("No valid cluster setup specified.");
-            }
-
-
-
-
-            List<string> precDrivers = new List<string>();
-
-            if (setup == ClusterDriverSetup.GLDAS20)
-            {
-                precDrivers.Add("/dss/dsshome1/lxc03/ga92wol2/driver_data/GLDAS2/GLDAS_1948_2010_prec_daily_half.nc");
-            }
-
-            else if (setup == ClusterDriverSetup.WATCH_WFDEI)
-            {
-                precDrivers.Add("/dss/dsshome1/lxc03/ga92wol2/driver_data/WATCH_WFDEI/WATCH_WFDEI_1950_2010_prec.nc");
-            }
-
-            else
-            {
-                Console.WriteLine("No valid cluster setup specified.");
-            }
-
 
 
 
@@ -107,7 +123,6 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
             DriverFilesHydraulics driverFiles = hydFile.DriverFiles as DriverFilesHydraulics;
 
             //driverFiles.File_gridlist = "/dss/dsshome1/lxc03/ga92wol2/driver_data/Gridlists/Amazon/TNF_CAX_K34_extend.txt";
-
             //precDrivers.Add("F:\\ClimateData\\Amazonia\\GLDAS_1948_2010_prec_daily_half_normal_TNF.nc");
             //precDrivers.Add("F:\\ClimateData\\Amazonia\\GLDAS_1948_2010_prec_daily_half_reduced_TNF.nc");
 
@@ -128,10 +143,6 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
 
             Directory.CreateDirectory(rootFolder);
 
-
-            for (int i = 0; i < precDrivers.Count; i++)
-            {
-                string filePrec = precDrivers[i];
 
                 for (int alpha = 0; alpha < alphaAs.Count; alpha++)
                 {
@@ -231,7 +242,6 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
                                 pft_iso.LToR_Max = 1.0;
 
 
-                            writer.AddValue("precDriver", i);
                                 writer.AddValue("alphaA", gParams.Alphaa_nlim);
                                 writer.AddValue("maxKLeaf", maxKLeaf[f]);
                                 writer.AddValue("psi50", pft_iso.psi50_xylem);
@@ -252,7 +262,7 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
                     }
                 }
 
-            }
+            
 
 
 
