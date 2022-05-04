@@ -42,6 +42,9 @@ namespace InctructionFileCreator
         public double NRelocFrac { get; set; }
         public bool Restart { get; set; }
         public bool Save_State { get; set; }
+        public double Soildepth_upper { get; set; }
+        public double Soildepth_lower { get; set; }
+
         public virtual object Clone()
         {
             IGeneralParameters generalParameters = new GeneralParametersTrunk();

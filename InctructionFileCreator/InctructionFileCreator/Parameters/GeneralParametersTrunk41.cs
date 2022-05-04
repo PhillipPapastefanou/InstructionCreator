@@ -40,6 +40,41 @@ namespace InctructionFileCreator.Parameters
         public double NRelocFrac { get; set; }
         public bool Restart { get; set; }
         public bool Save_State { get; set; }
+        string IGeneralParameters.Title { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        string IGeneralParameters.Outputdirectory { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        VegetationMode IGeneralParameters.Vegmode { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        int IGeneralParameters.Nyear_spinup { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        bool IGeneralParameters.IfCalcSLA { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        bool IGeneralParameters.IfCalcCtoN { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        bool IGeneralParameters.IfFire { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        int IGeneralParameters.NPatch { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        int IGeneralParameters.PatchArea { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        int IGeneralParameters.EstInterval { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        bool IGeneralParameters.IfDisturb { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        int IGeneralParameters.DistInterval { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        bool IGeneralParameters.IfBgEstab { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        bool IGeneralParameters.IfsMe { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        bool IGeneralParameters.IfStochEstab { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        bool IGeneralParameters.IfStochMort { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        bool IGeneralParameters.IfCDebt { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        WaterUptakeType IGeneralParameters.WaterUptake { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        bool IGeneralParameters.Textured_Soil { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        bool IGeneralParameters.IfSmoothGreffMort { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        bool IGeneralParameters.IfDroughtLimitedEstab { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        bool IGeneralParameters.IfRainOnWetDaysOnly { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        bool IGeneralParameters.IfBvoc { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        bool IGeneralParameters.Run_Landcover { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        bool IGeneralParameters.IfNLim { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        bool IGeneralParameters.IfCentury { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        int IGeneralParameters.FreeNYears { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        double IGeneralParameters.NFix_a { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        double IGeneralParameters.NFix_b { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        double IGeneralParameters.NRelocFrac { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        double IGeneralParameters.Soildepth_upper { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        double IGeneralParameters.Soildepth_lower { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        bool IGeneralParameters.Restart { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        bool IGeneralParameters.Save_State { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
         public virtual object Clone()
         {
             IGeneralParameters generalParameters = new GeneralParametersTrunk();
@@ -65,6 +100,16 @@ namespace InctructionFileCreator.Parameters
             {
                 Console.WriteLine(prop.Name + " " + prop.GetValue(this) + " " + prop.GetValue(otherT));
             }
+        }
+
+        object IGeneralParameters.Clone()
+        {
+            throw new NotImplementedException();
+        }
+
+        void IGeneralParameters.Compare(IGeneralParameters other)
+        {
+            throw new NotImplementedException();
         }
     }
 }

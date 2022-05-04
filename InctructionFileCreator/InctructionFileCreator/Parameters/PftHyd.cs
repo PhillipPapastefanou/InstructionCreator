@@ -26,6 +26,13 @@ namespace InctructionFileCreator.Parameters
         public double cav_slope { get; set; }
         [Export]
         public double psi50_xylem { get; set; }
+        [Export]
+        public double psi50_leaf { get; set; }
+        [Export]
+        public double psi50_root { get; set; }
+        [Export]
+        public double b_leaf_soil_xylem { get; set; }
+
 
         public override object Clone()
         {

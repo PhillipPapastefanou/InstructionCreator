@@ -37,6 +37,8 @@ namespace InctructionFileCreator
         public OutputTimeRangeType Output_time_range { get; set; }
         public int Year_begin { get; set; }
         public int Year_end { get; set; }
+        public double Soil_wilting_point { get; set; }
+        
 
 
 

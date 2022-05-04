@@ -54,6 +54,8 @@ namespace InctructionFileCreator
         double NFix_a { get; set; }
         double NFix_b { get; set; }
         double NRelocFrac { get; set; }
+        double Soildepth_upper { get; set; }
+        double Soildepth_lower { get; set; }
 
 
         bool Restart { get; set; }

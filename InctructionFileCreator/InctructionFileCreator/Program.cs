@@ -14,6 +14,7 @@ using InctructionFileCreator.V1._7.HomeSetups;
 using SensitivitySetup;
 using InctructionFileCreator.Factories;
 using InctructionFileCreator.V1.ClusterSetups;
+using InctructionFileCreator.V1.ClusterSetupsß;
 
 namespace InctructionFileCreator
 {
@@ -71,7 +72,7 @@ namespace InctructionFileCreator
             //AfricanRainforestSetup setup = new AfricanRainforestSetup();
 
             //ABSetup173_var_deltaPSi setup2205= new ABSetup173_var_deltaPSi();
-            
+
             //ABSetup174 setup174 = new ABSetup174();
             // StratifiedThreeFixed fiexed = new StratifiedThreeFixed();
 
@@ -87,8 +88,11 @@ namespace InctructionFileCreator
             //InsfileExport insfileExport = new InsfileExport(String.Empty);
 
 
-            ISIMIP_Factory factory = new ISIMIP_Factory();
+            //ISIMIP_Factory factory = new ISIMIP_Factory();
 
+            //Strat_Hydraulics_Fixes fixes = new Strat_Hydraulics_Fixes();
+
+            Sobol_Hydraulics_Fixes fixes = new Sobol_Hydraulics_Fixes();
 
             //Console.ReadKey();
         }

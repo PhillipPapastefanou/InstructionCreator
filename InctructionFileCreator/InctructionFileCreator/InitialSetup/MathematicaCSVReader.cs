@@ -32,7 +32,7 @@ namespace InctructionFileCreator.InitialSetup
 
 
         
-        public MathematicaCSVReader(string filename)
+        public MathematicaCSVReader(string filename, int cutoff = 2)
         {
 
             columns = new List<Column>();
@@ -61,7 +61,14 @@ namespace InctructionFileCreator.InitialSetup
                     for (int i = 0; i < Header.Length; i++)
                     {
                         string s = Header[i];
-                        string result = s.Substring(1, s.Length - 2);
+                        string result = string.Empty;
+                        if (cutoff !=0 )
+                             result = s.Substring(1, s.Length - cutoff);
+                        else
+                        {
+                            result = s;
+                        }
+
                         Header[i] = result;
 
                     }

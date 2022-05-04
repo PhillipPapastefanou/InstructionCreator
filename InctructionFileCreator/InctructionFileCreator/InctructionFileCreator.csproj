@@ -128,6 +128,8 @@
     <Compile Include="Scenario\ClusterGLDASBaseAURORASetup.cs" />    
     <Compile Include="V1.7\ClusterSetups\TNFCAXSetup.cs" />
     <Compile Include="Scenario\SimbaWATCHBaseSetup.cs" />
+    <Compile Include="V1.7\ClusterSetups\Strat_Hydraulics_Fixes.cs" />
+    <Compile Include="Sobol_Hydraulics_Fixes.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
