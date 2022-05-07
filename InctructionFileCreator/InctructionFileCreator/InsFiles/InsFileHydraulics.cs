@@ -7,12 +7,14 @@ using InctructionFileCreator.Parameters;
 
 namespace InctructionFileCreator
 {
-    class InsFileHydraulics:IInsFile
+    class InsFileHydraulics: IInsFile
     {
         public IGeneralParameters GeneralParameters { get; set; }
         public IDriverFiles DriverFiles { get; set; }
         public PftList Pfts { get; set; }
         public PftType PftType { get; set; }
+        StandParameters IInsFile.StandParameters { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
         public void Compare(IInsFile other)
         {
             Console.WriteLine("Comparing Insfiles:");

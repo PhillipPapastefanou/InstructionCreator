@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using InctructionFileCreator.Parameters;
 
 namespace InctructionFileCreator
 {
@@ -25,6 +26,7 @@ namespace InctructionFileCreator
             foreach (PropertyInfo info in generalParametersProperties)
             {
                 generalParametersSmallStrings.Add(info.Name.ToLower(CultureInfo.InvariantCulture), i);
+                //generalParametersSmallStrings.Add(info.Name, i);
                 ++i;
             }
         }
@@ -54,6 +56,11 @@ namespace InctructionFileCreator
 
             if (found)
             {
+
+                if (id ==6)
+                {
+                    int d = 3;
+                }
                 PropertyInfo info = generalParametersProperties[id];
                 Type varType = info.PropertyType;
                 bool isEnum = info.PropertyType.IsEnum;
@@ -99,7 +106,7 @@ namespace InctructionFileCreator
                     {
                         HydraulicSystemType mode;
 
-                        string enumString = value_str.Substring(0, 1).ToUpper() + value_str.Substring(1).ToLower();
+                        string enumString = value_str.Substring(0, 1).ToUpper() + value_str.Substring(1).ToUpper();
 
                         bool parsed = Enum.TryParse(enumString, out mode);
 
@@ -112,6 +119,20 @@ namespace InctructionFileCreator
                     else if (info.PropertyType == typeof(OutputTimeRangeType))
                     {
                         OutputTimeRangeType mode;
+
+                        string enumString = value_str.Substring(0, 1).ToUpper() + value_str.Substring(1).ToLower();
+
+                        bool parsed = Enum.TryParse(enumString, out mode);
+
+                        if (parsed)
+                        {
+                            info.SetValue(generalParameters, mode);
+                        }
+                    }
+
+                    else if (info.PropertyType == typeof(OutputDataFormatType))
+                    {
+                        OutputDataFormatType mode;
 
                         string enumString = value_str.Substring(0, 1).ToUpper() + value_str.Substring(1).ToLower();
 
@@ -198,6 +219,12 @@ namespace InctructionFileCreator
                 {
                     Console.WriteLine("Invalid Variable type supplied: " + varType);
                 }
+            }
+
+
+            else
+            {
+                Console.WriteLine(parameter_name + " not found!");
             }
 
         }

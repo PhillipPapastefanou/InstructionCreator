@@ -10,7 +10,7 @@ namespace InctructionFileCreator
 {
     public enum PftType
     {
-        Trunk, Hydraulics
+        Trunk, Hydraulics, Trunk41, Hydraulics41
     }
 
     public enum LandcoverType
@@ -46,132 +46,201 @@ namespace InctructionFileCreator
         Any
     }
 
-    public interface IPft
+    public class Export : Attribute
     {
-        string Name { get; set; }
 
+    }
+
+    [AttributeUsage(AttributeTargets.All)]
+    public class Found : Attribute
+        {
+        public bool HasFound { get; set; }
+        public Found()
+        {
+            HasFound = false;
+        }
+        }
+
+    public abstract class IPft
+    {
+        [Export]
+        public string Name { get; set; }
 
         // Common pft parameters
-        bool Include { get; set; }
-        double Lambda_max { get; set; }
-        int EMax { get; set; }
-        double ReprFrac { get; set; }
-        double Wscal_Min { get; set; }
-        double Res_Outtake { get; set; }
-        LifeFormType LifeForm { get; set; }
-        LandcoverType Landcover { get; set; }
+        [Found]
+        public bool Include { get; set; }
+        [Found]
+        public double Lambda_max { get; set; }
+        [Found]
+        public int EMax { get; set; }
+        [Found]
+        public double ReprFrac { get; set; }
+        [Found]
+        public double Wscal_Min { get; set; }
+        [Found]
+        public double Res_Outtake { get; set; }
+        [Found]
+        public LifeFormType LifeForm { get; set; }
+        [Found]
+        public LandcoverType Landcover { get; set; }
+        [Found]
+        public double FireResist { get; set; }
+        [Found]
+        public PhenologyType Phenology { get; set; }
+        [Found]
+        public double CrownArea_Max { get; set; }
+        [Found]
+        public double LToR_Max { get; set; }
+        [Found]
+        public double Turnover_Root { get; set; }
+        [Found]
+        public double Turnover_Leaf { get; set; }
+        [Found]
+        public double[] Rootdist { get; set; }
+        [Found]
+        public double K_allom1 { get; set; }
+        [Found]
+        public double K_allom2 { get; set; }
+        [Found]
+        public double K_allom3 { get; set; }
+        [Found]
+        public double K_rp { get; set; }
+        [Found]
+        public double K_LaToSa { get; set; }
+        [Found]
+        public double WoodDens { get; set; }
+        [Found]
+        public double CtoN_root { get; set; }
+        [Found]
+        public double CtoN_sap { get; set; }
+        [Found]
+        public double NUpToRoot { get; set; }
+        [Found]
+        public double Km_Volume { get; set; }
+        [Found]
+        public double FNStorage { get; set; }
+        [Found]
+        public PathwayType PathWay { get; set; }
+        [Found]
+        public double RespCoeff { get; set; }
+        [Found]
+        public double Kest_Repr { get; set; }
+        [Found]
+        public double Kest_bg { get; set; }
+        [Found]
+        public double Kest_pres { get; set; }
+        [Found]
+        public double K_chilla { get; set; }
+        [Found]
+        public double K_chillb { get; set; }
+        [Found]
+        public double K_chillk { get; set; }
+        [Found]
+        public double LitterMe { get; set; }
+        [Found]
+        public int Longevity { get; set; }
+        [Found]
+        public double LeafLong { get; set; }
+        [Found]
+        public LeafPhysiognomyType LeafPhysiognomy { get; set; }
+        [Found]
+        public double GMin { get; set; }
+        [Found]
+        public double IntC { get; set; }
+        [Found]
+        public double GA { get; set; }
+        [Found]
+        public double Est_max { get; set; }
+        [Found]
+        public double Parff_min { get; set; }
+        [Found]
+        public double Alphar { get; set; }
+        [Found]
+        public double Greff_min { get; set; }
+        [Found]
+        public double Turnover_sap { get; set; }
+        [Found]
+        public int Phengdd5ramp { get; set; }
+        [Found]
+        public double Drought_tolerance { get; set; }
+        [Found]
+        public double Tcmin_surv { get; set; }
+        [Found]
+        public double Tcmin_est { get; set; }
+        [Found]
+        public double Tcmax_est { get; set; }
+        [Found]
+        public double Twmin_est { get; set; }
+        [Found]
+        public double Gdd5min_est { get; set; }
+        [Found]
+        public double Pstemp_min { get; set; }
+        [Found]
+        public double Pstemp_low { get; set; }
+        [Found]
+        public double Pstemp_high { get; set; }
+        [Found]
+        public double Pstemp_max { get; set; }
+        [Found]
+        public double TwMinusC { get; set; }
+        [Found]
+        public double Eps_iso { get; set; }
+        [Found]
+        public double Seas_iso { get; set; }
+        [Found]
+        public double[] Eps_mon { get; set; }
+        [Found]
+        public double[] Storfrac_mon { get; set; }
+        [Found]
+        public double Harv_eff { get; set; }
+        [Found]
+        public double Turnover_harv_prod { get; set; }
+        [Found]
+        public double Harvest_slow_frac { get; set; }
+        [Found]
+        public double Sla { get; set; }
+        public double Cton_leaf_min { get; set; }
 
-        double FireResist { get; set; }
-        PhenologyType Phenology { get; set; }
-        double CrownArea_Max { get; set; }
-        double LToR_Max { get; set; }
-        double Turnover_Root { get; set; }
-        double Turnover_Leaf { get; set; }
-        double[] Rootdist { get; set; }
-        double K_allom1 { get; set; }
-        double K_allom2 { get; set; }
-        double K_allom3 { get; set; }
-        double K_rp { get; set; }
-        double K_LaToSa { get; set; }
-        double WoodDens { get; set; }
-        double CtoN_root { get; set; }
-        double CtoN_sap { get; set; }
-        double NUpToRoot { get; set; }
-        double Km_Volume { get; set; }
-        double FNStorage { get; set; }
-        PathwayType PathWay { get; set; }
-        double RespCoeff { get; set; }
-        double Kest_Repr { get; set; }
-        double Kest_bg { get; set; }
-        double Kest_pres { get; set; }
-        double K_chilla { get; set; }
-        double K_chillb { get; set; }
-        double K_chillk { get; set; }
-        double LitterMe { get; set; }
-        int Longevity { get; set; }
-        double LeafLong { get; set; }
-        LeafPhysiognomyType LeafPhysiognomy { get; set; }
-        double GMin { get; set; }
-        double IntC { get; set; }
-        double GA { get; set; }
-        double Est_max { get; set; }
-        double Parff_min { get; set; }
-        double Alphar { get; set; }
-        double Greff_min { get; set; }
-        double Turnover_sap { get; set; }
-        int Phengdd5ramp { get; set; }
-        double Drought_tolerance { get; set; }
-        double Tcmin_surv { get; set; }
-        double Tcmin_est { get; set; }
-        double Tcmax_est { get; set; }
-        double Twmin_est { get; set; }
-        double Gdd5min_est { get; set; }
-        double Pstemp_min { get; set; }
-        double Pstemp_low { get; set; }
-        double Pstemp_high { get; set; }
-        double Pstemp_max { get; set; }
-        double TwMinusC { get; set; }
-
-
-        double Eps_iso { get; set; }
-        double Seas_iso { get; set; }
-        double[] Eps_mon { get; set; }
-        double[] Storfrac_mon { get; set; }
-
-
-        double Harv_eff { get; set; }
-        double Turnover_harv_prod { get; set; }
-        double Harvest_slow_frac { get; set; }
-
-
-        double Sla { get; set; }
-
-        double Root_beta { get; set; }
-        double wtp_max { get; set; }
-        double Inund_duration { get; set; }
-        double Min_snow { get; set; }
-        double Max_snow { get; set; }
-        double Gdd0_max { get; set; }
-        double Gdd0_min { get; set; }
-        bool Has_aerenchyma { get; set; }
-
-
-
-        object Clone();
-        void Compare(IPft other);
+        public abstract object Clone();
+        public abstract void Compare(IPft other);
 
     }
 
 
-
-
-    public class PftList : List<IPft>
-    {
-        public IPft this[string name]
+        public class PftList : List<IPft>
         {
-            get
+            public IPft this[string name]
             {
-                foreach (IPft pft in this)
+                get
                 {
-                    if (pft.Name == name)
+                    foreach (IPft pft in this)
                     {
-                        return pft;
+                        if (pft.Name == name)
+                        {
+                            return pft;
+                        }
                     }
+                    return null;
                 }
-                return null;
             }
-        }
-        public List<string> AllNames
-        {
-            get
+            public List<string> AllNames
             {
-                List<string> names = new List<string>();
-                foreach (IPft pft in this)
+                get
                 {
-                    names.Add(pft.Name);
+                    List<string> names = new List<string>();
+                    foreach (IPft pft in this)
+                    {
+                        names.Add(pft.Name);
+                    }
+                    return names;
                 }
-                return names;
             }
         }
     }
-}
+
+
+
+
+
+
+

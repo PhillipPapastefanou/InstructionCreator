@@ -86,7 +86,7 @@
     <Compile Include="InsFiles\IInsFile.cs" />
     <Compile Include="Parameters\DriverFilesTrunk.cs" />
     <Compile Include="Parameters\GeneralParametersHydraulics.cs" />
-    <Compile Include="Parameters\GeneralParametersTrunk.cs" />
+    <Compile Include="Parameters\GeneralParametersTrunk40.cs" />
     <Compile Include="Parameters\IPft.cs" />
     <Compile Include="Parameters\PftHyd.cs" />
     <Compile Include="Parser\InputDriverCreator.cs" />
@@ -95,7 +95,7 @@
     <Compile Include="InsGroup.cs" />
     <Compile Include="Reader\InsReader.cs" />
     <Compile Include="Parser\GeneralParameterCreator.cs" />
-    <Compile Include="Parameters\Pft.cs" />
+    <Compile Include="Parameters\Pft40.cs" />
     <Compile Include="Parser\PftInsCreator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -123,6 +123,16 @@
     <Compile Include="WatchHomeSetup.cs" />
     <Compile Include="Writer.cs" />
     <Compile Include="V1.7\HomeSetups\MacSetup.cs" />
+    <Compile Include="Parameters\Pft41.cs" />
+    <Compile Include="Parameters\PftHyd41.cs" />
+    <Compile Include="Parameters\DriverFiles41.cs" />
+    <Compile Include="InsFiles\InsFileTrunk41.cs" />
+    <Compile Include="Parameters\DriverFilesHyd41.cs" />
+    <Compile Include="Parameters\GeneralParamters41Hydraulics.cs" />
+    <Compile Include="InsFiles\InsFile41Hydraulics.cs" />
+    <Compile Include="V1.7\Extern\AnnemarieSensitivityAuroraSetup.cs" />
+    <Compile Include="Parser\StandParameterCreator.cs" />
+    <Compile Include="Parameters\IStandParameters.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -145,6 +155,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="V1.7\Extern\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

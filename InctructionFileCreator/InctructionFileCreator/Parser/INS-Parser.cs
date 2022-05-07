@@ -9,6 +9,7 @@ using System.Reflection;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using InctructionFileCreator.Parser;
 
 namespace InctructionFileCreator
 {
@@ -21,6 +22,7 @@ namespace InctructionFileCreator
 
         private GeneralParameterCreator generalParameterCreator;
         private InputDriverCreator inputDriverCreator;
+        private StandParameterCreator standParameterCreator;
 
         public InsParser(string filename, IInsFile insFile)
         {
@@ -30,7 +32,9 @@ namespace InctructionFileCreator
 
             generalParameterCreator = new GeneralParameterCreator(insFile.GeneralParameters);
             inputDriverCreator = new InputDriverCreator(insFile.DriverFiles);
-            
+            standParameterCreator = new StandParameterCreator(insFile.StandParameters);
+
+
         }
 
 
@@ -41,12 +45,16 @@ namespace InctructionFileCreator
             bool foundGroup = false;
             bool foundPft = false;
 
+            bool foundSt = false;
 
-            
+
             InsGroup gGroup = null;
-
             InsGroupCollection groups = new InsGroupCollection();
             InsGroupCollection pftGroups = new InsGroupCollection();
+
+            InsGroup sGroup = null;
+            InsGroupCollection sgroups = new InsGroupCollection();
+            InsGroupCollection stgroups = new InsGroupCollection();
 
 
             foreach (string[] row in rawInput)
@@ -81,7 +89,9 @@ namespace InctructionFileCreator
                             paramValue += row[i] + " ";
                         }
 
-                            gGroup.Parameters.Add(paramName, paramValue);
+
+   
+                        gGroup.Parameters.Add(paramName, paramValue);
 
                         }
 
@@ -127,6 +137,44 @@ namespace InctructionFileCreator
 
                 }
 
+                else if (foundSt)
+                {
+                    if (row.Length > 0)
+                    {
+
+                        if (row[0].Contains(')'))
+                        {
+                            foundSt = false;
+                            stgroups.Groups.Add(sGroup);
+                        }
+
+                        //This should be a sub group
+                        else if (row.Length == 1)
+                        {
+                            sGroup.SubGroups.Add(groups[row[0]]);
+                        }
+
+
+                        else
+                        {
+                            string paramName = row[0];
+
+                            string paramValue = String.Empty;
+
+
+                            for (int i = 1; i < row.Length; i++)
+                            {
+                                paramValue += row[i] + " ";
+                            }
+
+                            sGroup.Parameters.Add(paramName, paramValue);
+                        }
+
+
+                    }
+
+                }
+
                 else if(row.Length > 1)
                 {
                     // Check for group or Pft first:
@@ -142,6 +190,13 @@ namespace InctructionFileCreator
                         foundPft = true;
                         gGroup = new InsGroup();
                         gGroup.Name = row[1];
+                    }
+
+                    else if (row[0] == "st")
+                    {
+                        foundSt= true;
+                        sGroup = new InsGroup();
+                        sGroup.Name = row[1];
                     }
 
                     else if (row[0] == "param")
@@ -167,6 +222,16 @@ namespace InctructionFileCreator
                 pftGroup.AccumulateParameters();
             }
 
+            foreach (InsGroup pftGroup in stgroups.Groups)
+            {
+                pftGroup.AccumulateParameters();
+            }
+
+
+            foreach (var stGroup in stgroups.Groups)
+            {
+                standParameterCreator.Parse(stGroup);
+            }
 
             foreach (InsGroup pftGroup in pftGroups.Groups)
             {

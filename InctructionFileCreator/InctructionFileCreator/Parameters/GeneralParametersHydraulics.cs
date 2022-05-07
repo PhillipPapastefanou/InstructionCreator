@@ -3,16 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InctructionFileCreator.Parameters;
 
 namespace InctructionFileCreator
 {
-    enum HydraulicSystemType
-    {
-        STANDARD,
-        MONTEITH_BASED_GC,
-        VPD_BASED_GC
-    }
-
     enum OutputTimeRange
     {
         //The standard time of the climate data simulation

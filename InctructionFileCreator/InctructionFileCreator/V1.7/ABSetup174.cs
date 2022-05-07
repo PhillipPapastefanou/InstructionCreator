@@ -57,12 +57,8 @@ namespace InctructionFileCreator.V1._7
 
 
 
-            //driverFiles.File_gridlist = "/dss/dsshome1/lxc03/ga92wol2/driver_data/Gridlists/Amazon/TNF_CAX_K34_extend.txt";
 
-            //precDrivers.Add("F:\\ClimateData\\Amazonia\\GLDAS_1948_2010_prec_daily_half_normal_TNF.nc");
-            //precDrivers.Add("F:\\ClimateData\\Amazonia\\GLDAS_1948_2010_prec_daily_half_reduced_TNF.nc");
 
-            
             int index = 0;
             
             List<double> maxKLeaf = new List<double>() { 7.5 };
@@ -71,6 +67,8 @@ namespace InctructionFileCreator.V1._7
             List<double> alphaAs = new List<double>() { 0.65 };
 
             writer.Setup(new List<string>() { "scenario", "psi50", "psi88", "maxKLeaf", "alphaA", "Isohyd", "DeltaPsi" });
+
+
 
 
             string rootFolder = "Insfiles";

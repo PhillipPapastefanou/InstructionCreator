@@ -26,6 +26,7 @@ namespace InctructionFileCreator
                 subGroup.AccumulateParameters();
             }
 
+            SubGroups.Reverse();
 
             foreach (InsGroup subGroup in SubGroups)
             {
@@ -40,7 +41,8 @@ namespace InctructionFileCreator
                         //written?
                         //Resp_coeff says yes for tropical trees
                         // the cordex tree list however tells something very different...
-                        Parameters[subGroupParameter.Key] = subGroupParameter.Value;
+                        //Parameters[subGroupParameter.Key] = subGroupParameter.Value;
+
                     }
 
                     else

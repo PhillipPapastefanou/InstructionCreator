@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InctructionFileCreator.InitialSetup;
+using InctructionFileCreator.InsFiles;
 using InctructionFileCreator.Parameters;
 using InctructionFileCreator.Scenario;
 namespace InctructionFileCreator.V1.HomeSetups
@@ -16,25 +17,57 @@ namespace InctructionFileCreator.V1.HomeSetups
         public MacSetup()
         {
 
-            string filename = @"../../hydraulics_gldas.ins";
+            //string filename = @"../../hydraulics_gldas.ins";
+            string filename = "/Users/pp/Documents/Repos/guess4.1_hydraulics/cmake-build-release/new/Savestate.ins";
 
-            IInsFile insfile = new InsFileHydraulics();
+
+
+            InsFile41Hydraulics insfile = new InsFile41Hydraulics();
 
             InsParser parser = new InsParser(filename, insfile);
             parser.Read();
 
 
 
+            //var properties = insfile.Pfts[0].GetType().GetProperties();
+            //foreach (var p in properties.Where(prop => prop.CanRead && prop.CanWrite))
+            //{
+            //    object[] attrs = p.GetCustomAttributes(true);
+
+            //    Found found_att = attrs[0] as Found;
+
+            //    if (found_att != null)
+            //    {
+            //        Console.WriteLine(p.Name + " " + found_att.HasFound);
+
+            //    }
+            //}
 
 
-            InsFileHydraulics hydFile = (IInsFile)insfile.Clone() as InsFileHydraulics;
+            InsFile41Hydraulics hydFile = (IInsFile)insfile.Clone() as InsFile41Hydraulics;
 
 
-            Writer ws = new Writer(hydFile, "Test.ins");
+            //InsFileTrunk41 loeader = new InsFileTrunk41();
+
+            //InsParser loeader_parser = new InsParser("/Users/pp/Documents/Repos/guess4.1_hydraulics/cmake-build-release/global_hyd_dummy_TeBS.ins", loeader);
+            //loeader_parser.Read();
+           // InsFileTrunk41 loader_file = (IInsFile)insfile.Clone() as InsFileTrunk41;
+
+
+
+
+
+
+
+
+
+            Writer ws = new Writer(hydFile, "Test2.ins");
 
 
             ws.Write();
             ws.Dispose();
+
+            Console.ReadKey();
         }
     }
 }

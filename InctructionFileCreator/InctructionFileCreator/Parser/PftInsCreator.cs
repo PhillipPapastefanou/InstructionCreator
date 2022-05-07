@@ -34,6 +34,12 @@ namespace InctructionFileCreator
                 case PftType.Hydraulics:
                     Pft = new PftHyd(pftInsGroup.Name);
                     break;
+                case PftType.Trunk41:
+                    Pft = new Pft41(pftInsGroup.Name);
+                    break;
+                case PftType.Hydraulics41:
+                    Pft = new PftHyd41(pftInsGroup.Name);
+                    break;
             }
 
 
@@ -58,6 +64,8 @@ namespace InctructionFileCreator
                     int id = pftParsedString[name];
                     
                     ParseParameter(id, value);
+
+
                 }
 
                 else
@@ -72,7 +80,7 @@ namespace InctructionFileCreator
         private void ParseParameter(int id, string value)
         {
 
-            PropertyInfo parameter  = pftProperties[id];
+            PropertyInfo parameter = pftProperties[id];
 
             Type type = parameter.PropertyType;
 
@@ -96,7 +104,7 @@ namespace InctructionFileCreator
                 ParseDoubleArray(parameter, value);
             }
 
-            else if(type.IsEnum)
+            else if (type.IsEnum)
             {
 
                 Type enumType = parameter.PropertyType;
@@ -130,9 +138,18 @@ namespace InctructionFileCreator
             else
             {
                 Console.WriteLine("Failed to parse parameter " + parameter.Name + " value: " + value);
+                throw new Exception();
             }
-        }
 
+            //object[] attrs = parameter.GetCustomAttributes(true);
+            //foreach (object attr in attrs)
+            //{
+            //    Found found_att = attr as Found;
+            //    if (found_att != null)
+            //        found_att.HasFound = true;                
+
+            //}
+        }
 
         private void ParseBoolean(PropertyInfo parameter, string value)
         {

@@ -14,6 +14,7 @@ using InctructionFileCreator.V1._7.HomeSetups;
 using SensitivitySetup;
 using InctructionFileCreator.Factories;
 using InctructionFileCreator.V1.HomeSetups;
+using InctructionFileCreator.V1.Extern;
 
 namespace InctructionFileCreator
 {
@@ -63,7 +64,9 @@ namespace InctructionFileCreator
             //ABSetupHome setup = new ABSetupHome();
 
 
-            MacSetup setup = new MacSetup();
+            //AnnemarieSensitivityAuroraSetup setup = new AnnemarieSensitivityAuroraSetup();
+
+            //MacSetup setup = new MacSetup();
             //ABSetup setup = new ABSetup();
 
             //AfricanRainforestSetup setup = new AfricanRainforestSetup();

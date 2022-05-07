@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InctructionFileCreator.Parameters;
 
 namespace InctructionFileCreator
 {
@@ -12,6 +13,8 @@ namespace InctructionFileCreator
         public IDriverFiles DriverFiles { get; set; }
         public PftList Pfts { get; set; }
         public PftType PftType { get; set; }
+        StandParameters IInsFile.StandParameters { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
         public void Compare(IInsFile other)
         {
             throw new NotImplementedException();
