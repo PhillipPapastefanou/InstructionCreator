@@ -18,7 +18,7 @@ namespace InctructionFileCreator.V1.HomeSetups
         {
 
             //string filename = @"../../hydraulics_gldas.ins";
-            string filename = "/Users/pp/Documents/Repos/guess4.1_hydraulics/cmake-build-release/new/Savestate.ins";
+            string filename = "/Users/pp/Documents/Repos/guess4.1_hydraulics/cmake-build-release/TrBE/agg_hydraulics_gldas_TrBE_MP.ins";
 
 
 

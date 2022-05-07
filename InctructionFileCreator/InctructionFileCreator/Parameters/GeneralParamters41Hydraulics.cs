@@ -38,7 +38,6 @@ namespace InctructionFileCreator.Parameters
         public OutputDataFormatType Output_data_format { get; set; }
 
 
-
         public override object Clone()
         {
             GeneralParameters41Hydraulics generalParameters = new GeneralParameters41Hydraulics();

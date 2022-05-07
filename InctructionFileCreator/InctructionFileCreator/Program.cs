@@ -66,7 +66,7 @@ namespace InctructionFileCreator
 
             //AnnemarieSensitivityAuroraSetup setup = new AnnemarieSensitivityAuroraSetup();
 
-            //MacSetup setup = new MacSetup();
+            MacSetup setup = new MacSetup();
             //ABSetup setup = new ABSetup();
 
             //AfricanRainforestSetup setup = new AfricanRainforestSetup();

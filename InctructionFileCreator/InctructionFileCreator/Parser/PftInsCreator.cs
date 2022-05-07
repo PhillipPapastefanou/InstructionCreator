@@ -40,6 +40,9 @@ namespace InctructionFileCreator
                 case PftType.Hydraulics41:
                     Pft = new PftHyd41(pftInsGroup.Name);
                     break;
+                case PftType.Hydraulics41mp:
+                    Pft = new PftHyd41mp(pftInsGroup.Name);
+                    break;
             }
 
 

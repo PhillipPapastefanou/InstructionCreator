@@ -13,8 +13,6 @@ namespace InctructionFileCreator.V1.Extern
         {
 
             string filename = "/Users/pp/Documents/Repos/InstructionCreator/InctructionFileCreator/InctructionFileCreator/main_start_aurora.ins";
-
-
             string combination_filename = "/Users/pp/Documents/Repos/InstructionCreator/InctructionFileCreator/InctructionFileCreator/SA_Parameters.txt";
 
 

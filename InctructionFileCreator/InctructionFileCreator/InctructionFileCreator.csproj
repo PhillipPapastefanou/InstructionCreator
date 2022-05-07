@@ -133,6 +133,8 @@
     <Compile Include="V1.7\Extern\AnnemarieSensitivityAuroraSetup.cs" />
     <Compile Include="Parser\StandParameterCreator.cs" />
     <Compile Include="Parameters\IStandParameters.cs" />
+    <Compile Include="Parameters\GeneralParameters41HydraulcisWaterParams.cs" />
+    <Compile Include="Parameters\PftHyd41mp.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
