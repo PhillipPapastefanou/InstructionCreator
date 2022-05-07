@@ -43,11 +43,8 @@ namespace InctructionFileCreator
         public double NRelocFrac { get; set; }
         public bool Restart { get; set; }
         public bool Save_State { get; set; }
-        public RootDistribution RootDistribution { get; set; }
-        public WeatherGeneratorType WeatherGenerator { get; set; }
-        public FireModelType FireModel { get; set; }
 
-        public virtual object Clone()
+        public override object Clone()
         {
             IGeneralParameters generalParameters = new GeneralParametersTrunk();
 
@@ -62,7 +59,7 @@ namespace InctructionFileCreator
             return generalParameters;
         }
 
-        public virtual void Compare(IGeneralParameters other)
+        public override void Compare(IGeneralParameters other)
         {
             GeneralParametersTrunk otherT = other as GeneralParametersTrunk;
 
