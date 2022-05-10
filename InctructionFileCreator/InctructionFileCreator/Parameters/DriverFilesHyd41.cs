@@ -8,7 +8,7 @@ namespace InctructionFileCreator.Parameters
         public string File_Mip_Noy { get; set; }
         public string File_Soildata { get; set; }
         public string File_Specifichum { get; set; }
-        //public string Variable_Specifichum { get; set; }
+        public string Variable_Specifichum { get; set; }
         public string File_Pres { get; set; }
         public string Variable_Pres{ get; set; }
         //public string Variable_Pres { get; set; }

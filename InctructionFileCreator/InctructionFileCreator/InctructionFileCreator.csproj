@@ -135,6 +135,9 @@
     <Compile Include="Parameters\IStandParameters.cs" />
     <Compile Include="Parameters\GeneralParameters41HydraulcisWaterParams.cs" />
     <Compile Include="Parameters\PftHyd41mp.cs" />
+    <Compile Include="V1.7\ClusterSetups\StratifiedMulti.cs" />
+    <Compile Include="Scenario\ClusterSetuGLDASAurora.cs" />
+    <Compile Include="V1.7\ClusterSetups\SimbaGLDASBaseSetup.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

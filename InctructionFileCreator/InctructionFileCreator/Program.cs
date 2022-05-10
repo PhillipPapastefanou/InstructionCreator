@@ -15,6 +15,7 @@ using SensitivitySetup;
 using InctructionFileCreator.Factories;
 using InctructionFileCreator.V1.HomeSetups;
 using InctructionFileCreator.V1.Extern;
+using InctructionFileCreator.V1.ClusterSetups;
 
 namespace InctructionFileCreator
 {
@@ -66,13 +67,16 @@ namespace InctructionFileCreator
 
             //AnnemarieSensitivityAuroraSetup setup = new AnnemarieSensitivityAuroraSetup();
 
-            MacSetup setup = new MacSetup();
+
+            Strat_Hydraulics_Fixes fixes = new Strat_Hydraulics_Fixes();
+
+            //MacSetup setup = new MacSetup();
             //ABSetup setup = new ABSetup();
 
             //AfricanRainforestSetup setup = new AfricanRainforestSetup();
 
             //ABSetup173_var_deltaPSi setup2205= new ABSetup173_var_deltaPSi();
-            
+
             //ABSetup174 setup174 = new ABSetup174();
             // StratifiedThreeFixed fiexed = new StratifiedThreeFixed();
 

@@ -45,7 +45,7 @@ namespace InctructionFileCreator.InitialSetup
                 //string[] lines = sb.ToString().Split(new[] {"\r\n"}, StringSplitOptions.None);
                 string[] lines = sb.ToString().Split(new[] { "\n" }, StringSplitOptions.None);
 
-                Header = lines[0].Split(' ');
+                Header = lines[0].Split(',');
 
 
 
@@ -73,7 +73,7 @@ namespace InctructionFileCreator.InitialSetup
 
                 for (int i = 0; i < realLines; i++)
                 {
-                    string[] dataLine = lines[i + 1].Split(' ');
+                    string[] dataLine = lines[i + 1].Split(',');
                     
                     for (int j = 0; j < dataLine.Length; j++)
                     {
