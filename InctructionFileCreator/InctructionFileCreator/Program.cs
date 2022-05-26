@@ -63,9 +63,16 @@ namespace InctructionFileCreator
 
             //ABSetup setup = new ABSetup();
 
+<<<<<<< Updated upstream
             //TNFCAXSetup setup = new TNFCAXSetup();
 
             //ABSetup_IncreasedSpinuptime setup = new ABSetup_IncreasedSpinuptime();
+=======
+            AnnemarieSensitivityAuroraSetup setup = new AnnemarieSensitivityAuroraSetup();
+
+
+            //Strat_Hydraulics_Fixes fixes = new Strat_Hydraulics_Fixes();
+>>>>>>> Stashed changes
 
             //AB_Comp_Iso_Ansio setup = new AB_Comp_Iso_Ansio();
 
@@ -95,6 +102,8 @@ namespace InctructionFileCreator
             Sobol_Hydraulics_Fixes fixes = new Sobol_Hydraulics_Fixes();
 
             //Console.ReadKey();
+
+            Console.WriteLine("Finished!");
         }
     }
 }
