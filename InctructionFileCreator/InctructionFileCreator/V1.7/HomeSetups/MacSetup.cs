@@ -18,8 +18,8 @@ namespace InctructionFileCreator.V1.HomeSetups
         {
 
             //string filename = @"../../hydraulics_gldas.ins";
-            string filename = "/Users/pp/Documents/Repos/guess4.1_hydraulics/cmake-build-release/TrBE/agg_hydraulics_gldas_TrBE_MP.ins";
-
+            //string filename = "/Users/pp/Documents/Repos/guess4.1_hydraulics/cmake-build-release/TrBE/agg_hydraulics_gldas_TrBE_MP.ins";
+            string filename = "/Users/pp/Documents/Repos/guess4.1_hydraulics/cmake-build-release/Europe_Test2_expand.ins";
 
 
             InsFile41Hydraulics insfile = new InsFile41Hydraulics();
@@ -51,17 +51,30 @@ namespace InctructionFileCreator.V1.HomeSetups
 
             //InsParser loeader_parser = new InsParser("/Users/pp/Documents/Repos/guess4.1_hydraulics/cmake-build-release/global_hyd_dummy_TeBS.ins", loeader);
             //loeader_parser.Read();
-           // InsFileTrunk41 loader_file = (IInsFile)insfile.Clone() as InsFileTrunk41;
+            // InsFileTrunk41 loader_file = (IInsFile)insfile.Clone() as InsFileTrunk41;
 
 
 
 
+            DriverFilesHyd41 drivers = hydFile.DriverFiles as DriverFilesHyd41;
+
+            drivers.Variable_Specifichum = "";
+
+            GeneralParameters41Hydraulics parameters = hydFile.GeneralParameters as GeneralParameters41Hydraulics;
+
+            parameters.State_year = 1;
+
+            foreach (var pft in hydFile.Pfts)
+            {
+                PftHyd41 a = pft as PftHyd41;
+
+                a.Boleheight_frac = 0.5;
+            }
 
 
 
 
-
-            Writer ws = new Writer(hydFile, "Test2.ins");
+            Writer ws = new Writer(hydFile, "Test_Europe.ins");
 
 
             ws.Write();

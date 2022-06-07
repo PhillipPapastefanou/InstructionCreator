@@ -27,6 +27,9 @@ namespace InctructionFileCreator.Parameters
         [Export]
         public double psi50_xylem { get; set; }
 
+        //Temporary
+        public double Boleheight_frac { get; set; }
+
         public override object Clone()
         {
             IPft pft = new PftHyd41(Name);

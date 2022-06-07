@@ -296,16 +296,24 @@ namespace InctructionFileCreator
             {
                 value = (string)param.GetValue(parameters);
 
-                value = value.Insert(0, "\"");
-                value += "\"";
+                if (value != null)
+                {
+
+                    value = value.Insert(0, "\"");
+                    value += "\"";
+                }
 
             }
 
             else if (param.PropertyType.IsEnum)
             {
-                value = Convert.ToString(param.GetValue(parameters), CultureInfo.InvariantCulture).ToLower();
-                value = value.Insert(0, "\"");
-                value += "\"";
+
+                    value = Convert.ToString(param.GetValue(parameters), CultureInfo.InvariantCulture).ToLower();
+                    value = value.Insert(0, "\"");
+                    value += "\"";
+                
+
+
             }
 
             else if (param.PropertyType == typeof(double[]))

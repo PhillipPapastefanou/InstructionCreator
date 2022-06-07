@@ -37,9 +37,10 @@ namespace InctructionFileCreator
                 Directory.Delete("Insfiles", true);
 
 
+            //SratifiedStandard41Params setup = new StratifiedStandard41Params();
 
 
-
+            Cluster41Solving setup = new Cluster41Solving();
 
             //SobolSequenceInstructionFile sobolFiles = new SobolSequenceInstructionFile();
             //BrienenAnalysis brienenAnalysis = new BrienenAnalysis();
@@ -68,9 +69,9 @@ namespace InctructionFileCreator
             //AnnemarieSensitivityAuroraSetup setup = new AnnemarieSensitivityAuroraSetup();
 
 
-            Strat_Hydraulics_Fixes fixes = new Strat_Hydraulics_Fixes();
+            //Strat_Hydraulics_Fixes fixes = new Strat_Hydraulics_Fixes();
 
-            //MacSetup setup = new MacSetup();
+            //MacSetup setup_mac = new MacSetup();
             //ABSetup setup = new ABSetup();
 
             //AfricanRainforestSetup setup = new AfricanRainforestSetup();

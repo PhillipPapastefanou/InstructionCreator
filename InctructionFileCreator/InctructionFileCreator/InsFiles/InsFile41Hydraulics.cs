@@ -18,25 +18,25 @@ namespace InctructionFileCreator.InsFiles
 
         public InsFile41Hydraulics()
         {
-            GeneralParameters = new GeneralParameters41HydraulcisWaterParams();
-            //GeneralParameters = new GeneralParameters41Hydraulics();
+            //GeneralParameters = new GeneralParameters41HydraulcisWaterParams();
+            GeneralParameters = new GeneralParameters41Hydraulics();
             DriverFiles = new DriverFilesHyd41();
             Pfts = new PftList();
             StandParameters = new StandParameters();
-            PftType = PftType.Hydraulics41mp;
-            //PftType = PftType.Hydraulics41;
+            //PftType = PftType.Hydraulics41mp;
+            PftType = PftType.Hydraulics41;
         }
 
         public object Clone()
         {
             InsFile41Hydraulics newFile = new InsFile41Hydraulics();
-            newFile.GeneralParameters = (GeneralParameters41HydraulcisWaterParams)GeneralParameters.Clone();
-            //newFile.GeneralParameters = (GeneralParameters41Hydraulics)GeneralParameters.Clone();
+            //newFile.GeneralParameters = (GeneralParameters41HydraulcisWaterParams)GeneralParameters.Clone();
+            newFile.GeneralParameters = (GeneralParameters41Hydraulics)GeneralParameters.Clone();
             newFile.DriverFiles = (DriverFilesHyd41)DriverFiles.Clone();
             newFile.StandParameters = (StandParameters)StandParameters.Clone();
-            foreach (PftHyd41mp pft in Pfts)
+            foreach (PftHyd41 pft in Pfts)
             {
-                newFile.Pfts.Add((PftHyd41mp)pft.Clone());
+                newFile.Pfts.Add((PftHyd41)pft.Clone());
             }
 
             return newFile;

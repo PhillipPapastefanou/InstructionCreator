@@ -18,10 +18,14 @@ namespace InctructionFileCreator.V1.ClusterSetups
 
             //hydFile.DriverFiles.File_gridlist = "/dss/dsshome1/lxc03/ga92wol2/driver_data/Gridlists/Amazon/TNF_CAX_K34_extend.txt";
             driverFiles.File_gridlist = root_path + "TNF_CAX_K34_extend.tsv";
-            driverFiles.File_temp = root_path + "GLDAS_1948_2010_temp_daily_half.nc";
-            driverFiles.File_insol = root_path + "GLDAS_1948_2010_swdown_daily_half.nc";
-            driverFiles.File_prec = root_path + "GLDAS_1948_2010_prec_daily_half.nc";
+            driverFiles.File_temp = root_path + "GLDAS_1948_2010_temp_daily_quarter.nc";
+            driverFiles.File_insol = root_path + "GLDAS_1948_2010_swdown_daily_quarter.nc";
+            driverFiles.File_prec = root_path + "GLDAS_1948_2010_prec_daily_quarter.nc";
             driverFiles.File_Co2 = root_path + "co2_1764_2100_extended_rcp85.dat";
+
+            driverFiles.Variable_temp = "temp";
+            driverFiles.Variable_prec = "prec";
+            driverFiles.Variable_insol = "insol";
 
 
             driverFiles.File_Soildata = root_path + "soils_lpj.dat";
@@ -38,10 +42,11 @@ namespace InctructionFileCreator.V1.ClusterSetups
             if (driverFiles != null)
             {
                 driverFiles.File_Vpd = root_path + "GLDAS_1948_2010_vpd_Mean4day_d_daily_half.nc";
-                driverFiles.File_Wind = root_path + "GLDAS_1948_2010_windspeed_daily_half.nc";
+                driverFiles.File_Wind = root_path + "GLDAS_1948_2010_windspeed_daily_quarter.nc";
                 driverFiles.File_Relhum = "";
                 driverFiles.Variable_vpd = "vpd";
                 driverFiles.Variable_Relhum = "hursAdjust";
+                driverFiles.Variable_Wind = "windspeed";
             }
         }
     }
