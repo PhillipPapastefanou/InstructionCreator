@@ -33,7 +33,7 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
         public ABSetup173_var_deltaPSi()
         {
 
-            InitialSetup.MathematicaCSVReader csvReader = new MathematicaCSVReader(@"F:\Dropbox\UNI\Projekte\A03_Hydraulics_Implementation\Parameters_v1.7.3.csv");
+            InitialSetup.MathematicaCSVReader csvReader = new MathematicaCSVReader(@"F:\Dropbox\UNI\Projekte\A03_Hydraulics_Implementation\Parameters_v1.7.3.csv", ' ');
 
 
             Column psi50s = csvReader.GetData("psi50s");

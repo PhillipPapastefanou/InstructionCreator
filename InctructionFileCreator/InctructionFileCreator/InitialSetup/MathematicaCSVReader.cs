@@ -18,6 +18,7 @@ namespace InctructionFileCreator.InitialSetup
 
         public string Header { get; private set; }
         public double[] Data { get; private set; }
+
     }
 
 
@@ -30,12 +31,15 @@ namespace InctructionFileCreator.InitialSetup
 
         private List<Column> columns;
 
+        public char Delimiter { get; set; }
 
-        
-        public MathematicaCSVReader(string filename)
+
+
+        public MathematicaCSVReader(string filename, char delimeter)
         {
 
             columns = new List<Column>();
+            Delimiter = delimeter;
 
             using (StreamReader reader = File.OpenText(filename))
             {
@@ -45,7 +49,7 @@ namespace InctructionFileCreator.InitialSetup
                 //string[] lines = sb.ToString().Split(new[] {"\r\n"}, StringSplitOptions.None);
                 string[] lines = sb.ToString().Split(new[] { "\n" }, StringSplitOptions.None);
 
-                Header = lines[0].Split(',');
+                Header = lines[0].Split(Delimiter);
 
 
 
@@ -73,7 +77,7 @@ namespace InctructionFileCreator.InitialSetup
 
                 for (int i = 0; i < realLines; i++)
                 {
-                    string[] dataLine = lines[i + 1].Split(',');
+                    string[] dataLine = lines[i + 1].Split(Delimiter);
                     
                     for (int j = 0; j < dataLine.Length; j++)
                     {

@@ -30,7 +30,8 @@ namespace InctructionFileCreator.V1._7.HomeSetups
         public HomeStratifiedSetup()
         {
 
-            InitialSetup.MathematicaCSVReader csvReader = new MathematicaCSVReader(@"F:\Dropbox\UNI\Projekte\A03_Hydraulics_Implementation\Parameters_v1.72.csv");
+            InitialSetup.MathematicaCSVReader csvReader = new MathematicaCSVReader(@"F:\Dropbox\UNI\Projekte\A03_Hydraulics_Implementation\Parameters_v1.72.csv",
+                 ' ');
 
 
             Column psi50s = csvReader.GetData("psi50s");

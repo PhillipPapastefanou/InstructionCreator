@@ -19,7 +19,8 @@ namespace InctructionFileCreator.V1._7
         public ABSetup174()
         {
 
-            InctructionFileCreator.InitialSetup.MathematicaCSVReader csvReader = new MathematicaCSVReader(@"F:\Dropbox\UNI\Projekte\A03_Hydraulics_Implementation\Parameters_v1.7.3.csv");
+            InctructionFileCreator.InitialSetup.MathematicaCSVReader csvReader = new MathematicaCSVReader(@"F:\Dropbox\UNI\Projekte\A03_Hydraulics_Implementation\Parameters_v1.7.3.csv",
+                 ' ') ;
 
 
             Column psi50s = csvReader.GetData("psi50s");

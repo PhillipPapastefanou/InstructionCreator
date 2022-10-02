@@ -31,7 +31,7 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
         public AB_Isimip_Setup_v174(EarthSystemModelType esm_type, ScenarioType scen_type, string masterfile)
         {
 
-            InitialSetup.MathematicaCSVReader csvReader = new MathematicaCSVReader(@"F:\Dropbox\UNI\Projekte\A03_Hydraulics_Implementation\Parameters_v1.7.3.csv");
+            InitialSetup.MathematicaCSVReader csvReader = new MathematicaCSVReader(@"F:\Dropbox\UNI\Projekte\A03_Hydraulics_Implementation\Parameters_v1.7.3.csv", ' ');
 
 
             Column psi50s = csvReader.GetData("psi50s");

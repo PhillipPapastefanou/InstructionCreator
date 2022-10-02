@@ -38,7 +38,7 @@ namespace InctructionFileCreator.V1.ClusterSetups
             public Strat_Hydraulics_Fixes()
             {
                 //InitialSetup.MathematicaCSVReader csvReader = new MathematicaCSVReader(@"F:\Dropbox\UNI\Projekte\A03_Hydraulics_Implementation\Parameters_v1.7.3.csv");
-                InitialSetup.MathematicaCSVReader csvReader = new MathematicaCSVReader(@"/Users/pp/Dropbox/UNI/Projekte/A03_Hydraulics_Implementation/Parameters_v1.7.3.csv");
+                InitialSetup.MathematicaCSVReader csvReader = new MathematicaCSVReader(@"/Users/pp/Dropbox/UNI/Projekte/A03_Hydraulics_Implementation/Parameters_v1.7.3.csv", ' ');
 
                 Column psi50s = csvReader.GetData("psi50s");
                 Column psi88s = csvReader.GetData("psi88s");

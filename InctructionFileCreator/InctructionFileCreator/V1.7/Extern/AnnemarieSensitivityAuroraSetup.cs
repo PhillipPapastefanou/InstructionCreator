@@ -16,7 +16,7 @@ namespace InctructionFileCreator.V1.Extern
             string combination_filename = "/Users/pp/Documents/Repos/InstructionCreator/InctructionFileCreator/InctructionFileCreator/SA_Parameters.txt";
 
 
-            InitialSetup.MathematicaCSVReader csvReader = new MathematicaCSVReader(combination_filename);
+            InitialSetup.MathematicaCSVReader csvReader = new MathematicaCSVReader(combination_filename, ' ');
 
 
             var klatosas = csvReader.GetData("TeBS_k_latosa");
@@ -53,7 +53,6 @@ namespace InctructionFileCreator.V1.Extern
             {
 
                 string name = index + "run.ins";
-                //string path = @"/gpfs/scratch/pr48va/ga92wol2/ga92wol2/2019/Hydraulics_Sens_2019/";
                 fileWriter.Write("Insfiles/" + name + "\n");
 
                 Writer ws = new Writer(hydFile, rootFolder + "//" + name);

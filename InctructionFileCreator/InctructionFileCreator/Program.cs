@@ -24,17 +24,10 @@ namespace InctructionFileCreator
         static void Main(string[] args)
         {
 
-            //string[] subdirectoryEntries = Directory.GetDirectories(Directory.GetCurrentDirectory());
-
-            //foreach (string dir in subdirectoryEntries)
-            //{
-            //    if (dir.Contains("run"))
-            //    {
-                    
-            //    }
-            //}
             if (Directory.Exists("Insfiles"))
                 Directory.Delete("Insfiles", true);
+
+            //DNN_3Single_Pfts_Setup setup = new DNN_3Single_Pfts_Setup();
 
 
             //SratifiedStandard41Params setup = new StratifiedStandard41Params();
@@ -43,7 +36,9 @@ namespace InctructionFileCreator
             //Cluster41Solving setup = new Cluster41Solving();
 
 
-            DNN_3Single_Pfts_Setup setup = new DNN_3Single_Pfts_Setup();
+            AnnemarieSensitivityAuroraSetup setup = new AnnemarieSensitivityAuroraSetup();
+
+
             //BiomClassesSinglePFTsetup setup = new BiomClassesSinglePFTsetup();
 
             //SobolSequenceInstructionFile sobolFiles = new SobolSequenceInstructionFile();
