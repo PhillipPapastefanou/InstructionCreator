@@ -26,7 +26,7 @@ namespace InctructionFileCreator.V1.ClusterSetups
             InsFile41Hydraulics insfile = new InsFile41Hydraulics();
             InsParser parser = new InsParser(filename, insfile);
             parser.Read();
-            InsFile41Hydraulics hydFile = (IInsFile)insfile.Clone() as InsFile41Hydraulics;
+            IInsFile hydFile = (IInsFile)insfile.Clone() as InsFile41Hydraulics;
 
 
             StreamWriter fileWriter = new StreamWriter("Insfiles.txt");

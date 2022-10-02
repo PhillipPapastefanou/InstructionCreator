@@ -140,6 +140,11 @@
     <Compile Include="V1.7\ClusterSetups\SimbaGLDASBaseSetup.cs" />
     <Compile Include="V1.7\ClusterSetups\StratifiedStandard41Params.cs" />
     <Compile Include="V1.7\ClusterSetups\Cluster41Solving.cs" />
+    <Compile Include="V1.7\ClusterSetups\Std_DNN_setup_3single_Pfts.cs" />
+    <Compile Include="InsFiles\InsFile41DNNHydraulics.cs" />
+    <Compile Include="Parameters\GeneralParameters41HydraulicsDNN.cs" />
+    <Compile Include="V1.7\ClusterSetups\DNN_3Single_Pfts_Setup.cs" />
+    <Compile Include="Parameters\DriverFilesDNNHyd41.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

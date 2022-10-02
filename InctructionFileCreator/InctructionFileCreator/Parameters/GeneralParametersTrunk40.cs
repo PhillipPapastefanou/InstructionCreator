@@ -21,7 +21,7 @@ namespace InctructionFileCreator
         public int NPatch { get; set; }
         public int PatchArea { get; set; }
         public int EstInterval { get; set; }
-        public bool IfDisturb { get; set; }
+        public bool DisturbanceModel { get; set; }
         public int DistInterval { get; set; }
         public bool IfBgEstab { get; set; }
         public bool IfsMe { get; set; }

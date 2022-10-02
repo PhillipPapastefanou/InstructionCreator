@@ -9,7 +9,7 @@ namespace InctructionFileCreator.V1.ClusterSetups
 {
     class SimbaGLDASBaseSetup
     {
-        public SimbaGLDASBaseSetup(ref InsFile41Hydraulics hydFile)
+        public SimbaGLDASBaseSetup(ref IInsFile hydFile)
         {
             string root_path = "/scratch/phillip/data/GLDAS20/";
 

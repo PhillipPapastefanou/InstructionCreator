@@ -19,7 +19,8 @@ namespace InctructionFileCreator.V1.ClusterSetups
     {
         Simba,
         LRZ,
-        Aurora
+        Aurora,
+        MB
 
     }
         class Strat_Hydraulics_Fixes
@@ -60,7 +61,7 @@ namespace InctructionFileCreator.V1.ClusterSetups
                 parser.Read();
 
 
-                InsFile41Hydraulics hydFile = (IInsFile)insfile.Clone() as InsFile41Hydraulics;
+                IInsFile hydFile = (IInsFile)insfile.Clone() as InsFile41Hydraulics;
 
 
                 StreamWriter fileWriter = new StreamWriter("Insfiles.txt");

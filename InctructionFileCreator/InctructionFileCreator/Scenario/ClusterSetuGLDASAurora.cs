@@ -10,7 +10,7 @@ namespace InctructionFileCreator
 {
     class ClusterGLDASBaseAuroraSetup
     {
-        public ClusterGLDASBaseAuroraSetup(ref InsFile41Hydraulics hydFile)
+        public ClusterGLDASBaseAuroraSetup(ref IInsFile hydFile)
         {
             string root_path = "/home/papa/snic2022-6-59/phillip/input/GLDAS20/";
 

@@ -40,7 +40,11 @@ namespace InctructionFileCreator
             //SratifiedStandard41Params setup = new StratifiedStandard41Params();
 
 
-            Cluster41Solving setup = new Cluster41Solving();
+            //Cluster41Solving setup = new Cluster41Solving();
+
+
+            DNN_3Single_Pfts_Setup setup = new DNN_3Single_Pfts_Setup();
+            //BiomClassesSinglePFTsetup setup = new BiomClassesSinglePFTsetup();
 
             //SobolSequenceInstructionFile sobolFiles = new SobolSequenceInstructionFile();
             //BrienenAnalysis brienenAnalysis = new BrienenAnalysis();
