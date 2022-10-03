@@ -27,6 +27,11 @@ namespace InctructionFileCreator
             if (Directory.Exists("Insfiles"))
                 Directory.Delete("Insfiles", true);
 
+
+
+            Example3_Looping e3 = new Example3_Looping();
+
+
             //DNN_3Single_Pfts_Setup setup = new DNN_3Single_Pfts_Setup();
 
 
@@ -36,7 +41,8 @@ namespace InctructionFileCreator
             //Cluster41Solving setup = new Cluster41Solving();
 
 
-            AnnemarieSensitivityAuroraSetup setup = new AnnemarieSensitivityAuroraSetup();
+            //AnnemarieSensitivityAuroraSetup setup = new AnnemarieSensitivityAuroraSetup();
+
 
 
             //BiomClassesSinglePFTsetup setup = new BiomClassesSinglePFTsetup();

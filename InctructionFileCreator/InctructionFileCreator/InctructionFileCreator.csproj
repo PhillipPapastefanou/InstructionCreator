@@ -145,6 +145,10 @@
     <Compile Include="Parameters\GeneralParameters41HydraulicsDNN.cs" />
     <Compile Include="V1.7\ClusterSetups\DNN_3Single_Pfts_Setup.cs" />
     <Compile Include="Parameters\DriverFilesDNNHyd41.cs" />
+    <Compile Include="Example1_Testing.cs" />
+    <Compile Include="Example2_GeneralChanges.cs" />
+    <Compile Include="Example2_GeneralChanges %28copy%29.cs" />
+    <Compile Include="Example3_Looping.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
