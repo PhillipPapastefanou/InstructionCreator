@@ -44,7 +44,7 @@ namespace InctructionFileCreator.InitialSetup
 
                 string[] lines = sb.ToString().Split(new[] { "\n" }, StringSplitOptions.None);
 
-                Header = lines[0].Split(' ');
+                Header = lines[0].Split(',');
 
 
 
@@ -61,7 +61,6 @@ namespace InctructionFileCreator.InitialSetup
                     for (int i = 0; i < Header.Length; i++)
                     {
                         string s = Header[i];
-<<<<<<< Updated upstream
                         string result = string.Empty;
                         if (cutoff !=0 )
                              result = s.Substring(1, s.Length - cutoff);
@@ -70,9 +69,7 @@ namespace InctructionFileCreator.InitialSetup
                             result = s;
                         }
 
-=======
-                        string result = s.Substring(0, s.Length);
->>>>>>> Stashed changes
+
                         Header[i] = result;
 
                     }
@@ -83,13 +80,8 @@ namespace InctructionFileCreator.InitialSetup
 
                 for (int i = 0; i < realLines; i++)
                 {
-<<<<<<< Updated upstream
                     string[] dataLine = lines[i + 1].Split(',');
 
-=======
-                    string[] dataLine = lines[i + 1].Split(' ');
-                    
->>>>>>> Stashed changes
                     for (int j = 0; j < dataLine.Length; j++)
                     {
                         data[i, j] = Convert.ToDouble(dataLine[j], CultureInfo.InvariantCulture);
