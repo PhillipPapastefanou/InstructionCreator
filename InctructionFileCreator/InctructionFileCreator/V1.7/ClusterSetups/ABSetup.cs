@@ -220,7 +220,7 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
 
                             //double multiplier = mults[j] * 0.75;
 
-                            pft_iso.ks_max = kStemXylem.Data[j];
+                                pft_iso.ks_max = kStemXylem.Data[j];
                                 pft_iso.kL_max = maxKLeaf[f];
                                 pft_iso.kr_max = kRoot.Data[j];
 
@@ -233,7 +233,7 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
                                 pft_iso.LToR_Max = 1.0;
 
 
-                            writer.AddValue("precDriver", i);
+                                writer.AddValue("precDriver", i);
                                 writer.AddValue("alphaA", gParams.Alphaa_nlim);
                                 writer.AddValue("maxKLeaf", maxKLeaf[f]);
                                 writer.AddValue("psi50", pft_iso.psi50_xylem);

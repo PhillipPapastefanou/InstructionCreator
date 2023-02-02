@@ -177,7 +177,7 @@ namespace InctructionFileCreator.V1.ClusterSetups
 
                             GeneralParameters41HydraulicsDNN parameters = hydFile.GeneralParameters as GeneralParameters41HydraulicsDNN;
 
-                            parameters.Disturbance_model = Disturbance_Model_Type.Functional;
+                            parameters.Disturbance_model = Disturbance_Model_Type.DNN;
 
                             parameters.DNN_Relative_Growth = DNN_relative_growth_type.AGB_based;
 
@@ -185,6 +185,10 @@ namespace InctructionFileCreator.V1.ClusterSetups
                             parameters.NPatch = 500;
                             parameters.Nyear_spinup = 1000;
                             parameters.Alphaa_nlim = 0.65;
+
+
+                            //Normal value is 100
+                            parameters.DistInterval = 1000;
 
 
                             string name = index + "run.ins";

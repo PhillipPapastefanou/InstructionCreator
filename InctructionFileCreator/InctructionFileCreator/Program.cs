@@ -29,10 +29,10 @@ namespace InctructionFileCreator
 
 
 
-            Example3_Looping e3 = new Example3_Looping();
+            //Example1_Testing e1 = new Example1_Testing();
 
 
-            //DNN_3Single_Pfts_Setup setup = new DNN_3Single_Pfts_Setup();
+            DNN_3Single_Pfts_Setup setup = new DNN_3Single_Pfts_Setup();
 
 
             //SratifiedStandard41Params setup = new StratifiedStandard41Params();
