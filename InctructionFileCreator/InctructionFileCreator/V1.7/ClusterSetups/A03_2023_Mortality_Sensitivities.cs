@@ -11,10 +11,12 @@ using InctructionFileCreator.Parameters;
 using InctructionFileCreator.Scenario;
 using InctructionFileCreator.V1._7.ClusterSetups;
 
-namespace InctructionFileCreator.V1.ClusterSetupsß
+using InctructionFileCreator;
+namespace InctructionFileCreator.V1.ClusterSetups
 {
-    class Strat_Hydraulics_Fixes
+    class A03_2023_Mortality_Sensitivities
     {
+
         private ClusterDriverSetup setup;
 
         //List<double> lambdas = new List<double>(){-0.08, 0.15, 0.49};
@@ -25,7 +27,7 @@ namespace InctructionFileCreator.V1.ClusterSetupsß
         //pft_iso.Isohydricity = -0.08;pri
         //pft_iso.Delta_Psi_Max = 0.62;
 
-        public Strat_Hydraulics_Fixes()
+        public A03_2023_Mortality_Sensitivities()
         {
             //InitialSetup.MathematicaCSVReader csvReader = new MathematicaCSVReader(@"F:\Dropbox\UNI\Projekte\A03_Hydraulics_Implementation\Parameters_v1.7.3.csv");
             InitialSetup.MathematicaCSVReader csvReader = new MathematicaCSVReader(@"/Users/pp/Dropbox/UNI/Projekte/A03_Hydraulics_Implementation/Parameters_v1.7.3.csv");
@@ -50,20 +52,19 @@ namespace InctructionFileCreator.V1.ClusterSetupsß
             //string filename = @"F:\ClimateData\master_hyd.ins";
             string filename = @"../../masterBase.ins";
 
-            IInsFile insfile = new InsFileHydraulics();
+            IInsFile insfile = new InsfileHydraulicsMort();
 
             InsParser parser = new InsParser(filename, insfile);
             parser.Read();
 
 
-            InsFileHydraulics hydFile = (IInsFile)insfile.Clone() as InsFileHydraulics;
 
 
             StreamWriter fileWriter = new StreamWriter("Insfiles.txt");
             ParameterCombinationWriter writer = new ParameterCombinationWriter("Values.tsv");
 
 
-            Cluster cluster = Cluster.Simba;
+            Cluster cluster = Cluster.MPI;
 
 
             switch (cluster)
@@ -103,10 +104,25 @@ namespace InctructionFileCreator.V1.ClusterSetupsß
 
                     }
                     break;
+
+                case Cluster.MPI:
+                    {
+                        if (setup == ClusterDriverSetup.GLDAS20)
+                        { MPI_GLDAS_Base_Setup baseSetup = new MPI_GLDAS_Base_Setup(ref insfile); }
+
+                        else
+                        { Console.WriteLine("No valid cluster setup specified."); }
+
+                    }
+                    break;
+
                 default:
                     break;
             }
 
+
+
+            InsfileHydraulicsMort hydFile = (IInsFile)insfile.Clone() as InsfileHydraulicsMort;
 
 
             //precDrivers.Add(
@@ -115,9 +131,8 @@ namespace InctructionFileCreator.V1.ClusterSetupsß
 
             DriverFilesHydraulics driverFiles = hydFile.DriverFiles as DriverFilesHydraulics;
 
-            //driverFiles.File_gridlist = "/dss/dsshome1/lxc03/ga92wol2/driver_data/Gridlists/Amazon/TNF_CAX_K34_extend.txt";
-            //precDrivers.Add("F:\\ClimateData\\Amazonia\\GLDAS_1948_2010_prec_daily_half_normal_TNF.nc");
-            //precDrivers.Add("F:\\ClimateData\\Amazonia\\GLDAS_1948_2010_prec_daily_half_reduced_TNF.nc");
+            driverFiles.File_gridlist = "/Net/Groups/BSI/scratch/ppapastefanou/GLDAS20/AB/TNF_CAX_K34_extend.txt";
+   
 
 
 
@@ -125,7 +140,7 @@ namespace InctructionFileCreator.V1.ClusterSetupsß
 
 
 
-            writer.Setup(new List<string>() { "precDriver", "psi50_xylem", "psi88_xylem", "m_leaf", "m_root", "b", "wilting_point", "m_rootdepth", "Isohyd", "DeltaPsi"});
+            writer.Setup(new List<string>() { "precDriver", "psi50_xylem", "psi88_xylem", "dk", "fk", "b", "wilting_point", "m_rootdepth", "Isohyd", "DeltaPsi" });
 
 
             string rootFolder = "Insfiles";
@@ -133,27 +148,17 @@ namespace InctructionFileCreator.V1.ClusterSetupsß
             Directory.CreateDirectory(rootFolder);
 
 
-            List<double> multiplier_psi_leafs = new List<double>() { 1.0, 1.25, 1.5 };
-            List<double> multiplier_psi_roots = new List<double>() { 1.0, 0.75, 0.5 };
-            List<double> multiplier_root_depths= new List<double>() { 1.0, 1.5, 2.0};
-            List<double> wilting_points = new List<double>() { -3.5, -2.5, -3.0, -4.0 };
-            List<double> bs = new List<double>() { 0.5, 0.3, 0.7 };
+            //List<double> multiplier_psi_leafs = new List<double>() { 0.5,  0.75, 1.0, 1.25, 1.5 };
+            List<double> fks = new List<double>() { 0.72, 0.76, 0.8, 0.84, 0.88  };
+            List<double> dks = new List<double>() { 7.2, 7.6, 8.0, 8.4, 8.8 };
 
 
-            foreach (var b in bs)
-            {
-                foreach (var m_psi_leaf in multiplier_psi_leafs)
-                {
-                    foreach (var m_psi_root in multiplier_psi_roots)
+            foreach (var fk in fks)
+            { 
+                    foreach (var dk in dks)
                     {
-                        foreach (var m_root_depth in multiplier_root_depths)
-                        {
-                            foreach (var wp in wilting_points)
-                            {
 
-
-
-                                for (int j = 0; j < psi50s.Data.Length; j++)
+                    for (int j = 0; j < psi50s.Data.Length; j++)
                                 {
 
                                     string name = index + "run.ins";
@@ -179,26 +184,21 @@ namespace InctructionFileCreator.V1.ClusterSetupsß
                                     gParams.Disable_mort_greff = false;
                                     gParams.IfCalcSLA = false;
 
-                                    gParams.Soildepth_upper = 500.0 * m_root_depth;
-                                    gParams.Soildepth_lower = 1000.0 * m_root_depth;
-
-                                    gParams.Soil_wilting_point = wp;
-
 
                                     DriverFilesHydraulics hyDriverFiles =
                                         hydFile.DriverFiles as DriverFilesHydraulics;
 
-                                    hyDriverFiles.File_gridlist = "/home/phillip/gridlists/TNF_CAX_K34_extend.tsv";
+                                    //hyDriverFiles.File_gridlist = "/home/phillip/gridlists/TNF_CAX_K34_extend.tsv";
 
 
                                     double psi50_xylem = psi50s.Data[j];
                                     double cavS = cavSlopes.Data[j];
 
 
-                                    PftHyd c3g = insfile.Pfts["C3G"] as PftHyd;
+                        PftHydMort c3g = insfile.Pfts["C3G"] as PftHydMort;
                                     c3g.Sla = 26.0;
 
-                                    PftHyd c4g = insfile.Pfts["C4G"] as PftHyd;
+                        PftHydMort c4g = insfile.Pfts["C4G"] as PftHydMort;
                                     c4g.Sla = 26.0;
 
 
@@ -206,13 +206,13 @@ namespace InctructionFileCreator.V1.ClusterSetupsß
                                     hydFile.Pfts[2] = c4g;
 
 
-                                    PftHyd pft_iso = insfile.Pfts["TrBE"] as PftHyd;
+                        PftHydMort pft_iso = insfile.Pfts["TrBE"] as PftHydMort;
 
                                     pft_iso.psi50_xylem = psi50_xylem;
-                                    pft_iso.psi50_leaf = psi50_xylem * m_psi_leaf;
-                                    pft_iso.psi50_root = psi50_xylem * m_psi_root;
-                                    pft_iso.b_leaf_soil_xylem = b;
-                                    pft_iso.cav_slope = cavS;
+                        pft_iso.dk = dk;
+                        pft_iso.fk = fk;
+
+                        pft_iso.cav_slope = cavS;
 
                                     pft_iso.Sla = SLA.Data[j];
                                     pft_iso.Isohydricity = isohydricities.Data[j];
@@ -255,10 +255,8 @@ namespace InctructionFileCreator.V1.ClusterSetupsß
 
 
                                     writer.AddValue("psi50_xylem", pft_iso.psi50_xylem);
-                                    writer.AddValue("m_root", m_psi_root);
-                                    writer.AddValue("m_leaf", m_psi_leaf);
-                                    writer.AddValue("b", pft_iso.b_leaf_soil_xylem);
-                                    writer.AddValue("m_rootdepth", m_root_depth);
+                                    writer.AddValue("fk", pft_iso.fk);
+                                    writer.AddValue("dk", pft_iso.dk);
                                     writer.AddValue("wilting_point", gParams.Soil_wilting_point);
                                     writer.AddValue("psi88_xylem", pft_iso.cav_slope);
                                     writer.AddValue("Isohyd", pft_iso.Isohydricity);
@@ -273,16 +271,15 @@ namespace InctructionFileCreator.V1.ClusterSetupsß
                                     index++;
 
                                 }
-                            }
-                    }
-
-
-    
+                            }                    
 
 
 
-                    }
-                }
+
+
+
+                    
+                
             }
             fileWriter.Close();
             writer.Write();

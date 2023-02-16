@@ -4,7 +4,7 @@ namespace InctructionFileCreator.Scenario
 {
     class SimbaWATCHBaseSetup
     {
-        public SimbaWATCHBaseSetup(ref InsFileHydraulics hydFile)
+        public SimbaWATCHBaseSetup(ref IInsFile hydFile)
         {
 
             string root_path = "/scratch/phillip/data/WATCH_WFDEI/";

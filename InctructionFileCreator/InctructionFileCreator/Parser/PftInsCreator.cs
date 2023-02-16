@@ -34,6 +34,9 @@ namespace InctructionFileCreator
                 case PftType.Hydraulics:
                     Pft = new PftHyd(pftInsGroup.Name);
                     break;
+                case PftType.HydraulicsMort:
+                    Pft = new PftHydMort(pftInsGroup.Name);
+                    break;
             }
 
 

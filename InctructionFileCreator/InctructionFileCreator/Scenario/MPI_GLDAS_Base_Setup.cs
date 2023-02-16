@@ -1,24 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using InctructionFileCreator.Parameters;
-
-namespace InctructionFileCreator
+namespace InctructionFileCreator.Scenario
 {
-    class ClusterGLDASBaseAuroraSetup
+    class MPI_GLDAS_Base_Setup
     {
-        public ClusterGLDASBaseAuroraSetup(ref IInsFile hydFile)
+        public MPI_GLDAS_Base_Setup(ref IInsFile hydFile)
         {
-            string root_path = "/home/papa/snic2022-6-59/phillip/input/GLDAS20/";
+            string root_path = "/Net/Groups/BSI/scratch/ppapastefanou/GLDAS20/AB/";
 
+            //hydFile.DriverFiles.File_gridlist = "/dss/dsshome1/lxc03/ga92wol2/driver_data/Gridlists/Amazon/TNF_CAX_K34_extend.txt";
             hydFile.DriverFiles.File_gridlist = root_path + "Amazon_basin_05.txt";
             hydFile.DriverFiles.File_temp = root_path + "GLDAS_1948_2010_temp_daily_half.nc";
             hydFile.DriverFiles.File_insol = root_path + "GLDAS_1948_2010_swdown_daily_half.nc";
             hydFile.DriverFiles.File_prec = root_path + "GLDAS_1948_2010_prec_daily_half.nc";
-
-
             hydFile.DriverFiles.File_Co2 = root_path + "co2_1764_2100_extended_rcp85.dat";
             hydFile.DriverFiles.File_Cru = root_path + "Cruncep_1901_2015.bin";
             hydFile.DriverFiles.File_Cru_Misc = root_path + "Cruncep_1901_2015misc.bin";

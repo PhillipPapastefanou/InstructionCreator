@@ -9,7 +9,7 @@ namespace InctructionFileCreator
 {
     class ClusterGLDASBaseLRZSetup
     {
-        public ClusterGLDASBaseLRZSetup(ref InsFileHydraulics hydFile)
+        public ClusterGLDASBaseLRZSetup(ref IInsFile hydFile)
         {
             string root_path = "/gpfs/scratch/pr48va/ga92wol2/ga92wol2/data/";
 

@@ -52,12 +52,12 @@ namespace InctructionFileCreator.V1.ClusterSetups
             if (setup == ClusterDriverSetup.GLDAS20)
             {
                 //ClusterGLDASBaseSetup baseSetup = new ClusterGLDASBaseSetup(ref hydFile);
-                SimbaGLDASBaseSetup baseSetup = new SimbaGLDASBaseSetup(ref hydFile);
+                SimbaGLDASBaseSetup baseSetup = new SimbaGLDASBaseSetup(ref insfile);
             }
 
             else if (setup == ClusterDriverSetup.WATCH_WFDEI)
             {
-                ClusterWWBaseSetup baseSetup = new ClusterWWBaseSetup(ref hydFile);
+                ClusterWWBaseSetup baseSetup = new ClusterWWBaseSetup(ref insfile);
             }
 
             else

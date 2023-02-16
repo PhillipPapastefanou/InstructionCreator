@@ -130,6 +130,10 @@
     <Compile Include="Scenario\SimbaWATCHBaseSetup.cs" />
     <Compile Include="V1.7\ClusterSetups\Strat_Hydraulics_Fixes.cs" />
     <Compile Include="Sobol_Hydraulics_Fixes.cs" />
+    <Compile Include="Parameters\PftHydMort.cs" />
+    <Compile Include="InsFiles\InsfileHydraulicsMort.cs" />
+    <Compile Include="V1.7\ClusterSetups\A03_2023_Mortality_Sensitivities.cs" />
+    <Compile Include="Scenario\MPI_GLDAS_Base_Setup.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

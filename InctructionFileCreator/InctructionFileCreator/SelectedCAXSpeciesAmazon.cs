@@ -33,7 +33,7 @@ namespace InctructionFileCreator
             
 
             InsFileHydraulics hydFile = (IInsFile)insfile.Clone() as InsFileHydraulics;
-            ClusterGLDASBaseLRZSetup baseSetup = new ClusterGLDASBaseLRZSetup(ref hydFile);
+            ClusterGLDASBaseLRZSetup baseSetup = new ClusterGLDASBaseLRZSetup(ref insfile);
 
             StreamWriter fileWriter = new StreamWriter("Insfiles.txt");
             StreamWriter values = new StreamWriter("Values.tsv");

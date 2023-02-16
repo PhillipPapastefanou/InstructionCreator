@@ -10,7 +10,7 @@ namespace InctructionFileCreator
 {
     public enum PftType
     {
-        Trunk, Hydraulics
+        Trunk, Hydraulics, HydraulicsMort
     }
 
     public enum LandcoverType

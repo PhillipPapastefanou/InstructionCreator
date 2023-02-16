@@ -66,8 +66,9 @@ namespace InctructionFileCreator
 
             //ABSetup_IncreasedSpinuptime setup = new ABSetup_IncreasedSpinuptime();
 
+            A03_2023_Mortality_Sensitivities asd = new A03_2023_Mortality_Sensitivities();
 
-            Strat_Hydraulics_Fixes fixes = new Strat_Hydraulics_Fixes();
+            //Strat_Hydraulics_Fixes fixes = new Strat_Hydraulics_Fixes();
 
             //AB_Comp_Iso_Ansio setup = new AB_Comp_Iso_Ansio();
 

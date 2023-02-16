@@ -9,7 +9,7 @@ namespace InctructionFileCreator.Scenario
 {
     class SimbaGLDASBaseSetup
     {
-        public SimbaGLDASBaseSetup(ref InsFileHydraulics hydFile)
+        public SimbaGLDASBaseSetup(ref IInsFile hydFile)
         {
             string root_path = "/scratch/phillip/data/GLDAS20/";
 

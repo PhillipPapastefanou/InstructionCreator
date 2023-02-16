@@ -92,7 +92,7 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
                         if (setup == ClusterDriverSetup.GLDAS20)
                         {
                             string root_path = "/scratch/phillip/data/GLDAS20/";
-                            SimbaGLDASBaseSetup baseSetup = new SimbaGLDASBaseSetup(ref hydFile);
+                            SimbaGLDASBaseSetup baseSetup = new SimbaGLDASBaseSetup(ref insfile);
                             prec_drivers.Add(root_path + "GLDAS_1948_2010_prec_daily_half.nc");
                             prec_drivers.Add(root_path + "GLDAS_1948_2010_prec_daily_half_TNF_CAX_RED05_EndTime.nc");
                             file_gridlist = root_path + "TNF_CAX_K34.txt";
@@ -101,7 +101,7 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
                         else if (setup == ClusterDriverSetup.WATCH_WFDEI)
                         {
                             string root_path = "/scratch/phillip/data/WATCH_WFDEI/";
-                            SimbaWATCHBaseSetup baseSetup = new SimbaWATCHBaseSetup(ref hydFile);
+                            SimbaWATCHBaseSetup baseSetup = new SimbaWATCHBaseSetup(ref insfile);
                             prec_drivers.Add(root_path + "WATCH_WFDEI_1950_2010_prec.nc");
                             prec_drivers.Add(root_path + "WATCH_WFDEI_1950_2010_prec_TNF_CAX_RED05.nc");
                             file_gridlist = root_path + "TNF_CAX_K34.txt";

@@ -82,10 +82,10 @@ namespace InctructionFileCreator
                 case Cluster.LRZ:
                     {
                         if (setup == ClusterDriverSetup.GLDAS20)
-                        { ClusterGLDASBaseLRZSetup baseSetup = new ClusterGLDASBaseLRZSetup(ref hydFile); }
+                        { ClusterGLDASBaseLRZSetup baseSetup = new ClusterGLDASBaseLRZSetup(ref insfile); }
 
                         else if (setup == ClusterDriverSetup.WATCH_WFDEI)
-                        { ClusterWWBaseSetup baseSetup = new ClusterWWBaseSetup(ref hydFile); }
+                        { ClusterWWBaseSetup baseSetup = new ClusterWWBaseSetup(ref insfile); }
 
                         else
                         { Console.WriteLine("No valid cluster setup specified."); }
@@ -96,7 +96,7 @@ namespace InctructionFileCreator
                 case Cluster.Aurora:
                     {
                         if (setup == ClusterDriverSetup.GLDAS20)
-                        { ClusterGLDASBaseAuroraSetup baseSetup = new ClusterGLDASBaseAuroraSetup(ref hydFile); }
+                        { ClusterGLDASBaseAuroraSetup baseSetup = new ClusterGLDASBaseAuroraSetup(ref insfile); }
 
                         else
                         { Console.WriteLine("No valid cluster setup specified."); }
@@ -107,7 +107,7 @@ namespace InctructionFileCreator
                 case Cluster.Simba:
                     {
                         if (setup == ClusterDriverSetup.GLDAS20)
-                        { SimbaGLDASBaseSetup baseSetup = new SimbaGLDASBaseSetup(ref hydFile); }
+                        { SimbaGLDASBaseSetup baseSetup = new SimbaGLDASBaseSetup(ref insfile); }
 
                         else
                         { Console.WriteLine("No valid cluster setup specified."); }

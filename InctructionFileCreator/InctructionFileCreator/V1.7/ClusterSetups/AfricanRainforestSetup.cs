@@ -69,17 +69,17 @@ namespace InctructionFileCreator.V1._7.ClusterSetups
 
             if (setup == ClusterDriverSetup.GLDAS20)
             {
-                ClusterGLDASBaseLRZSetup baseSetup = new ClusterGLDASBaseLRZSetup(ref hydFile);
+                ClusterGLDASBaseLRZSetup baseSetup = new ClusterGLDASBaseLRZSetup(ref insfile);
             }
 
             else if (setup == ClusterDriverSetup.WATCH_WFDEI)
             {
-                ClusterWWBaseSetup baseSetup = new ClusterWWBaseSetup(ref hydFile);
+                ClusterWWBaseSetup baseSetup = new ClusterWWBaseSetup(ref insfile);
             }
 
             else if (setup == ClusterDriverSetup.GLDAS20_Afirca)
             {
-                ClusterGLDASBaseSetupAfrica baseSetup = new ClusterGLDASBaseSetupAfrica(ref hydFile);
+                ClusterGLDASBaseSetupAfrica baseSetup = new ClusterGLDASBaseSetupAfrica(ref insfile);
             }
 
 

@@ -9,7 +9,7 @@ namespace InctructionFileCreator.Scenario
 {
     class ClusterWWBaseSetup
     {
-        public ClusterWWBaseSetup(ref InsFileHydraulics hydFile)
+        public ClusterWWBaseSetup(ref IInsFile hydFile)
         {
             //hydFile.DriverFiles.File_gridlist = "/dss/dsshome1/lxc03/ga92wol2/driver_data/Gridlists/Amazon/TNF_CAX_K34_extend.txt";
             hydFile.DriverFiles.File_gridlist = "/dss/dsshome1/lxc03/ga92wol2/driver_data/Gridlists/Amazon/Amazon_basin_05.txt";

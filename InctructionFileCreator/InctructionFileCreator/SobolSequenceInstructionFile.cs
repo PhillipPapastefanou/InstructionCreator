@@ -49,7 +49,7 @@ namespace InctructionFileCreator
 
 
             StreamWriter fileWriter = new StreamWriter("Insfiles.txt");
-            ClusterGLDASBaseLRZSetup baseSetup = new ClusterGLDASBaseLRZSetup(ref hydFile);
+            ClusterGLDASBaseLRZSetup baseSetup = new ClusterGLDASBaseLRZSetup(ref insfile);
 
             List<string> precDrivers = new List<string>();
             precDrivers.Add("/home/hpc/pr48va/ga92wol2/driver_data/GLDAS2/GLDAS_1948_2010_prec_daily_half.nc");
