@@ -134,6 +134,7 @@
     <Compile Include="InsFiles\InsfileHydraulicsMort.cs" />
     <Compile Include="V1.7\ClusterSetups\A03_2023_Mortality_Sensitivities.cs" />
     <Compile Include="Scenario\MPI_GLDAS_Base_Setup.cs" />
+    <Compile Include="V1.7\ClusterSetups\A03_ks_constant_fix.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

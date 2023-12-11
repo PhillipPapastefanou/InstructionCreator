@@ -16,7 +16,7 @@ namespace InctructionFileCreator.V1.ClusterSetups
 {
     class A03_2023_Mortality_Sensitivities
     {
-
+         
         private ClusterDriverSetup setup;
 
         //List<double> lambdas = new List<double>(){-0.08, 0.15, 0.49};
@@ -140,7 +140,7 @@ namespace InctructionFileCreator.V1.ClusterSetups
 
 
 
-            writer.Setup(new List<string>() { "precDriver", "psi50_xylem", "psi88_xylem", "dk", "fk", "b", "wilting_point", "m_rootdepth", "Isohyd", "DeltaPsi" });
+            writer.Setup(new List<string>() { "precDriver", "psi50_xylem", "psi88_xylem", "dk", "fk", "b", "wilting_point", "m_rootdepth", "Isohyd", "DeltaPsi" , "is_ks_const"});
 
 
             string rootFolder = "Insfiles";
@@ -149,8 +149,15 @@ namespace InctructionFileCreator.V1.ClusterSetups
 
 
             //List<double> multiplier_psi_leafs = new List<double>() { 0.5,  0.75, 1.0, 1.25, 1.5 };
-            List<double> fks = new List<double>() { 0.72, 0.76, 0.8, 0.84, 0.88  };
-            List<double> dks = new List<double>() { 7.2, 7.6, 8.0, 8.4, 8.8 };
+            List<double> fks = new List<double>() { 0.85};
+            List<double> dks = new List<double>() { 8.0 };
+
+            List<bool> is_constant_ks = new List<bool> (){ false, true };
+
+
+
+            foreach (var ks_const in is_constant_ks)
+            {
 
 
             foreach (var fk in fks)
@@ -213,6 +220,7 @@ namespace InctructionFileCreator.V1.ClusterSetups
                         pft_iso.fk = fk;
 
                         pft_iso.cav_slope = cavS;
+                        pft_iso.b_leaf_soil_xylem = 0.5;
 
                                     pft_iso.Sla = SLA.Data[j];
                                     pft_iso.Isohydricity = isohydricities.Data[j];
@@ -239,9 +247,25 @@ namespace InctructionFileCreator.V1.ClusterSetups
 
 
 
-                                    //double multiplier = mults[j] * 0.75;
+                            //double multiplier = mults[j] * 0.75;
 
-                                    pft_iso.ks_max = kStemXylem.Data[j];
+
+                                //This is important
+
+                                    if (ks_const)
+                                    {
+                                        pft_iso.ks_max = 1.5;
+
+                                    }
+                                    else
+                                    {
+                                        pft_iso.ks_max = kStemXylem.Data[j];
+                                    }
+
+
+                                    
+
+
                                     pft_iso.kL_max = 7.5;
                                     pft_iso.kr_max = kRoot.Data[j];
 
@@ -261,6 +285,8 @@ namespace InctructionFileCreator.V1.ClusterSetups
                                     writer.AddValue("psi88_xylem", pft_iso.cav_slope);
                                     writer.AddValue("Isohyd", pft_iso.Isohydricity);
                                     writer.AddValue("DeltaPsi", pft_iso.Delta_Psi_Max);
+                                    writer.AddValue("is_ks_const",  Convert.ToDouble(ks_const));
+
 
 
                                     hydFile.Pfts[0] = pft_iso;
@@ -271,15 +297,15 @@ namespace InctructionFileCreator.V1.ClusterSetups
                                     index++;
 
                                 }
-                            }                    
+                            }
+
+
+                }
 
 
 
 
 
-
-                    
-                
             }
             fileWriter.Close();
             writer.Write();
@@ -288,3 +314,4 @@ namespace InctructionFileCreator.V1.ClusterSetups
         }
     }
 }
+

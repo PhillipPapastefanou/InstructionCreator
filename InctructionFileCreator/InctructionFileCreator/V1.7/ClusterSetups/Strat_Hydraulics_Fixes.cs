@@ -42,7 +42,6 @@ namespace InctructionFileCreator.V1.ClusterSetupsß
 
 
             Stopwatch sw = Stopwatch.StartNew();
-
             setup = ClusterDriverSetup.GLDAS20;
 
 
